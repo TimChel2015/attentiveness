@@ -12,4 +12,7 @@ foreach ($name in $files) {
 
 $utf8 = New-Object System.Text.UTF8Encoding $false
 [System.IO.File]::WriteAllText((Join-Path $root 'js\main.js'), $content, $utf8)
-Write-Host 'Built js/main.js'
+
+# Keep styles in sync at project root (for GitHub Pages)
+Copy-Item (Join-Path $root 'css\styles.css') (Join-Path $root 'styles.css') -Force
+Write-Host 'Built js/main.js and synced styles.css'
