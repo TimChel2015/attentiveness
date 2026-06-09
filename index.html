@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Тренажёр внимания</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Rubik:wght@600;700;800&family=Noto+Sans+Arabic:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=26">
+</head>
+<body>
+  <div class="bg-decor" aria-hidden="true">
+    <span class="bg-decor__blob bg-decor__blob--1"></span>
+    <span class="bg-decor__blob bg-decor__blob--2"></span>
+    <span class="bg-decor__blob bg-decor__blob--3"></span>
+  </div>
+
+  <div class="auth-overlay" id="authOverlay">
+    <div class="auth-card">
+      <div class="auth-card__emoji" aria-hidden="true">🔐</div>
+      <div class="auth-tabs" role="tablist">
+        <button class="auth-tabs__btn auth-tabs__btn--active" id="authTabLogin" type="button" data-i18n="authLogin">Log in</button>
+        <button class="auth-tabs__btn" id="authTabRegister" type="button" data-i18n="authRegister">Sign up</button>
+      </div>
+      <h1 class="auth-card__title" id="authTitle" data-i18n="authLoginTitle">Log in</h1>
+      <form class="auth-form" id="authForm" novalidate>
+        <label class="auth-field">
+          <span class="auth-field__label" data-i18n="authUsername">Username</span>
+          <input class="auth-field__input" id="authUsername" type="text" autocomplete="username" required>
+        </label>
+        <label class="auth-field">
+          <span class="auth-field__label" data-i18n="authPassword">Password</span>
+          <input class="auth-field__input" id="authPassword" type="password" autocomplete="current-password" required>
+        </label>
+        <label class="auth-field" id="authConfirmWrap" hidden>
+          <span class="auth-field__label" data-i18n="authPasswordConfirm">Confirm password</span>
+          <input class="auth-field__input" id="authPasswordConfirm" type="password" autocomplete="new-password">
+        </label>
+        <p class="auth-form__error" id="authError" hidden></p>
+        <button class="btn btn--primary btn--large auth-form__submit" id="authSubmit" type="submit" data-i18n="authSubmitLogin">Log in</button>
+      </form>
+      <button class="btn btn--secondary auth-form__guest" id="authGuestBtn" type="button" data-i18n="authPlayAsGuest">
+        No account? Play anyway
+      </button>
+    </div>
+  </div>
+
+  <div class="app app--guest" id="app">
+    <header class="header" id="appHeader" hidden>
+      <div class="header__row">
+        <div class="header__bar">
+          <div class="picker picker--age">
+            <button class="picker__btn picker__btn--labeled" id="ageBtn" type="button">
+              <span class="picker__btn-text" id="ageBtnText">Level 1</span>
+            </button>
+            <div class="picker__menu picker__menu--drop" id="ageMenu" hidden></div>
+          </div>
+
+          <div class="picker picker--lang">
+            <button class="picker__btn picker__btn--labeled" id="langBtn" type="button">
+              <span class="picker__btn-icon" id="langBtnFlag">🇺🇸</span>
+              <span class="picker__btn-text" id="langBtnText">English</span>
+            </button>
+            <div class="picker__menu picker__menu--center" id="langMenu" hidden></div>
+          </div>
+
+          <div class="theme-switch" role="group" aria-label="Theme">
+            <button class="theme-switch__btn" id="themeLightBtn" type="button" data-theme-value="light">
+              <span class="theme-switch__icon">☀️</span>
+              <span class="theme-switch__label" data-i18n="themeBright">Light</span>
+            </button>
+            <button class="theme-switch__btn" id="themeDarkBtn" type="button" data-theme-value="dark">
+              <span class="theme-switch__icon">🌙</span>
+              <span class="theme-switch__label" data-i18n="themeDarkSide">Dark</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="account-chip picker picker--account" id="accountPanel">
+          <button class="account-chip__btn" id="accountBtn" type="button" aria-haspopup="menu">
+            <span class="account-chip__avatar" aria-hidden="true">👤</span>
+            <span class="account-chip__name" id="accountBtnName">Guest</span>
+            <span class="account-chip__caret" aria-hidden="true">▾</span>
+          </button>
+          <div class="picker__menu account-menu" id="accountMenu" hidden>
+            <p class="account-menu__title" id="accountMenuName"></p>
+            <button type="button" class="picker__item" id="accountLogoutBtn" data-i18n="authLogout">Log out</button>
+            <button type="button" class="picker__item account-menu__danger" id="accountDeleteBtn" hidden data-i18n="authDeleteAccount">Delete account</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="header__score-row" id="scoreRow" hidden>
+        <span class="score">
+          <span class="score__label" data-i18n="score">Счёт</span>
+          <span class="score__value" id="scoreValue">0</span>
+        </span>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="game" id="gameScreen" hidden>
+        <div class="timer" id="timerBar" role="timer" aria-live="polite">
+          <div class="timer__track">
+            <div class="timer__fill" id="timerFill"></div>
+          </div>
+          <span class="timer__seconds" id="timerSeconds">10</span>
+        </div>
+
+        <p class="game-hint" id="gameHint" aria-live="polite"></p>
+
+        <div class="game-panel">
+          <div class="game-field" id="gameField" role="group" aria-label="Game field"></div>
+        </div>
+
+        <button class="btn btn--secondary" id="newGameBtn" type="button" data-i18n="newGame">
+          Закончить игру
+        </button>
+      </section>
+
+      <div class="start-overlay" id="startOverlay">
+        <div class="welcome-card">
+          <div class="welcome__emoji" aria-hidden="true">👀</div>
+          <h1 class="welcome__title" data-i18n="title">Тренажёр внимания</h1>
+          <p class="welcome__hint" data-i18n="hint">Найди отличающийся объект</p>
+          <button class="btn btn--primary btn--large" id="startBtn" type="button" data-i18n="start">
+            Начать
+          </button>
+        </div>
+      </div>
+
+      <div class="tutorial-overlay" id="tutorialOverlay" hidden>
+        <div class="tutorial-card">
+          <div class="tutorial-card__emoji" id="tutorialEmoji" aria-hidden="true"></div>
+          <h2 class="tutorial-card__title" id="tutorialTitle"></h2>
+          <p class="tutorial-card__text" id="tutorialText"></p>
+          <div class="tutorial-card__dots" id="tutorialDots" aria-hidden="true"></div>
+          <div class="tutorial-card__actions">
+            <button class="btn btn--primary btn--large" id="tutorialNextBtn" type="button"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tutorial-banner" id="tutorialBanner" hidden>
+        <p class="tutorial-banner__text" id="tutorialBannerText"></p>
+        <span class="tutorial-banner__progress" id="tutorialBannerProgress"></span>
+      </div>
+
+      <div class="overlay" id="deleteAccountOverlay" hidden>
+        <div class="overlay__card overlay__card--confirm">
+          <div class="overlay__emoji" aria-hidden="true">⚠️</div>
+          <p class="overlay__text overlay__text--confirm" id="deleteAccountText" data-i18n="authDeleteConfirm">
+            Delete your account? This cannot be undone.
+          </p>
+          <div class="confirm-actions">
+            <button class="btn btn--secondary" id="deleteAccountCancel" type="button" data-i18n="authDeleteCancel">Cancel</button>
+            <button class="btn btn--danger" id="deleteAccountConfirm" type="button" data-i18n="authDeleteConfirmBtn">Delete</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay" id="feedbackOverlay" hidden>
+        <div class="overlay__card" id="feedbackCard">
+          <div class="overlay__emoji" id="feedbackEmoji" aria-hidden="true"></div>
+          <p class="overlay__text" id="feedbackText"></p>
+          <button class="btn btn--primary btn--large" id="feedbackBtn" type="button"></button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/main.js?v=27"></script>
+</body>
+</html>
