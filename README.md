@@ -7,17 +7,12 @@
 ```
 vnimatilnost/
   index.html       — главная страница
-  css/styles.css   — стили
-  js/i18n.js       — переводы
-  js/auth.js       — вход и регистрация
-  js/game.js       — логика игры
-  js/ui.js         — интерфейс
-  js/app.js        — запуск приложения
-  js/main.js       — (необязательно) один собранный файл
-  build.ps1        — сборка main.js из модулей
+  styles.css       — стили (главный файл для сайта)
+  css/styles.css   — копия стилей
+  js/              — все скрипты
 ```
 
-**На GitHub нужно загрузить всю папку целиком**, включая `css/` и все файлы в `js/`.
+**На GitHub загрузите всё**, особенно `styles.css` в корне и папку `js/`.
 
 ## GitHub Pages
 
