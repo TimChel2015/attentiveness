@@ -36,9 +36,12 @@
     hideAuthScreen,
     setAppAuthenticated,
     setAuthMode,
+    resetAuth,
     updateAuthFormTexts,
     showAuthError,
     clearAuthError,
+    showAuthSuccess,
+    clearAuthSuccess,
     updateAccountChip,
     initAccountMenu,
     showDeleteAccountConfirm,
@@ -57,6 +60,10 @@
     userNotFound: 'authErrorUserNotFound',
     wrongPassword: 'authErrorWrongPassword',
     passwordMismatch: 'authErrorPasswordMismatch',
+    invalidEmail: 'authErrorInvalidEmail',
+    emailExists: 'authErrorEmailExists',
+    emailMismatch: 'authErrorEmailMismatch',
+    noEmail: 'authErrorNoEmail',
   };
 
   const prefs = {
@@ -435,9 +442,7 @@
     hideDeleteAccountConfirm();
     setAppAuthenticated(false);
     showAuthScreen();
-    setAuthMode('login');
-    clearAuthError();
-    $('authForm').reset();
+    resetAuth();
     applyTranslations('en');
     setDirection(false);
     updateAuthFormTexts('en');
@@ -455,8 +460,10 @@
   async function handleAuthSubmit(e) {
     e.preventDefault();
     clearAuthError();
+    clearAuthSuccess();
 
     const username = $('authUsername').value;
+    const email = $('authEmail').value;
     const password = $('authPassword').value;
     const confirm = $('authPasswordConfirm').value;
     const mode = getAuthMode();
@@ -466,12 +473,29 @@
         showAuthErrorKey('passwordMismatch');
         return;
       }
-      const result = await Auth.register(username, password);
+      const result = await Auth.register(username, password, email);
       if (!result.ok) {
         showAuthErrorKey(result.error, result);
         return;
       }
       enterApp(result.username);
+      return;
+    }
+
+    if (mode === 'reset') {
+      if (password !== confirm) {
+        showAuthErrorKey('passwordMismatch');
+        return;
+      }
+      const result = await Auth.resetPassword(username, email, password);
+      if (!result.ok) {
+        showAuthErrorKey(result.error, result);
+        return;
+      }
+      $('authForm').reset();
+      setAuthMode('login');
+      updateAuthFormTexts(authLang());
+      showAuthSuccess(t(authLang(), 'authResetSuccess'));
       return;
     }
 
@@ -492,7 +516,7 @@
   }
 
   function initAuth() {
-    setAuthMode('login');
+    resetAuth();
     $('authTabLogin').addEventListener('click', () => {
       setAuthMode('login');
       updateAuthFormTexts(authLang());
@@ -502,6 +526,19 @@
       updateAuthFormTexts(authLang());
     });
     $('authForm').addEventListener('submit', handleAuthSubmit);
+    $('authForgotBtn').addEventListener('click', () => {
+      clearAuthError();
+      clearAuthSuccess();
+      setAuthMode('reset');
+      updateAuthFormTexts(authLang());
+    });
+    $('authBackLoginBtn').addEventListener('click', () => {
+      clearAuthError();
+      clearAuthSuccess();
+      $('authForm').reset();
+      setAuthMode('login');
+      updateAuthFormTexts(authLang());
+    });
     $('authGuestBtn').addEventListener('click', enterAsGuest);
     initAccountMenu(leaveApp, requestDeleteAccount);
   }
