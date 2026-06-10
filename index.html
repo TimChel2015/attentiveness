@@ -12,6 +12,7 @@
     [hidden] { display: none !important; }
     .app--guest .header,
     .app--guest .main { visibility: hidden; pointer-events: none; }
+    .app--guest { pointer-events: none; }
     .auth-overlay {
       position: fixed; inset: 0; z-index: 400;
       display: flex; align-items: center; justify-content: center;
@@ -220,10 +221,10 @@
       document.addEventListener('DOMContentLoaded', fixStuckScreen);
     })();
   </script>
-  <script src="i18n.js?v=10"></script>
-  <script src="auth/login.js?v=10"></script>
-  <script src="game.js?v=10"></script>
-  <script src="ui.js?v=10"></script>
-  <script src="app.js?v=10"></script>
+  <script src="i18n.js?v=11"></script>
+  <script src="auth/login.js?v=11" onerror="this.onerror=null;this.src='js/auth/login.js?v=11'"></script>
+  <script src="game.js?v=11"></script>
+  <script src="ui.js?v=11"></script>
+  <script src="app.js?v=11"></script>
 </body>
 </html>

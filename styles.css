@@ -306,6 +306,10 @@ select {
   pointer-events: none;
 }
 
+.app--guest {
+  pointer-events: none;
+}
+
 .picker--age { grid-area: age; justify-self: start; }
 .picker--lang { grid-area: lang; justify-self: center; }
 .theme-switch { grid-area: theme; justify-self: end; }

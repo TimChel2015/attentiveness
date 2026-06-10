@@ -2,6 +2,25 @@
  * Attention Trainer — main application controller
  */
 (function () {
+  if (typeof I18n === 'undefined' || typeof Game === 'undefined' || typeof UI === 'undefined') {
+    var box = document.getElementById('loadError');
+    var text = document.getElementById('loadErrorText');
+    if (box && text) {
+      text.textContent = 'Scripts failed to load. Upload all .js files and refresh (Ctrl+F5).';
+      box.hidden = false;
+    }
+    return;
+  }
+  if (typeof AuthUI === 'undefined' || typeof Auth === 'undefined' || typeof AuthController === 'undefined') {
+    var box = document.getElementById('loadError');
+    var text = document.getElementById('loadErrorText');
+    if (box && text) {
+      text.textContent = 'auth/login.js not found. Upload the auth folder with login.js inside.';
+      box.hidden = false;
+    }
+    return;
+  }
+
   const { isRtl, normalizeLang, TUTORIAL_STEPS, t } = I18n;
   const { createGameState, generateRound, addScore, normalizeAge } = Game;
   const {
@@ -571,7 +590,13 @@
   function boot() {
     if (boot.done) return;
     boot.done = true;
-    init();
+    try {
+      init();
+    } catch (err) {
+      console.error('Boot failed:', err);
+      showAuthScreen();
+      setAppAuthenticated(false);
+    }
   }
 
   if (document.readyState === 'loading') {
