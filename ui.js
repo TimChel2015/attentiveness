@@ -73,12 +73,12 @@
 
   function applyTranslations(lang) {
     document.querySelectorAll('[data-i18n]').forEach((el) => {
-      if (el.closest('#authOverlay') && (el.id === 'authTitle' || el.id === 'authSubmit')) return;
+      if (el.closest('#authOverlay') && (el.id === 'authTitle' || el.id === 'authSubmit' || el.id === 'authPasswordLabel')) return;
       el.textContent = t(lang, el.dataset.i18n);
     });
     document.documentElement.lang = lang;
     refreshPickerLabels(lang);
-    if (!$('authOverlay').hidden) {
+    if (!$('authOverlay')?.hidden) {
       updateAuthFormTexts(lang);
     }
   }
@@ -102,38 +102,79 @@
   let authMode = 'login';
 
   function showAuthScreen() {
-    $('authOverlay').hidden = false;
+    const overlay = $('authOverlay');
+    if (overlay) overlay.hidden = false;
     setAppAuthenticated(false);
   }
 
   function hideAuthScreen() {
-    $('authOverlay').hidden = true;
+    const overlay = $('authOverlay');
+    if (overlay) overlay.hidden = true;
   }
 
   function setAppAuthenticated(authenticated) {
-    $('app').classList.toggle('app--guest', !authenticated);
-    $('appHeader').hidden = !authenticated;
+    const app = $('app');
+    if (app) app.classList.toggle('app--guest', !authenticated);
+    const header = $('appHeader');
+    if (header) header.hidden = !authenticated;
   }
 
   function setAuthMode(mode) {
     authMode = mode;
     const isRegister = mode === 'register';
-    $('authTabLogin').classList.toggle('auth-tabs__btn--active', !isRegister);
-    $('authTabRegister').classList.toggle('auth-tabs__btn--active', isRegister);
-    $('authConfirmWrap').hidden = !isRegister;
-    $('authPasswordConfirm').required = isRegister;
+    const isReset = mode === 'reset';
+    const needsEmail = isRegister || isReset;
+    const needsConfirm = isRegister || isReset;
+
+    const tabs = $('authTabs');
+    if (tabs) tabs.hidden = isReset;
+    if ($('authTabLogin')) {
+      $('authTabLogin').classList.toggle('auth-tabs__btn--active', mode === 'login');
+    }
+    if ($('authTabRegister')) {
+      $('authTabRegister').classList.toggle('auth-tabs__btn--active', isRegister);
+    }
+    if ($('authEmailWrap')) $('authEmailWrap').hidden = !needsEmail;
+    if ($('authEmail')) $('authEmail').required = needsEmail;
+    if ($('authConfirmWrap')) $('authConfirmWrap').hidden = !needsConfirm;
+    if ($('authPasswordConfirm')) $('authPasswordConfirm').required = needsConfirm;
+    if ($('authForgotWrap')) $('authForgotWrap').hidden = mode !== 'login';
+    if ($('authBackLoginWrap')) $('authBackLoginWrap').hidden = !isReset;
+    if ($('authResetHint')) $('authResetHint').hidden = !isReset;
+    if ($('authPassword')) {
+      $('authPassword').autocomplete = needsConfirm ? 'new-password' : 'current-password';
+    }
     clearAuthError();
+    clearAuthSuccess();
+  }
+
+  function resetAuth() {
+    authMode = 'login';
+    const form = $('authForm');
+    if (form) form.reset();
+    setAuthMode('login');
   }
 
   function updateAuthFormTexts(lang) {
-    const titleKey = authMode === 'register' ? 'authRegisterTitle' : 'authLoginTitle';
-    const submitKey = authMode === 'register' ? 'authSubmitRegister' : 'authSubmitLogin';
+    const titleKey = authMode === 'register'
+      ? 'authRegisterTitle'
+      : authMode === 'reset'
+        ? 'authResetTitle'
+        : 'authLoginTitle';
+    const submitKey = authMode === 'register'
+      ? 'authSubmitRegister'
+      : authMode === 'reset'
+        ? 'authSubmitReset'
+        : 'authSubmitLogin';
+    const passwordLabelKey = authMode === 'reset' ? 'authNewPassword' : 'authPassword';
+
     $('authTitle').textContent = t(lang, titleKey);
     $('authSubmit').textContent = t(lang, submitKey);
+    $('authPasswordLabel').textContent = t(lang, passwordLabelKey);
     $('authTabLogin').textContent = t(lang, 'authLogin');
     $('authTabRegister').textContent = t(lang, 'authRegister');
     document.querySelectorAll('#authOverlay [data-i18n]').forEach((el) => {
-      if (el.id === 'authTitle' || el.id === 'authSubmit') return;
+      if (['authTitle', 'authSubmit', 'authPasswordLabel'].includes(el.id)) return;
       el.textContent = t(lang, el.dataset.i18n);
     });
     if ($('authGuestBtn')) {
@@ -150,6 +191,17 @@
   function clearAuthError() {
     $('authError').hidden = true;
     $('authError').textContent = '';
+  }
+
+  function showAuthSuccess(message) {
+    const el = $('authSuccess');
+    el.textContent = message;
+    el.hidden = !message;
+  }
+
+  function clearAuthSuccess() {
+    $('authSuccess').hidden = true;
+    $('authSuccess').textContent = '';
   }
 
   function updateAccountChip(displayName, isGuest, lang) {
@@ -192,22 +244,28 @@
   }
 
   function initAccountMenu(onLogout, onDeleteRequest) {
-    bindMenuScroll($('accountMenu'));
+    const menu = $('accountMenu');
+    if (menu) bindMenuScroll(menu);
 
-    $('accountBtn').addEventListener('click', (e) => {
+    bindClick('accountBtn', (e) => {
       e.stopPropagation();
       toggleMenu('accountMenu');
     });
 
-    $('accountLogoutBtn').addEventListener('click', () => {
+    bindClick('accountLogoutBtn', () => {
       closeAllMenus();
       onLogout();
     });
 
-    $('accountDeleteBtn').addEventListener('click', () => {
+    bindClick('accountDeleteBtn', () => {
       closeAllMenus();
       onDeleteRequest();
     });
+  }
+
+  function bindClick(id, handler) {
+    const el = $(id);
+    if (el) el.addEventListener('click', handler);
   }
 
   function showWelcomeScreen() {
@@ -333,6 +391,7 @@
 
   function populateLangMenu(onSelect) {
     const menu = $('langMenu');
+    if (!menu) return;
     menu.innerHTML = LANGUAGE_OPTIONS.map(
       ({ code, flag, label }) =>
         `<button type="button" class="picker__item" data-lang="${code}">${flag} ${label}</button>`
@@ -349,6 +408,7 @@
 
   function populateAgeMenu(lang, onSelect) {
     const menu = $('ageMenu');
+    if (!menu) return;
     menu.innerHTML = AGE_GROUPS.map((id) => {
       const key = AGE_I18N_KEYS[id];
       return `<button type="button" class="picker__item" data-age-id="${id}">${t(lang, key)}</button>`;
@@ -421,7 +481,8 @@
   }
 
   function bindTutorialControls(onNext) {
-    $('tutorialNextBtn').addEventListener('click', onNext);
+    const btn = $('tutorialNextBtn');
+    if (btn) btn.addEventListener('click', onNext);
   }
 
   function refreshTutorialTexts(lang, stepIndex, score, playing) {
@@ -437,16 +498,22 @@
     populateLangMenu(onLangSelect);
     populateAgeMenu(lang, onAgeSelect);
 
-    $('langBtn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMenu('langMenu');
-    });
+    const langBtn = $('langBtn');
+    if (langBtn) {
+      langBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu('langMenu');
+      });
+    }
 
-    $('ageBtn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (agePickerLocked) return;
-      toggleMenu('ageMenu');
-    });
+    const ageBtn = $('ageBtn');
+    if (ageBtn) {
+      ageBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (agePickerLocked) return;
+        toggleMenu('ageMenu');
+      });
+    }
 
     document.addEventListener('click', closeAllMenus);
     window.addEventListener('resize', closeAllMenus);
@@ -486,9 +553,12 @@
     hideAuthScreen,
     setAppAuthenticated,
     setAuthMode,
+    resetAuth,
     updateAuthFormTexts,
     showAuthError,
     clearAuthError,
+    showAuthSuccess,
+    clearAuthSuccess,
     updateAccountChip,
     initAccountMenu,
     showDeleteAccountConfirm,
