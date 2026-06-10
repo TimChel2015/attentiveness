@@ -37,6 +37,20 @@
     return String(username || '').trim().toLowerCase();
   }
 
+  function normalizeEmail(email) {
+    return String(email || '').trim().toLowerCase();
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function findUserByEmail(email, users) {
+    const normalized = normalizeEmail(email);
+    if (!normalized) return null;
+    return Object.keys(users).find((name) => normalizeEmail(users[name].email) === normalized) || null;
+  }
+
   function getDisplayName(username) {
     return String(username || '').trim();
   }
@@ -94,13 +108,15 @@
     localStorage.removeItem(GUEST_KEY);
   }
 
-  async function register(username, password) {
+  async function register(username, password, email) {
     const name = normalizeUsername(username);
+    const mail = normalizeEmail(email);
     const users = readUsers();
 
-    if (!name || !password) return { ok: false, error: 'empty' };
+    if (!name || !password || !mail) return { ok: false, error: 'empty' };
     if (name.length < 3) return { ok: false, error: 'usernameShort' };
     if (password.length < 4) return { ok: false, error: 'passwordShort' };
+    if (!isValidEmail(mail)) return { ok: false, error: 'invalidEmail' };
     if (users[name]) {
       return {
         ok: false,
@@ -108,11 +124,13 @@
         suggestions: suggestUsernames(username, users),
       };
     }
+    if (findUserByEmail(mail, users)) return { ok: false, error: 'emailExists' };
 
     const displayName = getDisplayName(username);
     users[name] = {
       ...DEFAULT_USER_DATA,
       displayName,
+      email: mail,
       passwordHash: await hashPassword(password),
       createdAt: Date.now(),
     };
@@ -120,6 +138,41 @@
     clearGuestSession();
     setSession(name);
     return { ok: true, username: name, displayName, isNew: true };
+  }
+
+  async function resetPassword(username, email, newPassword) {
+    const name = normalizeUsername(username);
+    const mail = normalizeEmail(email);
+    const users = readUsers();
+
+    if (!name || !mail || !newPassword) return { ok: false, error: 'empty' };
+    if (newPassword.length < 4) return { ok: false, error: 'passwordShort' };
+    if (!isValidEmail(mail)) return { ok: false, error: 'invalidEmail' };
+    if (!users[name]) return { ok: false, error: 'userNotFound' };
+    if (!users[name].email) return { ok: false, error: 'noEmail' };
+    if (normalizeEmail(users[name].email) !== mail) {
+      return { ok: false, error: 'emailMismatch' };
+    }
+
+    users[name].passwordHash = await hashPassword(newPassword);
+    writeUsers(users);
+    return { ok: true, username: name };
+  }
+
+  async function loginByEmail(email, password) {
+    const username = findUserByEmail(email, readUsers());
+    if (!username) return { ok: false, error: 'userNotFound' };
+    return login(username, password);
+  }
+
+  async function resetPasswordByEmail(email, newPassword) {
+    const username = findUserByEmail(email, readUsers());
+    if (!username) return { ok: false, error: 'userNotFound' };
+    return resetPassword(username, email, newPassword);
+  }
+
+  function emailExists(email) {
+    return !!findUserByEmail(email, readUsers());
   }
 
   async function login(username, password) {
@@ -173,6 +226,12 @@
     saveUserData,
     register,
     login,
+    loginByEmail,
+    resetPassword,
+    resetPasswordByEmail,
+    emailExists,
+    isValidEmail,
+    normalizeEmail,
     logout,
     deleteAccount,
     normalizeUsername,
