@@ -78,9 +78,8 @@
     });
     document.documentElement.lang = lang;
     refreshPickerLabels(lang);
-    if (!$('authOverlay')?.hidden) {
+    if (!$('authOverlay') || $('authOverlay').hidden) return;
       updateAuthFormTexts(lang);
-    }
   }
 
   function refreshPickerLabels(lang) {
@@ -168,11 +167,14 @@
         : 'authSubmitLogin';
     const passwordLabelKey = authMode === 'reset' ? 'authNewPassword' : 'authPassword';
 
-    $('authTitle').textContent = t(lang, titleKey);
-    $('authSubmit').textContent = t(lang, submitKey);
-    $('authPasswordLabel').textContent = t(lang, passwordLabelKey);
-    $('authTabLogin').textContent = t(lang, 'authLogin');
-    $('authTabRegister').textContent = t(lang, 'authRegister');
+    const titleEl = $('authTitle');
+    const submitEl = $('authSubmit');
+    const passwordLabelEl = $('authPasswordLabel');
+    if (titleEl) titleEl.textContent = t(lang, titleKey);
+    if (submitEl) submitEl.textContent = t(lang, submitKey);
+    if (passwordLabelEl) passwordLabelEl.textContent = t(lang, passwordLabelKey);
+    if ($('authTabLogin')) $('authTabLogin').textContent = t(lang, 'authLogin');
+    if ($('authTabRegister')) $('authTabRegister').textContent = t(lang, 'authRegister');
     document.querySelectorAll('#authOverlay [data-i18n]').forEach((el) => {
       if (['authTitle', 'authSubmit', 'authPasswordLabel'].includes(el.id)) return;
       el.textContent = t(lang, el.dataset.i18n);
@@ -184,24 +186,30 @@
 
   function showAuthError(message) {
     const el = $('authError');
+    if (!el) return;
     el.textContent = message;
     el.hidden = !message;
   }
 
   function clearAuthError() {
-    $('authError').hidden = true;
-    $('authError').textContent = '';
+    const el = $('authError');
+    if (!el) return;
+    el.hidden = true;
+    el.textContent = '';
   }
 
   function showAuthSuccess(message) {
     const el = $('authSuccess');
+    if (!el) return;
     el.textContent = message;
     el.hidden = !message;
   }
 
   function clearAuthSuccess() {
-    $('authSuccess').hidden = true;
-    $('authSuccess').textContent = '';
+    const el = $('authSuccess');
+    if (!el) return;
+    el.hidden = true;
+    el.textContent = '';
   }
 
   function updateAccountChip(displayName, isGuest, lang) {
