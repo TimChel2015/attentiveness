@@ -210,30 +210,20 @@
       }
 
       document.addEventListener('DOMContentLoaded', fixStuckScreen);
-
-      window.addEventListener('error', function (e) {
-        var target = e.target;
-        if (!target || target.tagName !== 'SCRIPT') return;
-        var box = document.getElementById('loadError');
-        var text = document.getElementById('loadErrorText');
-        if (!box || !text) return;
-        box.hidden = false;
-        text.textContent = 'Не удалось загрузить ' + (target.src || 'скрипт') + '. Положите файлы .js в папку js/ или в корень сайта.';
-      }, true);
     })();
   </script>
   <script>
     (function () {
       var FILES = ['i18n.js', 'auth.js', 'game.js', 'ui.js', 'app.js'];
-      var BASES = ['js/', ''];
-      var VERSION = '5';
+      var BASES = ['', 'js/'];
+      var VERSION = '6';
 
       function showLoadError(file) {
         var box = document.getElementById('loadError');
         var text = document.getElementById('loadErrorText');
         if (!box || !text) return;
         box.hidden = false;
-        text.textContent = 'Не удалось загрузить ' + file + '. Загрузите на GitHub папку js/ с файлами или положите .js файлы в корень репозитория.';
+        text.textContent = 'Не найден файл ' + file + '. Загрузите на GitHub все .js файлы: i18n.js, auth.js, game.js, ui.js, app.js';
       }
 
       function loadFile(index) {
