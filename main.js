@@ -591,9 +591,28 @@
 
   const AUTH_I18N = {
     en: {
-      authLogin: 'Log in', authRegister: 'Sign up', authLoginTitle: 'Log in',
+      authLogin: 'Log in', authRegister: 'Sign up', authLoginTitle: 'Sign in',
+      authWelcomeBack: 'Welcome back', authSubtitle: 'Continue to Attention Trainer',
+      authPasswordSubtitle: 'Enter your password to continue',
+      authRegisterSubtitle: 'Create your account',
+      authResetSubtitle: 'Choose a new password',
       authRegisterTitle: 'Create account', authUsername: 'Username', authPassword: 'Password',
-      authPasswordConfirm: 'Confirm password', authSubmitLogin: 'Log in', authSubmitRegister: 'Sign up',
+      authPasswordConfirm: 'Confirm password', authEmail: 'Email',
+      authForgotPassword: 'Forgot password?', authBackToLogin: 'Back to log in',
+      authResetTitle: 'Reset password', authResetHint: 'Enter the email from registration. Works on this device only.',
+      authNewPassword: 'New password', authNext: 'Next',
+      authCreateAccount: 'Create account', authSignInInstead: 'Sign in instead',
+      authChangeEmail: 'Change',
+      authSignInWithGmail: 'Sign in with Gmail', authBackFromGmail: 'Back to sign in', authOr: 'or',
+      authGoogleSignInHint: 'Tap the Google button. Google will ask for your real Gmail password — we never see it.',
+      authGoogleSignInSubtitle: 'Sign in with Google',
+      authGoogleNotConfigured: 'Google Sign-In is not set up yet. Add GOOGLE_CLIENT_ID in js/config.js (see README).',
+      authGoogleLoadFailed: 'Could not load Google Sign-In. Check your internet connection.',
+      authGmailRegisterHint: 'Gmail verified. Choose a username for the game.',
+      authGmailRegisterSubtitle: 'Create your account',
+      authErrorGoogleAccountMismatch: 'This email is linked to a different Google account.',
+      authSubmitLogin: 'Sign in', authSubmitRegister: 'Sign up', authSubmitReset: 'Reset password',
+      authResetSuccess: 'Password updated. You can log in now.',
       authLogout: 'Log out', authPlayAsGuest: 'No account? Play anyway', authGuestLabel: 'Guest',
       authDeleteAccount: 'Delete account', authDeleteConfirm: 'Delete your account? This cannot be undone.',
       authDeleteConfirmBtn: 'Delete', authDeleteCancel: 'Cancel',
@@ -603,11 +622,33 @@
       authErrorPasswordMismatch: 'Passwords do not match',
       authErrorUsernameShort: 'Username must be at least 3 characters',
       authErrorPasswordShort: 'Password must be at least 4 characters', authErrorEmpty: 'Fill in all fields',
+      authErrorInvalidEmail: 'Enter a valid email', authErrorEmailExists: 'This email is already registered',
+      authErrorEmailMismatch: 'Email does not match this account',
+      authErrorNoEmail: 'This account has no email — recovery is not available',
     },
     ru: {
       authLogin: 'Вход', authRegister: 'Регистрация', authLoginTitle: 'Вход',
+      authWelcomeBack: 'С возвращением', authSubtitle: 'Продолжить в Тренажёр внимания',
+      authPasswordSubtitle: 'Введите пароль, чтобы продолжить',
+      authRegisterSubtitle: 'Создайте аккаунт',
+      authResetSubtitle: 'Придумайте новый пароль',
       authRegisterTitle: 'Создать аккаунт', authUsername: 'Имя пользователя', authPassword: 'Пароль',
-      authPasswordConfirm: 'Подтвердите пароль', authSubmitLogin: 'Войти', authSubmitRegister: 'Зарегистрироваться',
+      authPasswordConfirm: 'Подтвердите пароль', authEmail: 'Email',
+      authForgotPassword: 'Забыли пароль?', authBackToLogin: 'Назад ко входу',
+      authResetTitle: 'Восстановление пароля', authResetHint: 'Укажите email, который вы указали при регистрации. Работает только на этом устройстве.',
+      authNewPassword: 'Новый пароль', authNext: 'Далее',
+      authCreateAccount: 'Создать аккаунт', authSignInInstead: 'Уже есть аккаунт? Войти',
+      authChangeEmail: 'Изменить',
+      authSignInWithGmail: 'Войти через Gmail', authBackFromGmail: 'Назад ко входу', authOr: 'или',
+      authGoogleSignInHint: 'Нажмите кнопку Google. Пароль от Gmail вводится только на сайте Google — мы его не видим.',
+      authGoogleSignInSubtitle: 'Вход через Google',
+      authGoogleNotConfigured: 'Google Sign-In ещё не настроен. Добавьте GOOGLE_CLIENT_ID в js/config.js (см. README).',
+      authGoogleLoadFailed: 'Не удалось загрузить Google Sign-In. Проверьте интернет.',
+      authGmailRegisterHint: 'Gmail подтверждён. Придумайте имя для игры.',
+      authGmailRegisterSubtitle: 'Создание аккаунта',
+      authErrorGoogleAccountMismatch: 'Этот email привязан к другому Google-аккаунту.',
+      authSubmitLogin: 'Войти', authSubmitRegister: 'Зарегистрироваться', authSubmitReset: 'Сохранить пароль',
+      authResetSuccess: 'Пароль изменён. Теперь можно войти.',
       authLogout: 'Выйти', authPlayAsGuest: 'Если не важно — играть без регистрации', authGuestLabel: 'Гость',
       authDeleteAccount: 'Удалить аккаунт', authDeleteConfirm: 'Удалить аккаунт? Это нельзя отменить.',
       authDeleteConfirmBtn: 'Удалить', authDeleteCancel: 'Отмена',
@@ -617,11 +658,33 @@
       authErrorPasswordMismatch: 'Пароли не совпадают',
       authErrorUsernameShort: 'Имя — минимум 3 символа',
       authErrorPasswordShort: 'Пароль — минимум 4 символа', authErrorEmpty: 'Заполните все поля',
+      authErrorInvalidEmail: 'Введите корректный email', authErrorEmailExists: 'Этот email уже зарегистрирован',
+      authErrorEmailMismatch: 'Email не совпадает с аккаунтом',
+      authErrorNoEmail: 'У аккаунта нет email — восстановление недоступно',
     },
     uk: {
       authLogin: 'Вхід', authRegister: 'Реєстрація', authLoginTitle: 'Вхід',
+      authWelcomeBack: 'З поверненням', authSubtitle: 'Продовжити до Тренажера уваги',
+      authPasswordSubtitle: 'Введіть пароль, щоб продовжити',
+      authRegisterSubtitle: 'Створіть акаунт',
+      authResetSubtitle: 'Придумайте новий пароль',
       authRegisterTitle: 'Створити акаунт', authUsername: "Ім'я користувача", authPassword: 'Пароль',
-      authPasswordConfirm: 'Підтвердіть пароль', authSubmitLogin: 'Увійти', authSubmitRegister: 'Зареєструватися',
+      authPasswordConfirm: 'Підтвердіть пароль', authEmail: 'Email',
+      authForgotPassword: 'Забули пароль?', authBackToLogin: 'Назад до входу',
+      authResetTitle: 'Відновлення пароля', authResetHint: 'Вкажіть email з реєстрації. Працює лише на цьому пристрої.',
+      authNewPassword: 'Новий пароль', authNext: 'Далі',
+      authCreateAccount: 'Створити акаунт', authSignInInstead: 'Уже є акаунт? Увійти',
+      authChangeEmail: 'Змінити',
+      authSignInWithGmail: 'Увійти через Gmail', authBackFromGmail: 'Назад до входу', authOr: 'або',
+      authGoogleSignInHint: 'Натисніть кнопку Google. Пароль від Gmail вводиться лише на сайті Google.',
+      authGoogleSignInSubtitle: 'Вхід через Google',
+      authGoogleNotConfigured: 'Google Sign-In не налаштовано. Додайте GOOGLE_CLIENT_ID у js/config.js.',
+      authGoogleLoadFailed: 'Не вдалося завантажити Google Sign-In.',
+      authGmailRegisterHint: 'Gmail підтверджено. Придумайте ім\'я для гри.',
+      authGmailRegisterSubtitle: 'Створення акаунта',
+      authErrorGoogleAccountMismatch: 'Цей email прив\'язано до іншого Google-акаунта.',
+      authSubmitLogin: 'Увійти', authSubmitRegister: 'Зареєструватися', authSubmitReset: 'Зберегти пароль',
+      authResetSuccess: 'Пароль змінено. Тепер можна увійти.',
       authLogout: 'Вийти', authPlayAsGuest: 'Якщо не важливо — грати без реєстрації', authGuestLabel: 'Гість',
       authDeleteAccount: 'Видалити акаунт', authDeleteConfirm: 'Видалити акаунт? Це не можна скасувати.',
       authDeleteConfirmBtn: 'Видалити', authDeleteCancel: 'Скасувати',
@@ -631,6 +694,9 @@
       authErrorPasswordMismatch: 'Паролі не збігаються',
       authErrorUsernameShort: "Ім'я — мінімум 3 символи",
       authErrorPasswordShort: 'Пароль — мінімум 4 символи', authErrorEmpty: 'Заповніть усі поля',
+      authErrorInvalidEmail: 'Введіть коректний email', authErrorEmailExists: 'Цей email уже зареєстровано',
+      authErrorEmailMismatch: 'Email не збігається з акаунтом',
+      authErrorNoEmail: 'У акаунта немає email — відновлення недоступне',
     },
     de: {
       authLogin: 'Anmelden', authRegister: 'Registrieren', authLoginTitle: 'Anmelden',
@@ -871,6 +937,20 @@
     return String(username || '').trim().toLowerCase();
   }
 
+  function normalizeEmail(email) {
+    return String(email || '').trim().toLowerCase();
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function findUserByEmail(email, users) {
+    const normalized = normalizeEmail(email);
+    if (!normalized) return null;
+    return Object.keys(users).find((name) => normalizeEmail(users[name].email) === normalized) || null;
+  }
+
   function getDisplayName(username) {
     return String(username || '').trim();
   }
@@ -928,13 +1008,15 @@
     localStorage.removeItem(GUEST_KEY);
   }
 
-  async function register(username, password) {
+  async function register(username, password, email) {
     const name = normalizeUsername(username);
+    const mail = normalizeEmail(email);
     const users = readUsers();
 
-    if (!name || !password) return { ok: false, error: 'empty' };
+    if (!name || !password || !mail) return { ok: false, error: 'empty' };
     if (name.length < 3) return { ok: false, error: 'usernameShort' };
     if (password.length < 4) return { ok: false, error: 'passwordShort' };
+    if (!isValidEmail(mail)) return { ok: false, error: 'invalidEmail' };
     if (users[name]) {
       return {
         ok: false,
@@ -942,11 +1024,13 @@
         suggestions: suggestUsernames(username, users),
       };
     }
+    if (findUserByEmail(mail, users)) return { ok: false, error: 'emailExists' };
 
     const displayName = getDisplayName(username);
     users[name] = {
       ...DEFAULT_USER_DATA,
       displayName,
+      email: mail,
       passwordHash: await hashPassword(password),
       createdAt: Date.now(),
     };
@@ -954,6 +1038,41 @@
     clearGuestSession();
     setSession(name);
     return { ok: true, username: name, displayName, isNew: true };
+  }
+
+  async function resetPassword(username, email, newPassword) {
+    const name = normalizeUsername(username);
+    const mail = normalizeEmail(email);
+    const users = readUsers();
+
+    if (!name || !mail || !newPassword) return { ok: false, error: 'empty' };
+    if (newPassword.length < 4) return { ok: false, error: 'passwordShort' };
+    if (!isValidEmail(mail)) return { ok: false, error: 'invalidEmail' };
+    if (!users[name]) return { ok: false, error: 'userNotFound' };
+    if (!users[name].email) return { ok: false, error: 'noEmail' };
+    if (normalizeEmail(users[name].email) !== mail) {
+      return { ok: false, error: 'emailMismatch' };
+    }
+
+    users[name].passwordHash = await hashPassword(newPassword);
+    writeUsers(users);
+    return { ok: true, username: name };
+  }
+
+  async function loginByEmail(email, password) {
+    const username = findUserByEmail(email, readUsers());
+    if (!username) return { ok: false, error: 'userNotFound' };
+    return login(username, password);
+  }
+
+  async function resetPasswordByEmail(email, newPassword) {
+    const username = findUserByEmail(email, readUsers());
+    if (!username) return { ok: false, error: 'userNotFound' };
+    return resetPassword(username, email, newPassword);
+  }
+
+  function emailExists(email) {
+    return !!findUserByEmail(email, readUsers());
   }
 
   async function login(username, password) {
@@ -1007,6 +1126,12 @@
     saveUserData,
     register,
     login,
+    loginByEmail,
+    resetPassword,
+    resetPasswordByEmail,
+    emailExists,
+    isValidEmail,
+    normalizeEmail,
     logout,
     deleteAccount,
     normalizeUsername,
@@ -1266,7 +1391,7 @@
 
   function applyTranslations(lang) {
     document.querySelectorAll('[data-i18n]').forEach((el) => {
-      if (el.closest('#authOverlay') && (el.id === 'authTitle' || el.id === 'authSubmit')) return;
+      if (el.closest('#authOverlay') && (el.id === 'authTitle' || el.id === 'authSubmit' || el.id === 'authPasswordLabel')) return;
       el.textContent = t(lang, el.dataset.i18n);
     });
     document.documentElement.lang = lang;
@@ -1311,22 +1436,51 @@
   function setAuthMode(mode) {
     authMode = mode;
     const isRegister = mode === 'register';
-    $('authTabLogin').classList.toggle('auth-tabs__btn--active', !isRegister);
+    const isReset = mode === 'reset';
+    const needsEmail = isRegister || isReset;
+    const needsConfirm = isRegister || isReset;
+
+    $('authTabs').hidden = isReset;
+    $('authTabLogin').classList.toggle('auth-tabs__btn--active', mode === 'login');
     $('authTabRegister').classList.toggle('auth-tabs__btn--active', isRegister);
-    $('authConfirmWrap').hidden = !isRegister;
-    $('authPasswordConfirm').required = isRegister;
+    $('authEmailWrap').hidden = !needsEmail;
+    $('authEmail').required = needsEmail;
+    $('authConfirmWrap').hidden = !needsConfirm;
+    $('authPasswordConfirm').required = needsConfirm;
+    $('authForgotWrap').hidden = mode !== 'login';
+    $('authBackLoginWrap').hidden = !isReset;
+    $('authResetHint').hidden = !isReset;
+    $('authPassword').autocomplete = needsConfirm ? 'new-password' : 'current-password';
     clearAuthError();
+    clearAuthSuccess();
+  }
+
+  function resetAuth() {
+    authMode = 'login';
+    $('authForm').reset();
+    setAuthMode('login');
   }
 
   function updateAuthFormTexts(lang) {
-    const titleKey = authMode === 'register' ? 'authRegisterTitle' : 'authLoginTitle';
-    const submitKey = authMode === 'register' ? 'authSubmitRegister' : 'authSubmitLogin';
+    const titleKey = authMode === 'register'
+      ? 'authRegisterTitle'
+      : authMode === 'reset'
+        ? 'authResetTitle'
+        : 'authLoginTitle';
+    const submitKey = authMode === 'register'
+      ? 'authSubmitRegister'
+      : authMode === 'reset'
+        ? 'authSubmitReset'
+        : 'authSubmitLogin';
+    const passwordLabelKey = authMode === 'reset' ? 'authNewPassword' : 'authPassword';
+
     $('authTitle').textContent = t(lang, titleKey);
     $('authSubmit').textContent = t(lang, submitKey);
+    $('authPasswordLabel').textContent = t(lang, passwordLabelKey);
     $('authTabLogin').textContent = t(lang, 'authLogin');
     $('authTabRegister').textContent = t(lang, 'authRegister');
     document.querySelectorAll('#authOverlay [data-i18n]').forEach((el) => {
-      if (el.id === 'authTitle' || el.id === 'authSubmit') return;
+      if (['authTitle', 'authSubmit', 'authPasswordLabel'].includes(el.id)) return;
       el.textContent = t(lang, el.dataset.i18n);
     });
     if ($('authGuestBtn')) {
@@ -1343,6 +1497,17 @@
   function clearAuthError() {
     $('authError').hidden = true;
     $('authError').textContent = '';
+  }
+
+  function showAuthSuccess(message) {
+    const el = $('authSuccess');
+    el.textContent = message;
+    el.hidden = !message;
+  }
+
+  function clearAuthSuccess() {
+    $('authSuccess').hidden = true;
+    $('authSuccess').textContent = '';
   }
 
   function updateAccountChip(displayName, isGuest, lang) {
@@ -1679,9 +1844,12 @@
     hideAuthScreen,
     setAppAuthenticated,
     setAuthMode,
+    resetAuth,
     updateAuthFormTexts,
     showAuthError,
     clearAuthError,
+    showAuthSuccess,
+    clearAuthSuccess,
     updateAccountChip,
     initAccountMenu,
     showDeleteAccountConfirm,
@@ -1728,9 +1896,12 @@
     hideAuthScreen,
     setAppAuthenticated,
     setAuthMode,
+    resetAuth,
     updateAuthFormTexts,
     showAuthError,
     clearAuthError,
+    showAuthSuccess,
+    clearAuthSuccess,
     updateAccountChip,
     initAccountMenu,
     showDeleteAccountConfirm,
@@ -1749,6 +1920,10 @@
     userNotFound: 'authErrorUserNotFound',
     wrongPassword: 'authErrorWrongPassword',
     passwordMismatch: 'authErrorPasswordMismatch',
+    invalidEmail: 'authErrorInvalidEmail',
+    emailExists: 'authErrorEmailExists',
+    emailMismatch: 'authErrorEmailMismatch',
+    noEmail: 'authErrorNoEmail',
   };
 
   const prefs = {
@@ -2127,9 +2302,7 @@
     hideDeleteAccountConfirm();
     setAppAuthenticated(false);
     showAuthScreen();
-    setAuthMode('login');
-    clearAuthError();
-    $('authForm').reset();
+    resetAuth();
     applyTranslations('en');
     setDirection(false);
     updateAuthFormTexts('en');
@@ -2147,8 +2320,10 @@
   async function handleAuthSubmit(e) {
     e.preventDefault();
     clearAuthError();
+    clearAuthSuccess();
 
     const username = $('authUsername').value;
+    const email = $('authEmail').value;
     const password = $('authPassword').value;
     const confirm = $('authPasswordConfirm').value;
     const mode = getAuthMode();
@@ -2158,12 +2333,29 @@
         showAuthErrorKey('passwordMismatch');
         return;
       }
-      const result = await Auth.register(username, password);
+      const result = await Auth.register(username, password, email);
       if (!result.ok) {
         showAuthErrorKey(result.error, result);
         return;
       }
       enterApp(result.username);
+      return;
+    }
+
+    if (mode === 'reset') {
+      if (password !== confirm) {
+        showAuthErrorKey('passwordMismatch');
+        return;
+      }
+      const result = await Auth.resetPassword(username, email, password);
+      if (!result.ok) {
+        showAuthErrorKey(result.error, result);
+        return;
+      }
+      $('authForm').reset();
+      setAuthMode('login');
+      updateAuthFormTexts(authLang());
+      showAuthSuccess(t(authLang(), 'authResetSuccess'));
       return;
     }
 
@@ -2184,7 +2376,7 @@
   }
 
   function initAuth() {
-    setAuthMode('login');
+    resetAuth();
     $('authTabLogin').addEventListener('click', () => {
       setAuthMode('login');
       updateAuthFormTexts(authLang());
@@ -2194,6 +2386,19 @@
       updateAuthFormTexts(authLang());
     });
     $('authForm').addEventListener('submit', handleAuthSubmit);
+    $('authForgotBtn').addEventListener('click', () => {
+      clearAuthError();
+      clearAuthSuccess();
+      setAuthMode('reset');
+      updateAuthFormTexts(authLang());
+    });
+    $('authBackLoginBtn').addEventListener('click', () => {
+      clearAuthError();
+      clearAuthSuccess();
+      $('authForm').reset();
+      setAuthMode('login');
+      updateAuthFormTexts(authLang());
+    });
     $('authGuestBtn').addEventListener('click', enterAsGuest);
     initAccountMenu(leaveApp, requestDeleteAccount);
   }
