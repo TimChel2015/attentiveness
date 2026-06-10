@@ -408,8 +408,8 @@
   function enterApp(username, asGuest = false) {
     isGuest = asGuest;
     appReady = true;
-    hideAuthScreen();
     setAppAuthenticated(true);
+    hideAuthScreen();
     loadUserPrefs(username);
     updateAccountChip(
       asGuest ? t(prefs.lang, 'authGuestLabel') : getAccountLabel(username),
@@ -515,56 +515,78 @@
     });
   }
 
+  function bindClick(id, handler) {
+    const el = $(id);
+    if (el) el.addEventListener('click', handler);
+  }
+
+  function bindSubmit(id, handler) {
+    const el = $(id);
+    if (el) el.addEventListener('submit', handler);
+  }
+
   function initAuth() {
     resetAuth();
-    $('authTabLogin').addEventListener('click', () => {
+    bindClick('authTabLogin', () => {
       setAuthMode('login');
       updateAuthFormTexts(authLang());
     });
-    $('authTabRegister').addEventListener('click', () => {
+    bindClick('authTabRegister', () => {
       setAuthMode('register');
       updateAuthFormTexts(authLang());
     });
-    $('authForm').addEventListener('submit', handleAuthSubmit);
-    $('authForgotBtn').addEventListener('click', () => {
+    bindSubmit('authForm', handleAuthSubmit);
+    bindClick('authForgotBtn', () => {
       clearAuthError();
       clearAuthSuccess();
       setAuthMode('reset');
       updateAuthFormTexts(authLang());
     });
-    $('authBackLoginBtn').addEventListener('click', () => {
+    bindClick('authBackLoginBtn', () => {
       clearAuthError();
       clearAuthSuccess();
-      $('authForm').reset();
+      const form = $('authForm');
+      if (form) form.reset();
       setAuthMode('login');
       updateAuthFormTexts(authLang());
     });
-    $('authGuestBtn').addEventListener('click', enterAsGuest);
+    bindClick('authGuestBtn', enterAsGuest);
     initAccountMenu(leaveApp, requestDeleteAccount);
   }
 
-  function init() {
-    initPickers(prefs.lang, applyLanguage, applyAge);
-    bindTutorialControls(advanceTutorialStep);
-    initAuth();
+  function bindGameControls() {
+    bindClick('startBtn', startGame);
+    bindClick('newGameBtn', newGame);
+    bindClick('themeLightBtn', () => applyTheme('light'));
+    bindClick('themeDarkBtn', () => applyTheme('dark'));
+  }
 
-    const username = Auth.getCurrentUser();
-    if (username && Auth.getUserData(username)) {
-      enterApp(username, false);
-    } else if (Auth.isGuestSession()) {
-      enterAsGuest();
-    } else {
-      if (username) Auth.logout();
+  function init() {
+    initAuth();
+    bindGameControls();
+
+    try {
+      bindTutorialControls(advanceTutorialStep);
+      initPickers(prefs.lang, applyLanguage, applyAge);
+
+      const username = Auth.getCurrentUser();
+      if (username && Auth.getUserData(username)) {
+        enterApp(username, false);
+      } else if (Auth.isGuestSession()) {
+        enterAsGuest();
+      } else {
+        if (username) Auth.logout();
+        showAuthScreen();
+        applyTranslations('en');
+        setDirection(false);
+        updateAuthFormTexts('en');
+      }
+    } catch (err) {
+      console.error('App init failed:', err);
       showAuthScreen();
-      applyTranslations('en');
-      setDirection(false);
+      setAppAuthenticated(false);
       updateAuthFormTexts('en');
     }
-
-    $('startBtn').addEventListener('click', startGame);
-    $('newGameBtn').addEventListener('click', newGame);
-    $('themeLightBtn').addEventListener('click', () => applyTheme('light'));
-    $('themeDarkBtn').addEventListener('click', () => applyTheme('dark'));
   }
 
   init();
