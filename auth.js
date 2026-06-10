@@ -27,10 +27,17 @@
 
   async function hashPassword(password) {
     const data = new TextEncoder().encode(password);
-    const hash = await crypto.subtle.digest('SHA-256', data);
-    return Array.from(new Uint8Array(hash))
-      .map((b) => b.toString(16).padStart(2, '0'))
-      .join('');
+    if (global.crypto?.subtle) {
+      const hash = await crypto.subtle.digest('SHA-256', data);
+      return Array.from(new Uint8Array(hash))
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join('');
+    }
+    let h = 5381;
+    for (let i = 0; i < data.length; i += 1) {
+      h = ((h << 5) + h) ^ data[i];
+    }
+    return `fallback-${(h >>> 0).toString(16)}-${data.length}`;
   }
 
   function normalizeUsername(username) {
@@ -234,10 +241,3 @@
     normalizeEmail,
     logout,
     deleteAccount,
-    normalizeUsername,
-    getDisplayNameForUser,
-    isGuestSession,
-    setGuestSession,
-    clearGuestSession,
-  };
-})(window);
