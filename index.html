@@ -30,7 +30,7 @@
   <div class="auth-overlay" id="authOverlay">
     <div class="auth-card">
       <div class="auth-card__emoji" aria-hidden="true">🔐</div>
-      <div class="auth-tabs" role="tablist">
+      <div class="auth-tabs" id="authTabs" role="tablist">
         <button class="auth-tabs__btn auth-tabs__btn--active" id="authTabLogin" type="button" data-i18n="authLogin">Log in</button>
         <button class="auth-tabs__btn" id="authTabRegister" type="button" data-i18n="authRegister">Sign up</button>
       </div>
@@ -40,16 +40,28 @@
           <span class="auth-field__label" data-i18n="authUsername">Username</span>
           <input class="auth-field__input" id="authUsername" type="text" autocomplete="username" required>
         </label>
+        <label class="auth-field" id="authEmailWrap" hidden>
+          <span class="auth-field__label" data-i18n="authEmail">Email</span>
+          <input class="auth-field__input" id="authEmail" type="email" autocomplete="email" inputmode="email">
+        </label>
         <label class="auth-field">
-          <span class="auth-field__label" data-i18n="authPassword">Password</span>
+          <span class="auth-field__label" id="authPasswordLabel" data-i18n="authPassword">Password</span>
           <input class="auth-field__input" id="authPassword" type="password" autocomplete="current-password" required>
         </label>
         <label class="auth-field" id="authConfirmWrap" hidden>
           <span class="auth-field__label" data-i18n="authPasswordConfirm">Confirm password</span>
           <input class="auth-field__input" id="authPasswordConfirm" type="password" autocomplete="new-password">
         </label>
+        <p class="auth-form__hint" id="authResetHint" hidden data-i18n="authResetHint"></p>
         <p class="auth-form__error" id="authError" hidden></p>
+        <p class="auth-form__success" id="authSuccess" hidden></p>
         <button class="btn btn--primary btn--large auth-form__submit" id="authSubmit" type="submit" data-i18n="authSubmitLogin">Log in</button>
+        <p class="auth-form__link-wrap" id="authForgotWrap">
+          <button class="auth-form__link" id="authForgotBtn" type="button" data-i18n="authForgotPassword">Forgot password?</button>
+        </p>
+        <p class="auth-form__link-wrap" id="authBackLoginWrap" hidden>
+          <button class="auth-form__link" id="authBackLoginBtn" type="button" data-i18n="authBackToLogin">Back to log in</button>
+        </p>
       </form>
       <button class="btn btn--secondary auth-form__guest" id="authGuestBtn" type="button" data-i18n="authPlayAsGuest">
         No account? Play anyway
