@@ -241,3 +241,10 @@
     normalizeEmail,
     logout,
     deleteAccount,
+    normalizeUsername,
+    getDisplayNameForUser,
+    isGuestSession,
+    setGuestSession,
+    clearGuestSession,
+  };
+})(window);

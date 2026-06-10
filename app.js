@@ -587,7 +587,13 @@
     }
   }
 
+  function hideLoadError() {
+    const box = document.getElementById('loadError');
+    if (box) box.hidden = true;
+  }
+
   function init() {
+    hideLoadError();
     fixStuckScreen();
     initAuth();
     bindGameControls();
@@ -616,9 +622,16 @@
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
+  function boot() {
+    if (boot.done) return;
+    boot.done = true;
     init();
   }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+  window.addEventListener('load', boot);
 })();

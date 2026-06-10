@@ -327,6 +327,21 @@ select {
   min-height: 0;
 }
 
+/* ===== Load error ===== */
+.load-error {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: #1e1b4b;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  text-align: center;
+}
+
 /* ===== Auth ===== */
 .auth-overlay {
   position: fixed;

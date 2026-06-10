@@ -1,4 +1,4 @@
-# Build js/main.js from module files in js/
+# Build js/main.js and sync files for GitHub Pages
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $files = @('i18n.js', 'auth.js', 'game.js', 'ui.js', 'app.js')
 
@@ -13,6 +13,10 @@ foreach ($name in $files) {
 $utf8 = New-Object System.Text.UTF8Encoding $false
 [System.IO.File]::WriteAllText((Join-Path $root 'js\main.js'), $content, $utf8)
 
-# Keep styles in sync at project root (for GitHub Pages)
 Copy-Item (Join-Path $root 'css\styles.css') (Join-Path $root 'styles.css') -Force
-Write-Host 'Built js/main.js and synced styles.css'
+
+foreach ($name in $files) {
+    Copy-Item (Join-Path $root "js\$name") (Join-Path $root $name) -Force
+}
+
+Write-Host 'Built js/main.js, synced styles.css and .js files to project root'
