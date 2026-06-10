@@ -406,22 +406,30 @@
   }
 
   function enterApp(username, asGuest = false) {
-    isGuest = asGuest;
-    appReady = true;
-    setAppAuthenticated(true);
-    hideAuthScreen();
-    loadUserPrefs(username);
-    updateAccountChip(
-      asGuest ? t(prefs.lang, 'authGuestLabel') : getAccountLabel(username),
-      asGuest,
-      prefs.lang
-    );
-    applyTheme(prefs.theme);
-    applyLanguage(prefs.lang);
-    updateAgeButton(prefs.age, prefs.lang);
-    resetGameSession();
-    showWelcomeScreen();
-    initTutorial();
+    try {
+      isGuest = asGuest;
+      appReady = true;
+      setAppAuthenticated(true);
+      hideAuthScreen();
+      loadUserPrefs(username);
+      updateAccountChip(
+        asGuest ? t(prefs.lang, 'authGuestLabel') : getAccountLabel(username),
+        asGuest,
+        prefs.lang
+      );
+      applyTheme(prefs.theme);
+      applyLanguage(prefs.lang);
+      updateAgeButton(prefs.age, prefs.lang);
+      resetGameSession();
+      showWelcomeScreen();
+      initTutorial();
+    } catch (err) {
+      console.error('enterApp failed:', err);
+      appReady = false;
+      isGuest = false;
+      showAuthScreen();
+      setAppAuthenticated(false);
+    }
   }
 
   function enterAsGuest() {
@@ -525,8 +533,12 @@
     if (el) el.addEventListener('submit', handler);
   }
 
+  let authBound = false;
+
   function initAuth() {
-    resetAuth();
+    if (authBound) return;
+    authBound = true;
+
     bindClick('authTabLogin', () => {
       setAuthMode('login');
       updateAuthFormTexts(authLang());
@@ -552,6 +564,12 @@
     });
     bindClick('authGuestBtn', enterAsGuest);
     initAccountMenu(leaveApp, requestDeleteAccount);
+
+    try {
+      resetAuth();
+    } catch (err) {
+      console.error('resetAuth failed:', err);
+    }
   }
 
   function bindGameControls() {
@@ -561,7 +579,16 @@
     bindClick('themeDarkBtn', () => applyTheme('dark'));
   }
 
+  function fixStuckScreen() {
+    const overlay = $('authOverlay');
+    const app = $('app');
+    if (overlay && app && app.classList.contains('app--guest') && overlay.hidden) {
+      overlay.hidden = false;
+    }
+  }
+
   function init() {
+    fixStuckScreen();
     initAuth();
     bindGameControls();
 
@@ -589,5 +616,9 @@
     }
   }
 
-  init();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
