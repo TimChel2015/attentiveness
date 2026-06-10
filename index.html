@@ -218,14 +218,47 @@
         var text = document.getElementById('loadErrorText');
         if (!box || !text) return;
         box.hidden = false;
-        text.textContent = 'Не удалось загрузить ' + (target.src || 'скрипт') + '. Проверьте, что папка js/ загружена на сайт.';
+        text.textContent = 'Не удалось загрузить ' + (target.src || 'скрипт') + '. Положите файлы .js в папку js/ или в корень сайта.';
       }, true);
     })();
   </script>
-  <script src="js/i18n.js?v=4"></script>
-  <script src="js/auth.js?v=4"></script>
-  <script src="js/game.js?v=4"></script>
-  <script src="js/ui.js?v=4"></script>
-  <script src="js/app.js?v=4"></script>
+  <script>
+    (function () {
+      var FILES = ['i18n.js', 'auth.js', 'game.js', 'ui.js', 'app.js'];
+      var BASES = ['js/', ''];
+      var VERSION = '5';
+
+      function showLoadError(file) {
+        var box = document.getElementById('loadError');
+        var text = document.getElementById('loadErrorText');
+        if (!box || !text) return;
+        box.hidden = false;
+        text.textContent = 'Не удалось загрузить ' + file + '. Загрузите на GitHub папку js/ с файлами или положите .js файлы в корень репозитория.';
+      }
+
+      function loadFile(index) {
+        if (index >= FILES.length) return;
+        tryBase(index, 0);
+      }
+
+      function tryBase(index, baseIndex) {
+        var file = FILES[index];
+        var base = BASES[baseIndex];
+        var script = document.createElement('script');
+        script.src = base + file + '?v=' + VERSION;
+        script.onload = function () { loadFile(index + 1); };
+        script.onerror = function () {
+          if (baseIndex + 1 < BASES.length) {
+            tryBase(index, baseIndex + 1);
+          } else {
+            showLoadError(file);
+          }
+        };
+        document.body.appendChild(script);
+      }
+
+      loadFile(0);
+    })();
+  </script>
 </body>
 </html>
