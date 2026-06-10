@@ -32,39 +32,24 @@
     bindTutorialControls,
     refreshTutorialTexts,
     setAgePickerLocked,
+    closeAllMenus,
+    toggleMenu,
+    bindMenuScroll,
+  } = UI;
+
+  const {
     showAuthScreen,
     hideAuthScreen,
     setAppAuthenticated,
-    setAuthMode,
     resetAuth,
     updateAuthFormTexts,
-    showAuthError,
-    clearAuthError,
-    showAuthSuccess,
-    clearAuthSuccess,
     updateAccountChip,
-    initAccountMenu,
     showDeleteAccountConfirm,
     hideDeleteAccountConfirm,
-    getAuthMode,
-    closeAllMenus,
-  } = UI;
+  } = AuthUI;
 
   const TUTORIAL_LEVEL = '5-7';
   const TUTORIAL_SCORE_GOAL = 10;
-  const AUTH_ERROR_KEYS = {
-    empty: 'authErrorEmpty',
-    usernameShort: 'authErrorUsernameShort',
-    passwordShort: 'authErrorPasswordShort',
-    userExists: 'authErrorUserExists',
-    userNotFound: 'authErrorUserNotFound',
-    wrongPassword: 'authErrorWrongPassword',
-    passwordMismatch: 'authErrorPasswordMismatch',
-    invalidEmail: 'authErrorInvalidEmail',
-    emailExists: 'authErrorEmailExists',
-    emailMismatch: 'authErrorEmailMismatch',
-    noEmail: 'authErrorNoEmail',
-  };
 
   const prefs = {
     theme: 'light',
@@ -77,6 +62,57 @@
   let tutorialStep = 0;
   let appReady = false;
   let isGuest = false;
+  let totalScore = 0;
+  let winStreak = 0;
+
+  function loadProgress() {
+    if (isGuest) {
+      totalScore = parseInt(localStorage.getItem('guestTotalScore') || '0', 10);
+      winStreak = parseInt(localStorage.getItem('guestWinStreak') || '0', 10);
+      return;
+    }
+    const progress = Auth.getProgress();
+    totalScore = progress.totalScore;
+    winStreak = progress.winStreak;
+  }
+
+  function saveProgress() {
+    if (isGuest) {
+      localStorage.setItem('guestTotalScore', String(totalScore));
+      localStorage.setItem('guestWinStreak', String(winStreak));
+      return;
+    }
+    Auth.saveProgress(totalScore, winStreak);
+  }
+
+  function getDisplayScore() {
+    return state.score;
+  }
+
+  function syncScoreUI(visible = state.isPlaying || state.score > 0) {
+    const showHeader = visible || (!isGuest && appReady);
+    updateScore(state.score, showHeader, {
+      totalScore,
+      winStreak,
+      showTotal: !isGuest && appReady,
+    });
+  }
+
+  function recordWin() {
+    addScore(state);
+    totalScore += 1;
+    winStreak += 1;
+    saveProgress();
+    syncScoreUI(true);
+    addTutorialProgress();
+    syncTutorialBanner();
+  }
+
+  function recordLoss() {
+    winStreak = 0;
+    saveProgress();
+    syncScoreUI(true);
+  }
 
   function authLang() {
     return appReady ? prefs.lang : 'en';
@@ -137,17 +173,20 @@
   function loadUserPrefs(username) {
     if (isGuest) {
       loadGuestPrefs();
+      loadProgress();
       return;
     }
     const user = Auth.getUserData(username);
     if (!user) {
       tutorialActive = true;
+      loadProgress();
       return;
     }
     prefs.theme = user.theme || 'light';
     prefs.lang = normalizeLang(user.lang || 'en');
     prefs.age = normalizeAge(user.age || '5-7');
     tutorialActive = accountNeedsTutorial(user, username);
+    loadProgress();
   }
 
   function saveUserPrefs() {
@@ -245,7 +284,7 @@
     state.isPlaying = false;
     state.answered = false;
     state.round = null;
-    updateScore(0, false);
+    syncScoreUI(false);
   }
 
   function applyTheme(theme) {
@@ -351,12 +390,10 @@
     );
 
     if (isCorrect) {
-      addScore(state);
-      updateScore(state.score, true);
-      addTutorialProgress();
-      syncTutorialBanner();
+      recordWin();
       showFeedback('correct', prefs.lang, () => startRound());
     } else {
+      recordLoss();
       showFeedback('wrong', prefs.lang, () => startRound());
     }
   }
@@ -366,6 +403,7 @@
 
     state.answered = true;
     state.isPlaying = false;
+    recordLoss();
     renderGameField(
       state.round.objects,
       state.round.cols,
@@ -380,7 +418,7 @@
     clearTimer();
     state.isPlaying = true;
     showPlayingScreen();
-    updateScore(state.score, true);
+    syncScoreUI(true);
     if (tutorialActive) {
       showTutorialBanner(prefs.lang, getTutorialScore());
     }
@@ -394,7 +432,7 @@
     state.score = 0;
     state.isPlaying = false;
     showWelcomeScreen();
-    updateScore(0, false);
+    syncScoreUI(false);
     if (tutorialActive) {
       hideTutorialBanner();
     }
@@ -421,6 +459,7 @@
       applyLanguage(prefs.lang);
       updateAgeButton(prefs.age, prefs.lang);
       resetGameSession();
+      syncScoreUI(!asGuest);
       showWelcomeScreen();
       initTutorial();
     } catch (err) {
@@ -456,65 +495,6 @@
     updateAuthFormTexts('en');
   }
 
-  function showAuthErrorKey(errorKey, extra = {}) {
-    const key = AUTH_ERROR_KEYS[errorKey] || 'authErrorEmpty';
-    let message = t(authLang(), key);
-    if (errorKey === 'userExists' && extra.suggestions?.length) {
-      message += ` ${t(authLang(), 'authErrorUserExistsTry')}: ${extra.suggestions.join(', ')}`;
-    }
-    showAuthError(message);
-  }
-
-  async function handleAuthSubmit(e) {
-    e.preventDefault();
-    clearAuthError();
-    clearAuthSuccess();
-
-    const username = $('authUsername').value;
-    const email = $('authEmail').value;
-    const password = $('authPassword').value;
-    const confirm = $('authPasswordConfirm').value;
-    const mode = getAuthMode();
-
-    if (mode === 'register') {
-      if (password !== confirm) {
-        showAuthErrorKey('passwordMismatch');
-        return;
-      }
-      const result = await Auth.register(username, password, email);
-      if (!result.ok) {
-        showAuthErrorKey(result.error, result);
-        return;
-      }
-      enterApp(result.username);
-      return;
-    }
-
-    if (mode === 'reset') {
-      if (password !== confirm) {
-        showAuthErrorKey('passwordMismatch');
-        return;
-      }
-      const result = await Auth.resetPassword(username, email, password);
-      if (!result.ok) {
-        showAuthErrorKey(result.error, result);
-        return;
-      }
-      $('authForm').reset();
-      setAuthMode('login');
-      updateAuthFormTexts(authLang());
-      showAuthSuccess(t(authLang(), 'authResetSuccess'));
-      return;
-    }
-
-    const result = await Auth.login(username, password);
-    if (!result.ok) {
-      showAuthErrorKey(result.error);
-      return;
-    }
-    enterApp(result.username);
-  }
-
   function requestDeleteAccount() {
     if (isGuest) return;
     showDeleteAccountConfirm(prefs.lang, () => {
@@ -526,50 +506,6 @@
   function bindClick(id, handler) {
     const el = $(id);
     if (el) el.addEventListener('click', handler);
-  }
-
-  function bindSubmit(id, handler) {
-    const el = $(id);
-    if (el) el.addEventListener('submit', handler);
-  }
-
-  let authBound = false;
-
-  function initAuth() {
-    if (authBound) return;
-    authBound = true;
-
-    bindClick('authTabLogin', () => {
-      setAuthMode('login');
-      updateAuthFormTexts(authLang());
-    });
-    bindClick('authTabRegister', () => {
-      setAuthMode('register');
-      updateAuthFormTexts(authLang());
-    });
-    bindSubmit('authForm', handleAuthSubmit);
-    bindClick('authForgotBtn', () => {
-      clearAuthError();
-      clearAuthSuccess();
-      setAuthMode('reset');
-      updateAuthFormTexts(authLang());
-    });
-    bindClick('authBackLoginBtn', () => {
-      clearAuthError();
-      clearAuthSuccess();
-      const form = $('authForm');
-      if (form) form.reset();
-      setAuthMode('login');
-      updateAuthFormTexts(authLang());
-    });
-    bindClick('authGuestBtn', enterAsGuest);
-    initAccountMenu(leaveApp, requestDeleteAccount);
-
-    try {
-      resetAuth();
-    } catch (err) {
-      console.error('resetAuth failed:', err);
-    }
   }
 
   function bindGameControls() {
@@ -595,7 +531,17 @@
   function init() {
     hideLoadError();
     fixStuckScreen();
-    initAuth();
+
+    AuthController.configure({
+      getLang: authLang,
+      onEnterApp: (username) => enterApp(username, false),
+      onEnterGuest: enterAsGuest,
+      onLeaveApp: leaveApp,
+      onDeleteAccount: requestDeleteAccount,
+    });
+    AuthController.setMenuApi({ toggleMenu, closeAllMenus, bindMenuScroll });
+    AuthController.initAuth();
+
     bindGameControls();
 
     try {

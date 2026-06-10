@@ -28,54 +28,54 @@
 
   const AGE_CONFIG = {
     '5-7': {
-      objectCount: 6,
-      cols: 3,
+      objectCount: 8,
+      cols: 4,
       roundTime: 9,
-      diffTypes: ['color', 'shape', 'symbol'],
+      diffTypes: ['color', 'shape', 'symbol', 'size'],
       shapes: SIMPLE_SHAPES,
       similarColors: true,
-      similarSymbols: false,
-      similarChance: 0.32,
+      similarSymbols: true,
+      similarChance: 0.48,
     },
     '8-10': {
-      objectCount: 9,
-      cols: 3,
-      roundTime: 7,
-      diffTypes: ['color', 'shape', 'symbol'],
-      shapes: SHAPES,
-      similarColors: true,
-      similarSymbols: true,
-      similarChance: 0.55,
-    },
-    '11-13': {
       objectCount: 12,
       cols: 4,
-      roundTime: 5,
-      diffTypes: ['color', 'shape', 'symbol'],
+      roundTime: 7,
+      diffTypes: ['color', 'shape', 'symbol', 'size'],
       shapes: SHAPES,
       similarColors: true,
       similarSymbols: true,
-      similarChance: 0.72,
+      similarChance: 0.68,
     },
-    '14-17': {
+    '11-13': {
       objectCount: 16,
       cols: 4,
-      roundTime: 4,
-      diffTypes: ['color', 'shape', 'symbol'],
+      roundTime: 5,
+      diffTypes: ['color', 'shape', 'symbol', 'size'],
       shapes: SHAPES,
       similarColors: true,
       similarSymbols: true,
       similarChance: 0.82,
     },
-    '18+': {
+    '14-17': {
       objectCount: 20,
       cols: 5,
-      roundTime: 3,
-      diffTypes: ['color', 'shape', 'symbol'],
+      roundTime: 4,
+      diffTypes: ['color', 'shape', 'symbol', 'size'],
       shapes: SHAPES,
       similarColors: true,
       similarSymbols: true,
-      similarChance: 0.85,
+      similarChance: 0.88,
+    },
+    '18+': {
+      objectCount: 24,
+      cols: 5,
+      roundTime: 3,
+      diffTypes: ['color', 'shape', 'symbol', 'size'],
+      shapes: SHAPES,
+      similarColors: true,
+      similarSymbols: true,
+      similarChance: 0.92,
     },
   };
 
@@ -128,11 +128,13 @@
 
     const objects = Array.from({ length: objectCount }, (_, i) => {
       const isOdd = i === oddIndex;
+      const scale = diffType === 'size' ? (isOdd ? 0.78 : 1) : 1;
       return {
         color: diffType === 'color' ? (isOdd ? oddColor : baseColor) : baseColor,
         shape: diffType === 'shape' ? (isOdd ? oddShape : baseShape) : baseShape,
         symbol: diffType === 'symbol' ? (isOdd ? oddSymbol : baseSymbol) : baseSymbol,
         showSymbol: diffType === 'symbol',
+        scale,
       };
     });
 

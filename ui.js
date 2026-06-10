@@ -79,7 +79,7 @@
     document.documentElement.lang = lang;
     refreshPickerLabels(lang);
     if (!$('authOverlay') || $('authOverlay').hidden) return;
-      updateAuthFormTexts(lang);
+    if (global.AuthUI) global.AuthUI.updateAuthFormTexts(lang);
   }
 
   function refreshPickerLabels(lang) {
@@ -98,184 +98,6 @@
     document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
   }
 
-  let authMode = 'login';
-
-  function showAuthScreen() {
-    const overlay = $('authOverlay');
-    if (overlay) overlay.hidden = false;
-    setAppAuthenticated(false);
-  }
-
-  function hideAuthScreen() {
-    const overlay = $('authOverlay');
-    if (overlay) overlay.hidden = true;
-  }
-
-  function setAppAuthenticated(authenticated) {
-    const app = $('app');
-    if (app) app.classList.toggle('app--guest', !authenticated);
-    const header = $('appHeader');
-    if (header) header.hidden = !authenticated;
-  }
-
-  function setAuthMode(mode) {
-    authMode = mode;
-    const isRegister = mode === 'register';
-    const isReset = mode === 'reset';
-    const needsEmail = isRegister || isReset;
-    const needsConfirm = isRegister || isReset;
-
-    const tabs = $('authTabs');
-    if (tabs) tabs.hidden = isReset;
-    if ($('authTabLogin')) {
-      $('authTabLogin').classList.toggle('auth-tabs__btn--active', mode === 'login');
-    }
-    if ($('authTabRegister')) {
-      $('authTabRegister').classList.toggle('auth-tabs__btn--active', isRegister);
-    }
-    if ($('authEmailWrap')) $('authEmailWrap').hidden = !needsEmail;
-    if ($('authEmail')) $('authEmail').required = needsEmail;
-    if ($('authConfirmWrap')) $('authConfirmWrap').hidden = !needsConfirm;
-    if ($('authPasswordConfirm')) $('authPasswordConfirm').required = needsConfirm;
-    if ($('authForgotWrap')) $('authForgotWrap').hidden = mode !== 'login';
-    if ($('authBackLoginWrap')) $('authBackLoginWrap').hidden = !isReset;
-    if ($('authResetHint')) $('authResetHint').hidden = !isReset;
-    if ($('authPassword')) {
-      $('authPassword').autocomplete = needsConfirm ? 'new-password' : 'current-password';
-    }
-    clearAuthError();
-    clearAuthSuccess();
-  }
-
-  function resetAuth() {
-    authMode = 'login';
-    const form = $('authForm');
-    if (form) form.reset();
-    setAuthMode('login');
-  }
-
-  function updateAuthFormTexts(lang) {
-    const titleKey = authMode === 'register'
-      ? 'authRegisterTitle'
-      : authMode === 'reset'
-        ? 'authResetTitle'
-        : 'authLoginTitle';
-    const submitKey = authMode === 'register'
-      ? 'authSubmitRegister'
-      : authMode === 'reset'
-        ? 'authSubmitReset'
-        : 'authSubmitLogin';
-    const passwordLabelKey = authMode === 'reset' ? 'authNewPassword' : 'authPassword';
-
-    const titleEl = $('authTitle');
-    const submitEl = $('authSubmit');
-    const passwordLabelEl = $('authPasswordLabel');
-    if (titleEl) titleEl.textContent = t(lang, titleKey);
-    if (submitEl) submitEl.textContent = t(lang, submitKey);
-    if (passwordLabelEl) passwordLabelEl.textContent = t(lang, passwordLabelKey);
-    if ($('authTabLogin')) $('authTabLogin').textContent = t(lang, 'authLogin');
-    if ($('authTabRegister')) $('authTabRegister').textContent = t(lang, 'authRegister');
-    document.querySelectorAll('#authOverlay [data-i18n]').forEach((el) => {
-      if (['authTitle', 'authSubmit', 'authPasswordLabel'].includes(el.id)) return;
-      el.textContent = t(lang, el.dataset.i18n);
-    });
-    if ($('authGuestBtn')) {
-      $('authGuestBtn').textContent = t(lang, 'authPlayAsGuest');
-    }
-  }
-
-  function showAuthError(message) {
-    const el = $('authError');
-    if (!el) return;
-    el.textContent = message;
-    el.hidden = !message;
-  }
-
-  function clearAuthError() {
-    const el = $('authError');
-    if (!el) return;
-    el.hidden = true;
-    el.textContent = '';
-  }
-
-  function showAuthSuccess(message) {
-    const el = $('authSuccess');
-    if (!el) return;
-    el.textContent = message;
-    el.hidden = !message;
-  }
-
-  function clearAuthSuccess() {
-    const el = $('authSuccess');
-    if (!el) return;
-    el.hidden = true;
-    el.textContent = '';
-  }
-
-  function updateAccountChip(displayName, isGuest, lang) {
-    const name = displayName || '';
-    $('accountBtnName').textContent = name;
-    $('accountMenuName').textContent = name;
-    $('accountDeleteBtn').hidden = isGuest;
-    if (lang) {
-      $('accountLogoutBtn').textContent = t(lang, 'authLogout');
-      $('accountDeleteBtn').textContent = t(lang, 'authDeleteAccount');
-    }
-  }
-
-  function showDeleteAccountConfirm(lang, onConfirm, onCancel) {
-    const overlay = $('deleteAccountOverlay');
-    $('deleteAccountText').textContent = t(lang, 'authDeleteConfirm');
-    $('deleteAccountCancel').textContent = t(lang, 'authDeleteCancel');
-    $('deleteAccountConfirm').textContent = t(lang, 'authDeleteConfirmBtn');
-    overlay.hidden = false;
-
-    const confirm = () => {
-      overlay.hidden = true;
-      $('deleteAccountConfirm').removeEventListener('click', confirm);
-      $('deleteAccountCancel').removeEventListener('click', cancel);
-      onConfirm();
-    };
-    const cancel = () => {
-      overlay.hidden = true;
-      $('deleteAccountConfirm').removeEventListener('click', confirm);
-      $('deleteAccountCancel').removeEventListener('click', cancel);
-      if (onCancel) onCancel();
-    };
-
-    $('deleteAccountConfirm').addEventListener('click', confirm);
-    $('deleteAccountCancel').addEventListener('click', cancel);
-  }
-
-  function hideDeleteAccountConfirm() {
-    $('deleteAccountOverlay').hidden = true;
-  }
-
-  function initAccountMenu(onLogout, onDeleteRequest) {
-    const menu = $('accountMenu');
-    if (menu) bindMenuScroll(menu);
-
-    bindClick('accountBtn', (e) => {
-      e.stopPropagation();
-      toggleMenu('accountMenu');
-    });
-
-    bindClick('accountLogoutBtn', () => {
-      closeAllMenus();
-      onLogout();
-    });
-
-    bindClick('accountDeleteBtn', () => {
-      closeAllMenus();
-      onDeleteRequest();
-    });
-  }
-
-  function bindClick(id, handler) {
-    const el = $(id);
-    if (el) el.addEventListener('click', handler);
-  }
-
   function showWelcomeScreen() {
     $('startOverlay').hidden = false;
     $('gameScreen').hidden = true;
@@ -286,12 +108,42 @@
     $('gameScreen').hidden = false;
   }
 
-  function updateScore(score, visible) {
+  function updateScore(score, visible, options = {}) {
+    const { totalScore = null, winStreak = 0, showTotal = false } = options;
     $('scoreRow').hidden = !visible;
     $('scoreValue').textContent = score;
+
+    const totalWrap = $('totalScoreWrap');
+    if (totalWrap) {
+      totalWrap.hidden = !showTotal || !visible;
+      if (showTotal && $('totalScoreValue')) {
+        $('totalScoreValue').textContent = totalScore != null ? totalScore : score;
+      }
+    }
+
+    const streakRow = $('streakRow');
+    const streakFires = $('streakFires');
+    if (streakRow && streakFires) {
+      const showStreak = visible && winStreak > 0;
+      streakRow.hidden = !showStreak;
+      if (showStreak) {
+        const popClass = ' streak__badge--new';
+        if (winStreak === 1) {
+          streakFires.innerHTML = `<span class="streak__fire${popClass}" aria-hidden="true">🔥</span>`;
+        } else {
+          streakFires.innerHTML =
+            `<span class="streak__badge${popClass}">` +
+            `<span class="streak__fire" aria-hidden="true">🔥</span>` +
+            `<span class="streak__mult">X${winStreak}</span>` +
+            `</span>`;
+        }
+      } else {
+        streakFires.textContent = '';
+      }
+    }
   }
 
-  const HINT_KEYS = { color: 'findColor', shape: 'findShape', symbol: 'findSymbol' };
+  const HINT_KEYS = { color: 'findColor', shape: 'findShape', symbol: 'findSymbol', size: 'findSize' };
 
   function updateGameHint(diffType, lang) {
     const key = HINT_KEYS[diffType];
@@ -313,6 +165,9 @@
       const shape = document.createElement('span');
       shape.className = `game-object__shape shape--${obj.shape}`;
       shape.style.backgroundColor = obj.color;
+      if (obj.scale && obj.scale !== 1) {
+        shape.style.transform = `scale(${obj.scale})`;
+      }
       if (revealIndex === index) shape.classList.add('game-object__shape--reveal');
 
       if (obj.showSymbol) {
@@ -548,6 +403,8 @@
     populateAgeMenu,
     initPickers,
     closeAllMenus,
+    toggleMenu,
+    bindMenuScroll,
     showTutorialStep,
     hideTutorialOverlay,
     isTutorialOverlayOpen,
@@ -557,20 +414,5 @@
     bindTutorialControls,
     refreshTutorialTexts,
     setAgePickerLocked,
-    showAuthScreen,
-    hideAuthScreen,
-    setAppAuthenticated,
-    setAuthMode,
-    resetAuth,
-    updateAuthFormTexts,
-    showAuthError,
-    clearAuthError,
-    showAuthSuccess,
-    clearAuthSuccess,
-    updateAccountChip,
-    initAccountMenu,
-    showDeleteAccountConfirm,
-    hideDeleteAccountConfirm,
-    getAuthMode: () => authMode,
   };
 })(window);
