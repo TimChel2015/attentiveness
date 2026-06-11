@@ -7,12 +7,14 @@
 ```
 vnimatilnost/
   index.html       — главная страница
-  styles.css       — стили (главный файл для сайта)
-  css/styles.css   — копия стилей
-  js/              — все скрипты
+  styles.css       — стили
+  login.js         — вход и регистрация (обязательно!)
+  i18n.js, game.js, ui.js, app.js
+  auth/login.js    — копия (можно не загружать, если есть login.js в корне)
+  js/              — исходники для правок
 ```
 
-**На GitHub загрузите всё**, особенно `styles.css` в корне и папку `js/`.
+**На GitHub загрузите в корень:** `index.html`, `styles.css`, `login.js`, `i18n.js`, `game.js`, `ui.js`, `app.js`.
 
 ## GitHub Pages
 
@@ -34,4 +36,4 @@ vnimatilnost/
 .\build.ps1
 ```
 
-Создаёт `js/main.js`. Для GitHub Pages достаточно отдельных файлов в `js/` — `index.html` уже подключает их.
+Создаёт `js/main.js` и копирует `login.js` в корень. Для GitHub загрузите файлы из корня проекта — см. список выше.

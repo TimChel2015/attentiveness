@@ -219,12 +219,41 @@
         }
       }
       document.addEventListener('DOMContentLoaded', fixStuckScreen);
+
+      var loginPaths = ['login.js?v=12', 'auth/login.js?v=12', 'js/auth/login.js?v=12'];
+      var loginIndex = 0;
+      function loadLogin() {
+        if (loginIndex >= loginPaths.length) {
+          var box = document.getElementById('loadError');
+          var text = document.getElementById('loadErrorText');
+          if (box && text) {
+            text.textContent = 'Файл login.js не найден. Загрузите login.js рядом с index.html (в корень сайта).';
+            box.hidden = false;
+          }
+          return;
+        }
+        var s = document.createElement('script');
+        s.src = loginPaths[loginIndex];
+        s.onload = loadRest;
+        s.onerror = function () {
+          loginIndex += 1;
+          loadLogin();
+        };
+        document.head.appendChild(s);
+      }
+      function loadRest() {
+        ['game.js?v=12', 'ui.js?v=12', 'app.js?v=12'].forEach(function (src) {
+          var s = document.createElement('script');
+          s.src = src;
+          document.body.appendChild(s);
+        });
+      }
+      var i18n = document.createElement('script');
+      i18n.src = 'i18n.js?v=12';
+      i18n.onload = loadLogin;
+      i18n.onerror = loadLogin;
+      document.head.appendChild(i18n);
     })();
   </script>
-  <script src="i18n.js?v=11"></script>
-  <script src="auth/login.js?v=11" onerror="this.onerror=null;this.src='js/auth/login.js?v=11'"></script>
-  <script src="game.js?v=11"></script>
-  <script src="ui.js?v=11"></script>
-  <script src="app.js?v=11"></script>
 </body>
 </html>

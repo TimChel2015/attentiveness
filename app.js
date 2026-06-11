@@ -15,7 +15,7 @@
     var box = document.getElementById('loadError');
     var text = document.getElementById('loadErrorText');
     if (box && text) {
-      text.textContent = 'auth/login.js not found. Upload the auth folder with login.js inside.';
+      text.textContent = 'Файл login.js не найден. Загрузите login.js в корень сайта (рядом с index.html).';
       box.hidden = false;
     }
     return;
