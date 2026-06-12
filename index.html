@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Rubik:wght@600;700;800&family=Noto+Sans+Arabic:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=39">
   <style>
     [hidden] { display: none !important; }
     .app--guest .header,
@@ -16,11 +16,14 @@
     .app--guest { pointer-events: none; }
     .auth-overlay {
       position: fixed; inset: 0; z-index: 400;
-      display: flex; align-items: center; justify-content: center;
-      padding: 1.5rem; background: rgba(30, 27, 75, 0.5);
+      display: flex; align-items: flex-start; justify-content: center;
+      overflow-y: auto; overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      padding: max(1.5rem, env(safe-area-inset-top)) 1.5rem max(1.5rem, env(safe-area-inset-bottom));
+      background: rgba(30, 27, 75, 0.5);
       pointer-events: auto;
     }
-    .auth-shell { pointer-events: auto; position: relative; z-index: 1; }
+    .auth-shell { pointer-events: auto; position: relative; z-index: 1; flex-shrink: 0; margin: auto; }
     .auth-card { pointer-events: auto; position: relative; z-index: 1; }
     .auth-lang-picker { pointer-events: auto; position: relative; z-index: 20; }
     .auth-overlay[hidden] { display: none !important; }
