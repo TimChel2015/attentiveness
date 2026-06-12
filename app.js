@@ -6,7 +6,7 @@
     var box = document.getElementById('loadError');
     var text = document.getElementById('loadErrorText');
     if (box && text) {
-      text.textContent = 'Scripts failed to load. Upload all .js files and refresh (Ctrl+F5).';
+      text.textContent = 'Не загрузились скрипты. Загрузите на GitHub: i18n.js, login.js, game.js, ui.js, app.js';
       box.hidden = false;
     }
     return;
@@ -42,6 +42,7 @@
     updateAgeButton,
     populateAgeMenu,
     initPickers,
+    initAuthLangPicker,
     showTutorialStep,
     hideTutorialOverlay,
     isTutorialOverlayOpen,
@@ -135,7 +136,7 @@
   }
 
   function authLang() {
-    return appReady ? prefs.lang : 'en';
+    return prefs.lang;
   }
 
   function isGuestTutorialDone() {
@@ -314,6 +315,17 @@
     prefs.theme = theme;
     if (appReady) saveUserPrefs();
   }
+
+  function applyAuthLanguage(lang) {
+    lang = normalizeLang(lang);
+    prefs.lang = lang;
+    localStorage.setItem('guestLang', lang);
+    applyTranslations(lang);
+    setDirection(isRtl(lang));
+    updateLangButton(lang);
+    updateAuthFormTexts(lang);
+  }
+  window.__applyAuthLanguage = applyAuthLanguage;
 
   function applyLanguage(lang) {
     lang = normalizeLang(lang);
@@ -518,9 +530,7 @@
     setAppAuthenticated(false);
     showAuthScreen();
     resetAuth();
-    applyTranslations('en');
-    setDirection(false);
-    updateAuthFormTexts('en');
+    applyAuthLanguage(normalizeLang(localStorage.getItem('guestLang') || prefs.lang || 'en'));
   }
 
   function requestDeleteAccount() {
@@ -560,6 +570,8 @@
     hideLoadError();
     fixStuckScreen();
 
+    prefs.lang = normalizeLang(localStorage.getItem('guestLang') || 'en');
+
     AuthController.configure({
       getLang: authLang,
       onEnterApp: (username) => enterApp(username, false),
@@ -569,6 +581,10 @@
     });
     AuthController.setMenuApi({ toggleMenu, closeAllMenus, bindMenuScroll });
     AuthController.initAuth();
+    initAuthLangPicker(prefs.lang, applyAuthLanguage);
+    window.addEventListener('authLangChange', (e) => {
+      if (e.detail && e.detail.lang) applyAuthLanguage(e.detail.lang);
+    });
 
     bindGameControls();
 
@@ -584,15 +600,13 @@
       } else {
         if (username) Auth.logout();
         showAuthScreen();
-        applyTranslations('en');
-        setDirection(false);
-        updateAuthFormTexts('en');
+        applyAuthLanguage(prefs.lang);
       }
     } catch (err) {
       console.error('App init failed:', err);
       showAuthScreen();
       setAppAuthenticated(false);
-      updateAuthFormTexts('en');
+      applyAuthLanguage('en');
     }
   }
 

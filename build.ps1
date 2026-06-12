@@ -32,10 +32,12 @@ if (-not (Test-Path $authDeployRoot)) {
 Copy-Item $loginSrc (Join-Path $authDeployRoot 'login.js') -Force
 Copy-Item $loginSrc (Join-Path $root 'login.js') -Force
 
+Copy-Item (Join-Path $root 'js\main.js') (Join-Path $root 'main.js') -Force
+
 $oldAuthFiles = @('auth.js', 'auth-ui.js', 'auth-controller.js')
 foreach ($name in $oldAuthFiles) {
     $path = Join-Path $authDeployRoot $name
     if (Test-Path $path) { Remove-Item $path -Force }
 }
 
-Write-Host 'Built js/main.js, synced styles.css, js files, login.js, and auth/login.js'
+Write-Host 'Built main.js (upload this!), styles.css, and js/ sources'

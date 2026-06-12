@@ -34,6 +34,7 @@
     langMenu: 'langBtn',
     ageMenu: 'ageBtn',
     accountMenu: 'accountBtn',
+    authLangMenu: 'authLangBtn',
   };
 
   function positionMenu(menuId) {
@@ -46,7 +47,7 @@
     menu.style.top = `${rect.bottom + gap}px`;
     menu.style.right = 'auto';
 
-    if (menuId === 'langMenu') {
+    if (menuId === 'langMenu' || menuId === 'authLangMenu') {
       let left = rect.left + rect.width / 2 - menuWidth / 2;
       left = Math.max(8, Math.min(left, window.innerWidth - menuWidth - 8));
       menu.style.left = `${left}px`;
@@ -71,12 +72,21 @@
     requestAnimationFrame(() => positionMenu(menuId));
   }
 
+  function setPageTitle(lang) {
+    const title = t(lang, 'title');
+    document.title = title;
+    const meta = document.getElementById('appleWebAppTitle')
+      || document.querySelector('meta[name="apple-mobile-web-app-title"]');
+    if (meta) meta.content = title;
+  }
+
   function applyTranslations(lang) {
     document.querySelectorAll('[data-i18n]').forEach((el) => {
-      if (el.closest('#authOverlay') && (el.id === 'authTitle' || el.id === 'authSubmit' || el.id === 'authPasswordLabel')) return;
+      if (el.closest('#authOverlay')) return;
       el.textContent = t(lang, el.dataset.i18n);
     });
     document.documentElement.lang = lang;
+    setPageTitle(lang);
     refreshPickerLabels(lang);
     if (!$('authOverlay') || $('authOverlay').hidden) return;
     if (global.AuthUI) global.AuthUI.updateAuthFormTexts(lang);
@@ -90,7 +100,7 @@
     });
     document.querySelectorAll('[data-lang]').forEach((btn) => {
       const opt = LANGUAGE_OPTIONS.find((l) => l.code === btn.dataset.lang);
-      btn.textContent = `${opt.flag} ${opt.label}`;
+      if (opt) btn.textContent = `${opt.flag} ${opt.label}`;
     });
   }
 
@@ -122,23 +132,15 @@
     }
 
     const streakRow = $('streakRow');
-    const streakFires = $('streakFires');
-    if (streakRow && streakFires) {
+    const streakValue = $('streakValue');
+    if (streakRow && streakValue) {
       const showStreak = visible && winStreak > 0;
       streakRow.hidden = !showStreak;
       if (showStreak) {
-        const popClass = ' streak__badge--new';
-        if (winStreak === 1) {
-          streakFires.innerHTML = `<span class="streak__fire${popClass}" aria-hidden="true">🔥</span>`;
-        } else {
-          streakFires.innerHTML =
-            `<span class="streak__badge${popClass}">` +
-            `<span class="streak__fire" aria-hidden="true">🔥</span>` +
-            `<span class="streak__mult">X${winStreak}</span>` +
-            `</span>`;
-        }
-      } else {
-        streakFires.textContent = '';
+        streakValue.textContent = winStreak;
+        streakValue.classList.remove('streak__value--new');
+        void streakValue.offsetWidth;
+        streakValue.classList.add('streak__value--new');
       }
     }
   }
@@ -241,19 +243,28 @@
 
   function updateLangButton(lang) {
     const opt = LANGUAGE_OPTIONS.find((l) => l.code === lang);
-    $('langBtnFlag').textContent = opt ? opt.flag : '🌐';
-    $('langBtnText').textContent = opt ? opt.label : '—';
-    $('langBtn').setAttribute('aria-label', opt ? opt.label : 'Language');
+    const flagEl = $('langBtnFlag');
+    const textEl = $('langBtnText');
+    const btn = $('langBtn');
+    if (flagEl) flagEl.textContent = opt ? opt.flag : '🌐';
+    if (textEl) textEl.textContent = opt ? opt.label : '—';
+    if (btn) btn.setAttribute('aria-label', opt ? opt.label : 'Language');
+    updateAuthLangButton(lang);
   }
 
-  function updateAgeButton(ageId, lang) {
-    const key = AGE_I18N_KEYS[ageId];
-    $('ageBtnText').textContent = key ? t(lang, key) : '—';
-    $('ageBtn').setAttribute('aria-label', t(lang, 'ageTitle'));
+  function updateAuthLangButton(lang) {
+    const btn = $('authLangBtn');
+    if (!btn) return;
+    const opt = LANGUAGE_OPTIONS.find((l) => l.code === lang);
+    const flagEl = $('authLangBtnFlag');
+    const textEl = $('authLangBtnText');
+    if (flagEl) flagEl.textContent = opt ? opt.flag : '🌐';
+    if (textEl) textEl.textContent = opt ? opt.label : '—';
+    btn.setAttribute('aria-label', opt ? opt.label : 'Language');
   }
 
-  function populateLangMenu(onSelect) {
-    const menu = $('langMenu');
+  function populateLanguageMenu(menuId, onSelect) {
+    const menu = $(menuId);
     if (!menu) return;
     menu.innerHTML = LANGUAGE_OPTIONS.map(
       ({ code, flag, label }) =>
@@ -269,7 +280,36 @@
     });
   }
 
-  function populateAgeMenu(lang, onSelect) {
+  function populateLangMenu(onSelect) {
+    populateLanguageMenu('langMenu', onSelect);
+  }
+
+  function populateAuthLangMenu(onSelect) {
+    populateLanguageMenu('authLangMenu', onSelect);
+  }
+
+  function initAuthLangPicker(lang, onSelect) {
+    populateAuthLangMenu(onSelect);
+    updateAuthLangButton(lang);
+
+    const btn = $('authLangBtn');
+    if (!btn || btn.dataset.langPickerBound === '1') return;
+    btn.dataset.langPickerBound = '1';
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu('authLangMenu');
+    });
+  }
+
+  function updateAgeButton(ageId, lang) {
+    const key = AGE_I18N_KEYS[ageId];
+    $('ageBtnText').textContent = key ? t(lang, key) : '—';
+    $('ageBtn').setAttribute('aria-label', t(lang, 'ageTitle'));
+  }
+
+  function updateAgeButton(ageId, lang) {
     const menu = $('ageMenu');
     if (!menu) return;
     menu.innerHTML = AGE_GROUPS.map((id) => {
@@ -402,6 +442,7 @@
     updateAgeButton,
     populateAgeMenu,
     initPickers,
+    initAuthLangPicker,
     closeAllMenus,
     toggleMenu,
     bindMenuScroll,

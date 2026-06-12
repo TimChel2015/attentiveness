@@ -1,39 +1,43 @@
 # Тренажёр внимания / Attention Trainer
 
-Игра на чистом HTML, CSS и JavaScript — без установки Node.js.
+Игра на HTML, CSS и JavaScript.
 
-## Структура проекта
+## Что загрузить на GitHub (только 3 файла!)
 
 ```
-vnimatilnost/
-  index.html       — главная страница
-  styles.css       — стили
-  login.js         — вход и регистрация (обязательно!)
-  i18n.js, game.js, ui.js, app.js
-  auth/login.js    — копия (можно не загружать, если есть login.js в корне)
-  js/              — исходники для правок
+index.html
+styles.css
+main.js
 ```
 
-**На GitHub загрузите в корень:** `index.html`, `styles.css`, `login.js`, `i18n.js`, `game.js`, `ui.js`, `app.js`.
+1. GitHub → ваш репозиторий → **Add file** → **Upload files**
+2. Перетащите эти **3 файла** из папки `C:\Users\Dashka\vnimatilnost`
+3. **Commit changes**
+4. Settings → Pages → Branch: **main**, folder: **/ (root)**
+5. Откройте сайт и обновите страницу (на телефоне — потяните вниз)
 
-## GitHub Pages
+## После правок в коде
 
-1. Создайте репозиторий на GitHub и загрузите **весь** проект.
-2. Settings → Pages → Source: **Deploy from a branch**.
-3. Branch: **main**, folder: **/ (root)**.
-4. Сайт откроется по адресу: `https://ВАШ_ЛОГИН.github.io/ИМЯ_РЕПО/`
-
-Открывайте именно ссылку GitHub Pages, а не файл `index.html` двойным щелчком на компьютере.
-
-## Локальный запуск
-
-- Live Server в VS Code (порт 5501), или
-- любой локальный сервер из корня проекта.
-
-## Сборка одного файла (необязательно)
+В папке проекта запустите:
 
 ```powershell
 .\build.ps1
 ```
 
-Создаёт `js/main.js` и копирует `login.js` в корень. Для GitHub загрузите файлы из корня проекта — см. список выше.
+Скрипт соберёт новый `main.js` — загрузите его на GitHub вместе с `index.html` и `styles.css`.
+
+## Локальная разработка
+
+Правки делайте в папке `js/`, затем `.\build.ps1`.
+
+Структура исходников:
+
+```
+js/
+  i18n.js
+  auth/login.js
+  game.js
+  ui.js
+  app.js
+css/styles.css
+```

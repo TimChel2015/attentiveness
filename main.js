@@ -31,6 +31,8 @@
       start: 'Start',
       newGame: 'End game',
       score: 'Score',
+      totalScore: 'Total',
+      streakLabel: 'Win streak',
       correct: 'Correct!',
       wrong: 'Try again',
       timeout: "Time's up!",
@@ -43,6 +45,7 @@
       findColor: 'Find the different color',
       findShape: 'Find the different shape',
       findSymbol: 'Find the different symbol',
+      findSize: 'Find the different size',
       ageTitle: 'Your age',
       age57: 'Level 1',
       age810: 'Level 2',
@@ -68,6 +71,8 @@
       start: 'Начать',
       newGame: 'Закончить игру',
       score: 'Счёт',
+      totalScore: 'Всего',
+      streakLabel: 'Серия побед',
       correct: 'Верно!',
       wrong: 'Попробуй ещё',
       timeout: 'Время вышло!',
@@ -80,6 +85,7 @@
       findColor: 'Найди другой цвет',
       findShape: 'Найди другую форму',
       findSymbol: 'Найди другой символ',
+      findSize: 'Найди другой размер',
       ageTitle: 'Твой возраст',
       age57: 'Уровень 1',
       age810: 'Уровень 2',
@@ -105,6 +111,8 @@
       start: 'Почати',
       newGame: 'Закінчити гру',
       score: 'Рахунок',
+      totalScore: 'Усього',
+      streakLabel: 'Серія перемог',
       correct: 'Вірно!',
       wrong: 'Спробуй ще',
       timeout: 'Час вийшов!',
@@ -117,6 +125,7 @@
       findColor: 'Знайди інший колір',
       findShape: 'Знайди іншу форму',
       findSymbol: 'Знайди інший символ',
+      findSize: 'Знайди інший розмір',
       ageTitle: 'Твій вік',
       age57: 'Рівень 1',
       age810: 'Рівень 2',
@@ -142,6 +151,8 @@
       start: 'Starten',
       newGame: 'Spiel beenden',
       score: 'Punkte',
+      totalScore: 'Gesamt',
+      streakLabel: 'Siegesserie',
       correct: 'Richtig!',
       wrong: 'Nochmal',
       timeout: 'Zeit abgelaufen!',
@@ -179,6 +190,8 @@
       start: 'Commencer',
       newGame: 'Terminer',
       score: 'Score',
+      totalScore: 'Total',
+      streakLabel: 'Série de victoires',
       correct: 'Correct !',
       wrong: 'Réessayer',
       timeout: 'Temps écoulé !',
@@ -216,6 +229,8 @@
       start: 'Empezar',
       newGame: 'Terminar',
       score: 'Puntuación',
+      totalScore: 'Total',
+      streakLabel: 'Racha de victorias',
       correct: '¡Correcto!',
       wrong: 'Inténtalo de nuevo',
       timeout: '¡Se acabó el tiempo!',
@@ -253,6 +268,8 @@
       start: 'Inizia',
       newGame: 'Fine partita',
       score: 'Punteggio',
+      totalScore: 'Totale',
+      streakLabel: 'Serie di vittorie',
       correct: 'Corretto!',
       wrong: 'Riprova',
       timeout: 'Tempo scaduto!',
@@ -290,6 +307,8 @@
       start: 'Começar',
       newGame: 'Terminar jogo',
       score: 'Pontuação',
+      totalScore: 'Total',
+      streakLabel: 'Sequência de vitórias',
       correct: 'Correto!',
       wrong: 'Tente novamente',
       timeout: 'Tempo esgotado!',
@@ -327,6 +346,8 @@
       start: 'Start',
       newGame: 'Zakończ grę',
       score: 'Wynik',
+      totalScore: 'Razem',
+      streakLabel: 'Seria zwycięstw',
       correct: 'Dobrze!',
       wrong: 'Spróbuj jeszcze',
       timeout: 'Czas minął!',
@@ -364,6 +385,8 @@
       start: 'Başla',
       newGame: 'Oyunu bitir',
       score: 'Skor',
+      totalScore: 'Toplam',
+      streakLabel: 'Galibiyet serisi',
       correct: 'Doğru!',
       wrong: 'Tekrar dene',
       timeout: 'Süre doldu!',
@@ -401,6 +424,8 @@
       start: 'ابدأ',
       newGame: 'إنهاء اللعبة',
       score: 'النقاط',
+      totalScore: 'المجموع',
+      streakLabel: 'سلسلة انتصارات',
       correct: 'صحيح!',
       wrong: 'حاول مرة أخرى',
       timeout: 'انتهى الوقت!',
@@ -438,6 +463,8 @@
       start: 'התחל',
       newGame: 'סיים משחק',
       score: 'ניקוד',
+      totalScore: 'סה״כ',
+      streakLabel: 'רצף ניצחונות',
       correct: 'נכון!',
       wrong: 'נסה שוב',
       timeout: 'הזמן נגמר!',
@@ -475,6 +502,8 @@
       start: '开始',
       newGame: '结束游戏',
       score: '得分',
+      totalScore: '总计',
+      streakLabel: '连胜',
       correct: '正确！',
       wrong: '再试一次',
       timeout: '时间到！',
@@ -512,6 +541,8 @@
       start: 'スタート',
       newGame: 'ゲーム終了',
       score: 'スコア',
+      totalScore: '合計',
+      streakLabel: '連勝',
       correct: '正解！',
       wrong: 'もう一度',
       timeout: '時間切れ！',
@@ -549,6 +580,8 @@
       start: '시작',
       newGame: '게임 종료',
       score: '점수',
+      totalScore: '합계',
+      streakLabel: '연승',
       correct: '정답!',
       wrong: '다시 시도',
       timeout: '시간 종료!',
@@ -614,6 +647,8 @@
       authSubmitLogin: 'Sign in', authSubmitRegister: 'Sign up', authSubmitReset: 'Reset password',
       authResetSuccess: 'Password updated. You can log in now.',
       authLogout: 'Log out', authPlayAsGuest: 'No account? Play anyway', authGuestLabel: 'Guest',
+      authSaveScoreHint: 'Sign in or create an account. Your score and streak will stay with you when you leave.',
+      authEndGameHint: 'Want to keep your score? Sign in or create an account.',
       authDeleteAccount: 'Delete account', authDeleteConfirm: 'Delete your account? This cannot be undone.',
       authDeleteConfirmBtn: 'Delete', authDeleteCancel: 'Cancel',
       authErrorUserExists: 'This username is already taken',
@@ -649,7 +684,9 @@
       authErrorGoogleAccountMismatch: 'Этот email привязан к другому Google-аккаунту.',
       authSubmitLogin: 'Войти', authSubmitRegister: 'Зарегистрироваться', authSubmitReset: 'Сохранить пароль',
       authResetSuccess: 'Пароль изменён. Теперь можно войти.',
-      authLogout: 'Выйти', authPlayAsGuest: 'Если не важно — играть без регистрации', authGuestLabel: 'Гость',
+      authLogout: 'Выйти', authPlayAsGuest: 'Если не важно, играй без регистрации', authGuestLabel: 'Гость',
+      authSaveScoreHint: 'Войди или регистрируйся, чтобы очки и серия побед сохранились, даже если выйдешь из игры.',
+      authEndGameHint: 'Хочешь сохранить очки? Войди или создай аккаунт.',
       authDeleteAccount: 'Удалить аккаунт', authDeleteConfirm: 'Удалить аккаунт? Это нельзя отменить.',
       authDeleteConfirmBtn: 'Удалить', authDeleteCancel: 'Отмена',
       authErrorUserExists: 'Такое имя уже занято',
@@ -685,7 +722,7 @@
       authErrorGoogleAccountMismatch: 'Цей email прив\'язано до іншого Google-акаунта.',
       authSubmitLogin: 'Увійти', authSubmitRegister: 'Зареєструватися', authSubmitReset: 'Зберегти пароль',
       authResetSuccess: 'Пароль змінено. Тепер можна увійти.',
-      authLogout: 'Вийти', authPlayAsGuest: 'Якщо не важливо — грати без реєстрації', authGuestLabel: 'Гість',
+      authLogout: 'Вийти', authPlayAsGuest: 'Якщо не важливо, грай без реєстрації', authGuestLabel: 'Гість',
       authDeleteAccount: 'Видалити акаунт', authDeleteConfirm: 'Видалити акаунт? Це не можна скасувати.',
       authDeleteConfirmBtn: 'Видалити', authDeleteCancel: 'Скасувати',
       authErrorUserExists: "Таке ім'я вже зайняте",
@@ -697,6 +734,8 @@
       authErrorInvalidEmail: 'Введіть коректний email', authErrorEmailExists: 'Цей email уже зареєстровано',
       authErrorEmailMismatch: 'Email не збігається з акаунтом',
       authErrorNoEmail: 'У акаунта немає email — відновлення недоступне',
+      authSaveScoreHint: 'Увійди або зареєструйся, щоб очки та серія перемог зберігалися, навіть якщо вийдеш з гри.',
+      authEndGameHint: 'Хочеш зберегти очки? Увійди або створи акаунт.',
     },
     de: {
       authLogin: 'Anmelden', authRegister: 'Registrieren', authLoginTitle: 'Anmelden',
@@ -711,6 +750,9 @@
       authErrorPasswordMismatch: 'Passwörter stimmen nicht überein',
       authErrorUsernameShort: 'Benutzername: mindestens 3 Zeichen',
       authErrorPasswordShort: 'Passwort: mindestens 4 Zeichen', authErrorEmpty: 'Alle Felder ausfüllen',
+      authForgotPassword: 'Passwort vergessen?', authBackToLogin: 'Zurück zur Anmeldung',
+      authSaveScoreHint: 'Melde dich an oder erstelle ein Konto. Punkte und Serie bleiben erhalten, wenn du gehst.',
+      authEndGameHint: 'Punktestand speichern? Anmelden oder Konto erstellen.',
     },
     fr: {
       authLogin: 'Connexion', authRegister: 'Inscription', authLoginTitle: 'Connexion',
@@ -725,6 +767,9 @@
       authErrorPasswordMismatch: 'Les mots de passe ne correspondent pas',
       authErrorUsernameShort: "Nom d'utilisateur : 3 caractères minimum",
       authErrorPasswordShort: 'Mot de passe : 4 caractères minimum', authErrorEmpty: 'Remplissez tous les champs',
+      authForgotPassword: 'Mot de passe oublié ?', authBackToLogin: 'Retour à la connexion',
+      authSaveScoreHint: 'Connecte-toi ou crée un compte. Ton score et ta série seront conservés si tu pars.',
+      authEndGameHint: 'Tu veux garder ton score ? Connecte-toi ou crée un compte.',
     },
     es: {
       authLogin: 'Iniciar sesión', authRegister: 'Registrarse', authLoginTitle: 'Iniciar sesión',
@@ -739,6 +784,9 @@
       authErrorPasswordMismatch: 'Las contraseñas no coinciden',
       authErrorUsernameShort: 'Usuario: mínimo 3 caracteres',
       authErrorPasswordShort: 'Contraseña: mínimo 4 caracteres', authErrorEmpty: 'Completa todos los campos',
+      authForgotPassword: '¿Olvidaste tu contraseña?', authBackToLogin: 'Volver al inicio de sesión',
+      authSaveScoreHint: 'Inicia sesión o crea una cuenta. Tu puntuación y racha se guardarán aunque salgas.',
+      authEndGameHint: '¿Quieres guardar tu puntuación? Inicia sesión o crea una cuenta.',
     },
     it: {
       authLogin: 'Accedi', authRegister: 'Registrati', authLoginTitle: 'Accedi',
@@ -753,6 +801,9 @@
       authErrorPasswordMismatch: 'Le password non coincidono',
       authErrorUsernameShort: 'Nome utente: minimo 3 caratteri',
       authErrorPasswordShort: 'Password: minimo 4 caratteri', authErrorEmpty: 'Compila tutti i campi',
+      authForgotPassword: 'Password dimenticata?', authBackToLogin: 'Torna al login',
+      authSaveScoreHint: 'Accedi o crea un account. Punteggio e serie restano salvati anche se esci.',
+      authEndGameHint: 'Vuoi salvare il punteggio? Accedi o crea un account.',
     },
     pt: {
       authLogin: 'Entrar', authRegister: 'Cadastrar', authLoginTitle: 'Entrar',
@@ -767,6 +818,9 @@
       authErrorPasswordMismatch: 'As senhas não coincidem',
       authErrorUsernameShort: 'Usuário: mínimo 3 caracteres',
       authErrorPasswordShort: 'Senha: mínimo 4 caracteres', authErrorEmpty: 'Preencha todos os campos',
+      authForgotPassword: 'Esqueceu a senha?', authBackToLogin: 'Voltar ao login',
+      authSaveScoreHint: 'Entre ou crie uma conta. Sua pontuação e sequência ficam salvas mesmo se sair.',
+      authEndGameHint: 'Quer guardar a pontuação? Entre ou crie uma conta.',
     },
     pl: {
       authLogin: 'Zaloguj', authRegister: 'Rejestracja', authLoginTitle: 'Logowanie',
@@ -781,6 +835,9 @@
       authErrorPasswordMismatch: 'Hasła nie pasują',
       authErrorUsernameShort: 'Nazwa: minimum 3 znaki',
       authErrorPasswordShort: 'Hasło: minimum 4 znaki', authErrorEmpty: 'Wypełnij wszystkie pola',
+      authForgotPassword: 'Zapomniałeś hasła?', authBackToLogin: 'Wróć do logowania',
+      authSaveScoreHint: 'Zaloguj się lub załóż konto. Wynik i seria zostaną zapisane, nawet gdy wyjdziesz.',
+      authEndGameHint: 'Chcesz zapisać wynik? Zaloguj się lub załóż konto.',
     },
     tr: {
       authLogin: 'Giriş', authRegister: 'Kayıt ol', authLoginTitle: 'Giriş yap',
@@ -795,6 +852,9 @@
       authErrorPasswordMismatch: 'Şifreler eşleşmiyor',
       authErrorUsernameShort: 'Kullanıcı adı: en az 3 karakter',
       authErrorPasswordShort: 'Şifre: en az 4 karakter', authErrorEmpty: 'Tüm alanları doldurun',
+      authForgotPassword: 'Şifreni mi unuttun?', authBackToLogin: 'Girişe dön',
+      authSaveScoreHint: 'Giriş yap veya hesap oluştur. Skorun ve serin çıksan da kayıtlı kalır.',
+      authEndGameHint: 'Skorunu kaydetmek ister misin? Giriş yap veya hesap oluştur.',
     },
     ar: {
       authLogin: 'تسجيل الدخول', authRegister: 'إنشاء حساب', authLoginTitle: 'تسجيل الدخول',
@@ -809,6 +869,9 @@
       authErrorPasswordMismatch: 'كلمتا المرور غير متطابقتين',
       authErrorUsernameShort: 'اسم المستخدم: 3 أحرف على الأقل',
       authErrorPasswordShort: 'كلمة المرور: 4 أحرف على الأقل', authErrorEmpty: 'املأ جميع الحقول',
+      authForgotPassword: 'نسيت كلمة المرور؟', authBackToLogin: 'العودة لتسجيل الدخول',
+      authSaveScoreHint: 'سجّل الدخول أو أنشئ حساباً. سيبقى رصدك وتسلسلك معك عند المغادرة.',
+      authEndGameHint: 'هل تريد حفظ رصدك؟ سجّل الدخول أو أنشئ حساباً.',
     },
     he: {
       authLogin: 'התחברות', authRegister: 'הרשמה', authLoginTitle: 'התחברות',
@@ -823,6 +886,9 @@
       authErrorPasswordMismatch: 'הסיסמאות לא תואמות',
       authErrorUsernameShort: 'שם משתמש: לפחות 3 תווים',
       authErrorPasswordShort: 'סיסמה: לפחות 4 תווים', authErrorEmpty: 'מלא את כל השדות',
+      authForgotPassword: 'שכחת סיסמה?', authBackToLogin: 'חזרה להתחברות',
+      authSaveScoreHint: 'התחבר או צור חשבון. הניקוד והרצף יישמרו גם אחרי שתעזוב.',
+      authEndGameHint: 'רוצה לשמור את הניקוד? התחבר או צור חשבון.',
     },
     zh: {
       authLogin: '登录', authRegister: '注册', authLoginTitle: '登录',
@@ -837,6 +903,9 @@
       authErrorPasswordMismatch: '两次密码不一致',
       authErrorUsernameShort: '用户名至少3个字符',
       authErrorPasswordShort: '密码至少4个字符', authErrorEmpty: '请填写所有字段',
+      authForgotPassword: '忘记密码？', authBackToLogin: '返回登录',
+      authSaveScoreHint: '登录或注册账号，离开后分数和连胜仍会保留。',
+      authEndGameHint: '想保存分数吗？登录或注册账号。',
     },
     ja: {
       authLogin: 'ログイン', authRegister: '新規登録', authLoginTitle: 'ログイン',
@@ -851,6 +920,9 @@
       authErrorPasswordMismatch: 'パスワードが一致しません',
       authErrorUsernameShort: 'ユーザー名は3文字以上',
       authErrorPasswordShort: 'パスワードは4文字以上', authErrorEmpty: 'すべて入力してください',
+      authForgotPassword: 'パスワードを忘れた？', authBackToLogin: 'ログインに戻る',
+      authSaveScoreHint: 'ログインまたはアカウント作成で、退出後もスコアと連勝が保存されます。',
+      authEndGameHint: 'スコアを保存しますか？ログインまたはアカウントを作成してください。',
     },
     ko: {
       authLogin: '로그인', authRegister: '회원가입', authLoginTitle: '로그인',
@@ -865,11 +937,14 @@
       authErrorPasswordMismatch: '비밀번호가 일치하지 않습니다',
       authErrorUsernameShort: '이름은 3자 이상',
       authErrorPasswordShort: '비밀번호는 4자 이상', authErrorEmpty: '모든 항목을 입력하세요',
+      authForgotPassword: '비밀번호를 잊으셨나요?', authBackToLogin: '로그인으로 돌아가기',
+      authSaveScoreHint: '로그인하거나 계정을 만들면 나가도 점수와 연승이 유지됩니다.',
+      authEndGameHint: '점수를 저장할까요? 로그인하거나 계정을 만드세요.',
     },
   };
 
   for (const code of LANGUAGES) {
-    Object.assign(translations[code], AUTH_I18N[code] || AUTH_I18N.en);
+    Object.assign(translations[code], AUTH_I18N.en, AUTH_I18N[code] || {});
   }
 
   const AGE_I18N_KEYS = {
@@ -898,7 +973,10 @@
   };
 })(window);
 
-/** Local account storage — demo auth without a server */
+/**
+ * Login — весь скрипт входа, регистрации и аккаунта
+ * Папка auth/ — один файл для GitHub Pages
+ */
 (function (global) {
   const USERS_KEY = 'attentionTrainerUsers';
   const SESSION_KEY = 'attentionTrainerSession';
@@ -908,6 +986,8 @@
     tutorialDone: false,
     tutorialScore: 0,
     tutorialIntroSeen: false,
+    totalScore: 0,
+    winStreak: 0,
     lang: 'en',
     theme: 'light',
     age: '5-7',
@@ -927,10 +1007,17 @@
 
   async function hashPassword(password) {
     const data = new TextEncoder().encode(password);
-    const hash = await crypto.subtle.digest('SHA-256', data);
-    return Array.from(new Uint8Array(hash))
-      .map((b) => b.toString(16).padStart(2, '0'))
-      .join('');
+    if (global.crypto?.subtle) {
+      const hash = await crypto.subtle.digest('SHA-256', data);
+      return Array.from(new Uint8Array(hash))
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join('');
+    }
+    let h = 5381;
+    for (let i = 0; i < data.length; i += 1) {
+      h = ((h << 5) + h) ^ data[i];
+    }
+    return `fallback-${(h >>> 0).toString(16)}-${data.length}`;
   }
 
   function normalizeUsername(username) {
@@ -974,7 +1061,11 @@
     const name = normalizeUsername(username || getCurrentUser());
     if (!name) return null;
     const users = readUsers();
-    return users[name] ? { ...users[name] } : null;
+    if (!users[name]) return null;
+    const user = { ...users[name] };
+    if (user.totalScore == null) user.totalScore = 0;
+    if (user.winStreak == null) user.winStreak = 0;
+    return user;
   }
 
   function saveUserData(updates, username) {
@@ -985,6 +1076,18 @@
     users[name] = { ...users[name], ...updates };
     writeUsers(users);
     return { ...users[name] };
+  }
+
+  function getProgress(username) {
+    const user = getUserData(username);
+    return {
+      totalScore: user?.totalScore || 0,
+      winStreak: user?.winStreak || 0,
+    };
+  }
+
+  function saveProgress(totalScore, winStreak, username) {
+    return saveUserData({ totalScore, winStreak }, username);
   }
 
   function setSession(username) {
@@ -1124,6 +1227,8 @@
     getCurrentUser,
     getUserData,
     saveUserData,
+    getProgress,
+    saveProgress,
     register,
     login,
     loginByEmail,
@@ -1140,6 +1245,398 @@
     setGuestSession,
     clearGuestSession,
   };
+})(window);
+
+(function (global) {
+  const { t } = global.I18n;
+
+  function $(id) {
+    return document.getElementById(id);
+  }
+
+  let authMode = 'login';
+  let endGameHint = false;
+
+  function showAuthScreen() {
+    const overlay = $('authOverlay');
+    if (overlay) overlay.hidden = false;
+    setAppAuthenticated(false);
+  }
+
+  function hideAuthScreen() {
+    const overlay = $('authOverlay');
+    if (overlay) overlay.hidden = true;
+    endGameHint = false;
+  }
+
+  function setAppAuthenticated(authenticated) {
+    const app = $('app');
+    if (app) app.classList.toggle('app--guest', !authenticated);
+    const header = $('appHeader');
+    if (header) header.hidden = !authenticated;
+  }
+
+  function setAuthMode(mode) {
+    authMode = mode;
+    const isRegister = mode === 'register';
+    const isReset = mode === 'reset';
+    const needsEmail = isRegister || isReset;
+    const needsConfirm = isRegister || isReset;
+
+    const tabs = $('authTabs');
+    if (tabs) tabs.hidden = isReset;
+    if ($('authTabLogin')) {
+      $('authTabLogin').classList.toggle('auth-tabs__btn--active', mode === 'login');
+    }
+    if ($('authTabRegister')) {
+      $('authTabRegister').classList.toggle('auth-tabs__btn--active', isRegister);
+    }
+    if ($('authEmailWrap')) $('authEmailWrap').hidden = !needsEmail;
+    if ($('authEmail')) $('authEmail').required = needsEmail;
+    if ($('authConfirmWrap')) $('authConfirmWrap').hidden = !needsConfirm;
+    if ($('authPasswordConfirm')) $('authPasswordConfirm').required = needsConfirm;
+    if ($('authForgotWrap')) $('authForgotWrap').hidden = mode !== 'login';
+    if ($('authBackLoginWrap')) $('authBackLoginWrap').hidden = !isReset;
+    if ($('authResetHint')) $('authResetHint').hidden = !isReset;
+    if ($('authPassword')) {
+      $('authPassword').autocomplete = needsConfirm ? 'new-password' : 'current-password';
+    }
+    clearAuthError();
+    clearAuthSuccess();
+  }
+
+  function resetAuth() {
+    authMode = 'login';
+    const form = $('authForm');
+    if (form) form.reset();
+    setAuthMode('login');
+  }
+
+  function updateAuthFormTexts(lang) {
+    const titleKey = authMode === 'register'
+      ? 'authRegisterTitle'
+      : authMode === 'reset'
+        ? 'authResetTitle'
+        : 'authLoginTitle';
+    const submitKey = authMode === 'register'
+      ? 'authSubmitRegister'
+      : authMode === 'reset'
+        ? 'authSubmitReset'
+        : 'authSubmitLogin';
+    const passwordLabelKey = authMode === 'reset' ? 'authNewPassword' : 'authPassword';
+
+    const titleEl = $('authTitle');
+    const submitEl = $('authSubmit');
+    const passwordLabelEl = $('authPasswordLabel');
+    if (titleEl) titleEl.textContent = t(lang, titleKey);
+    if (submitEl) submitEl.textContent = t(lang, submitKey);
+    if (passwordLabelEl) passwordLabelEl.textContent = t(lang, passwordLabelKey);
+    if ($('authTabLogin')) $('authTabLogin').textContent = t(lang, 'authLogin');
+    if ($('authTabRegister')) $('authTabRegister').textContent = t(lang, 'authRegister');
+    document.querySelectorAll('#authOverlay [data-i18n]').forEach((el) => {
+      if (['authTitle', 'authSubmit', 'authPasswordLabel', 'authSaveScoreHint'].includes(el.id)) return;
+      el.textContent = t(lang, el.dataset.i18n);
+    });
+    const saveHint = $('authSaveScoreHint');
+    if (saveHint) {
+      saveHint.hidden = authMode === 'reset';
+      if (!saveHint.hidden) {
+        const hintKey = endGameHint ? 'authEndGameHint' : 'authSaveScoreHint';
+        saveHint.textContent = t(lang, hintKey);
+      }
+    }
+    if ($('authGuestBtn')) {
+      $('authGuestBtn').textContent = t(lang, 'authPlayAsGuest');
+    }
+  }
+
+  function showAuthError(message) {
+    const el = $('authError');
+    if (!el) return;
+    el.textContent = message;
+    el.hidden = !message;
+  }
+
+  function clearAuthError() {
+    const el = $('authError');
+    if (!el) return;
+    el.hidden = true;
+    el.textContent = '';
+  }
+
+  function showAuthSuccess(message) {
+    const el = $('authSuccess');
+    if (!el) return;
+    el.textContent = message;
+    el.hidden = !message;
+  }
+
+  function clearAuthSuccess() {
+    const el = $('authSuccess');
+    if (!el) return;
+    el.hidden = true;
+    el.textContent = '';
+  }
+
+  function updateAccountChip(displayName, isGuest, lang) {
+    const name = displayName || '';
+    if ($('accountBtnName')) $('accountBtnName').textContent = name;
+    if ($('accountMenuName')) $('accountMenuName').textContent = name;
+    if ($('accountDeleteBtn')) $('accountDeleteBtn').hidden = isGuest;
+    if (lang) {
+      if ($('accountLogoutBtn')) $('accountLogoutBtn').textContent = t(lang, 'authLogout');
+      if ($('accountDeleteBtn')) $('accountDeleteBtn').textContent = t(lang, 'authDeleteAccount');
+    }
+  }
+
+  function showDeleteAccountConfirm(lang, onConfirm, onCancel) {
+    const overlay = $('deleteAccountOverlay');
+    if ($('deleteAccountText')) $('deleteAccountText').textContent = t(lang, 'authDeleteConfirm');
+    if ($('deleteAccountCancel')) $('deleteAccountCancel').textContent = t(lang, 'authDeleteCancel');
+    if ($('deleteAccountConfirm')) $('deleteAccountConfirm').textContent = t(lang, 'authDeleteConfirmBtn');
+    if (overlay) overlay.hidden = false;
+
+    const confirm = () => {
+      if (overlay) overlay.hidden = true;
+      $('deleteAccountConfirm')?.removeEventListener('click', confirm);
+      $('deleteAccountCancel')?.removeEventListener('click', cancel);
+      onConfirm();
+    };
+    const cancel = () => {
+      if (overlay) overlay.hidden = true;
+      $('deleteAccountConfirm')?.removeEventListener('click', confirm);
+      $('deleteAccountCancel')?.removeEventListener('click', cancel);
+      if (onCancel) onCancel();
+    };
+
+    $('deleteAccountConfirm')?.addEventListener('click', confirm);
+    $('deleteAccountCancel')?.addEventListener('click', cancel);
+  }
+
+  function hideDeleteAccountConfirm() {
+    const overlay = $('deleteAccountOverlay');
+    if (overlay) overlay.hidden = true;
+  }
+
+  function bindClick(id, handler) {
+    const el = $(id);
+    if (el) el.addEventListener('click', handler);
+  }
+
+  function initAccountMenu(menuApi, onLogout, onDeleteRequest) {
+    const menu = $('accountMenu');
+    if (menu && menuApi.bindMenuScroll) menuApi.bindMenuScroll(menu);
+
+    bindClick('accountBtn', (e) => {
+      e.stopPropagation();
+      menuApi.toggleMenu('accountMenu');
+    });
+
+    bindClick('accountLogoutBtn', () => {
+      menuApi.closeAllMenus();
+      onLogout();
+    });
+
+    bindClick('accountDeleteBtn', () => {
+      menuApi.closeAllMenus();
+      onDeleteRequest();
+    });
+  }
+
+  function showEndGameAuthHint(show, lang) {
+    endGameHint = show;
+    updateAuthFormTexts(lang || 'en');
+  }
+
+  global.AuthUI = {
+    $,
+    showAuthScreen,
+    hideAuthScreen,
+    setAppAuthenticated,
+    setAuthMode,
+    resetAuth,
+    updateAuthFormTexts,
+    showEndGameAuthHint,
+    showAuthError,
+    clearAuthError,
+    showAuthSuccess,
+    clearAuthSuccess,
+    updateAccountChip,
+    showDeleteAccountConfirm,
+    hideDeleteAccountConfirm,
+    initAccountMenu,
+    getAuthMode: () => authMode,
+  };
+})(window);
+
+(function (global) {
+  const { t } = global.I18n;
+  const Auth = global.Auth;
+  const AuthUI = global.AuthUI;
+
+  const AUTH_ERROR_KEYS = {
+    empty: 'authErrorEmpty',
+    usernameShort: 'authErrorUsernameShort',
+    passwordShort: 'authErrorPasswordShort',
+    userExists: 'authErrorUserExists',
+    userNotFound: 'authErrorUserNotFound',
+    wrongPassword: 'authErrorWrongPassword',
+    passwordMismatch: 'authErrorPasswordMismatch',
+    invalidEmail: 'authErrorInvalidEmail',
+    emailExists: 'authErrorEmailExists',
+    emailMismatch: 'authErrorEmailMismatch',
+    noEmail: 'authErrorNoEmail',
+  };
+
+  let hooks = {
+    getLang: () => 'en',
+    onEnterApp: () => {},
+    onEnterGuest: () => {},
+    onLeaveApp: () => {},
+    onDeleteAccount: () => {},
+  };
+
+  let menuApi = null;
+  let formBound = false;
+  let menuBound = false;
+
+  function bindAuthForm() {
+    if (formBound) return;
+    formBound = true;
+
+    const lang = () => hooks.getLang();
+
+    bindClick('authTabLogin', () => {
+      AuthUI.setAuthMode('login');
+      AuthUI.updateAuthFormTexts(lang());
+    });
+    bindClick('authTabRegister', () => {
+      AuthUI.setAuthMode('register');
+      AuthUI.updateAuthFormTexts(lang());
+    });
+    bindSubmit('authForm', handleAuthSubmit);
+    bindClick('authForgotBtn', () => {
+      AuthUI.clearAuthError();
+      AuthUI.clearAuthSuccess();
+      AuthUI.setAuthMode('reset');
+      AuthUI.updateAuthFormTexts(lang());
+    });
+    bindClick('authBackLoginBtn', () => {
+      AuthUI.clearAuthError();
+      AuthUI.clearAuthSuccess();
+      AuthUI.$('authForm')?.reset();
+      AuthUI.setAuthMode('login');
+      AuthUI.updateAuthFormTexts(lang());
+    });
+    bindClick('authGuestBtn', () => hooks.onEnterGuest());
+  }
+
+  function bindAccountMenu() {
+    if (menuBound || !menuApi) return;
+    menuBound = true;
+    AuthUI.initAccountMenu(menuApi, () => hooks.onLeaveApp(), () => hooks.onDeleteAccount());
+  }
+
+  function initAuth() {
+    bindAuthForm();
+    bindAccountMenu();
+    if (!formBound) return;
+    try {
+      AuthUI.resetAuth();
+    } catch (err) {
+      console.error('resetAuth failed:', err);
+    }
+  }
+
+  function configure(nextHooks) {
+    hooks = { ...hooks, ...nextHooks };
+  }
+
+  function setMenuApi(api) {
+    menuApi = api;
+    bindAccountMenu();
+  }
+
+  function showAuthErrorKey(errorKey, extra = {}) {
+    const key = AUTH_ERROR_KEYS[errorKey] || 'authErrorEmpty';
+    let message = t(hooks.getLang(), key);
+    if (errorKey === 'userExists' && extra.suggestions?.length) {
+      message += ` ${t(hooks.getLang(), 'authErrorUserExistsTry')}: ${extra.suggestions.join(', ')}`;
+    }
+    AuthUI.showAuthError(message);
+  }
+
+  async function handleAuthSubmit(e) {
+    e.preventDefault();
+    AuthUI.clearAuthError();
+    AuthUI.clearAuthSuccess();
+
+    const username = AuthUI.$('authUsername').value;
+    const email = AuthUI.$('authEmail').value;
+    const password = AuthUI.$('authPassword').value;
+    const confirm = AuthUI.$('authPasswordConfirm').value;
+    const mode = AuthUI.getAuthMode();
+
+    if (mode === 'register') {
+      if (password !== confirm) {
+        showAuthErrorKey('passwordMismatch');
+        return;
+      }
+      const result = await Auth.register(username, password, email);
+      if (!result.ok) {
+        showAuthErrorKey(result.error, result);
+        return;
+      }
+      hooks.onEnterApp(result.username);
+      return;
+    }
+
+    if (mode === 'reset') {
+      if (password !== confirm) {
+        showAuthErrorKey('passwordMismatch');
+        return;
+      }
+      const result = await Auth.resetPassword(username, email, password);
+      if (!result.ok) {
+        showAuthErrorKey(result.error, result);
+        return;
+      }
+      AuthUI.$('authForm')?.reset();
+      AuthUI.setAuthMode('login');
+      AuthUI.updateAuthFormTexts(hooks.getLang());
+      AuthUI.showAuthSuccess(t(hooks.getLang(), 'authResetSuccess'));
+      return;
+    }
+
+    const result = await Auth.login(username, password);
+    if (!result.ok) {
+      showAuthErrorKey(result.error);
+      return;
+    }
+    hooks.onEnterApp(result.username);
+  }
+
+  function bindClick(id, handler) {
+    const el = AuthUI.$(id);
+    if (el) el.addEventListener('click', handler);
+  }
+
+  function bindSubmit(id, handler) {
+    const el = AuthUI.$(id);
+    if (el) el.addEventListener('submit', handler);
+  }
+
+  global.AuthController = {
+    configure,
+    setMenuApi,
+    initAuth,
+  };
+
+  try {
+    initAuth();
+  } catch (err) {
+    console.error('Early auth bind failed:', err);
+  }
 })(window);
 
 /** Game logic — round generation, scoring, difficulty by age */
@@ -1172,54 +1669,54 @@
 
   const AGE_CONFIG = {
     '5-7': {
-      objectCount: 6,
-      cols: 3,
+      objectCount: 8,
+      cols: 4,
       roundTime: 9,
-      diffTypes: ['color', 'shape', 'symbol'],
+      diffTypes: ['color', 'shape', 'symbol', 'size'],
       shapes: SIMPLE_SHAPES,
       similarColors: true,
-      similarSymbols: false,
-      similarChance: 0.32,
+      similarSymbols: true,
+      similarChance: 0.48,
     },
     '8-10': {
-      objectCount: 9,
-      cols: 3,
-      roundTime: 7,
-      diffTypes: ['color', 'shape', 'symbol'],
-      shapes: SHAPES,
-      similarColors: true,
-      similarSymbols: true,
-      similarChance: 0.55,
-    },
-    '11-13': {
       objectCount: 12,
       cols: 4,
-      roundTime: 5,
-      diffTypes: ['color', 'shape', 'symbol'],
+      roundTime: 7,
+      diffTypes: ['color', 'shape', 'symbol', 'size'],
       shapes: SHAPES,
       similarColors: true,
       similarSymbols: true,
-      similarChance: 0.72,
+      similarChance: 0.68,
     },
-    '14-17': {
+    '11-13': {
       objectCount: 16,
       cols: 4,
-      roundTime: 4,
-      diffTypes: ['color', 'shape', 'symbol'],
+      roundTime: 5,
+      diffTypes: ['color', 'shape', 'symbol', 'size'],
       shapes: SHAPES,
       similarColors: true,
       similarSymbols: true,
       similarChance: 0.82,
     },
-    '18+': {
+    '14-17': {
       objectCount: 20,
       cols: 5,
-      roundTime: 3,
-      diffTypes: ['color', 'shape', 'symbol'],
+      roundTime: 4,
+      diffTypes: ['color', 'shape', 'symbol', 'size'],
       shapes: SHAPES,
       similarColors: true,
       similarSymbols: true,
-      similarChance: 0.85,
+      similarChance: 0.88,
+    },
+    '18+': {
+      objectCount: 24,
+      cols: 5,
+      roundTime: 3,
+      diffTypes: ['color', 'shape', 'symbol', 'size'],
+      shapes: SHAPES,
+      similarColors: true,
+      similarSymbols: true,
+      similarChance: 0.92,
     },
   };
 
@@ -1272,11 +1769,13 @@
 
     const objects = Array.from({ length: objectCount }, (_, i) => {
       const isOdd = i === oddIndex;
+      const scale = diffType === 'size' ? (isOdd ? 0.78 : 1) : 1;
       return {
         color: diffType === 'color' ? (isOdd ? oddColor : baseColor) : baseColor,
         shape: diffType === 'shape' ? (isOdd ? oddShape : baseShape) : baseShape,
         symbol: diffType === 'symbol' ? (isOdd ? oddSymbol : baseSymbol) : baseSymbol,
         showSymbol: diffType === 'symbol',
+        scale,
       };
     });
 
@@ -1352,6 +1851,7 @@
     langMenu: 'langBtn',
     ageMenu: 'ageBtn',
     accountMenu: 'accountBtn',
+    authLangMenu: 'authLangBtn',
   };
 
   function positionMenu(menuId) {
@@ -1364,7 +1864,7 @@
     menu.style.top = `${rect.bottom + gap}px`;
     menu.style.right = 'auto';
 
-    if (menuId === 'langMenu') {
+    if (menuId === 'langMenu' || menuId === 'authLangMenu') {
       let left = rect.left + rect.width / 2 - menuWidth / 2;
       left = Math.max(8, Math.min(left, window.innerWidth - menuWidth - 8));
       menu.style.left = `${left}px`;
@@ -1389,16 +1889,24 @@
     requestAnimationFrame(() => positionMenu(menuId));
   }
 
+  function setPageTitle(lang) {
+    const title = t(lang, 'title');
+    document.title = title;
+    const meta = document.getElementById('appleWebAppTitle')
+      || document.querySelector('meta[name="apple-mobile-web-app-title"]');
+    if (meta) meta.content = title;
+  }
+
   function applyTranslations(lang) {
     document.querySelectorAll('[data-i18n]').forEach((el) => {
-      if (el.closest('#authOverlay') && (el.id === 'authTitle' || el.id === 'authSubmit' || el.id === 'authPasswordLabel')) return;
+      if (el.closest('#authOverlay')) return;
       el.textContent = t(lang, el.dataset.i18n);
     });
     document.documentElement.lang = lang;
+    setPageTitle(lang);
     refreshPickerLabels(lang);
-    if (!$('authOverlay').hidden) {
-      updateAuthFormTexts(lang);
-    }
+    if (!$('authOverlay') || $('authOverlay').hidden) return;
+    if (global.AuthUI) global.AuthUI.updateAuthFormTexts(lang);
   }
 
   function refreshPickerLabels(lang) {
@@ -1409,163 +1917,12 @@
     });
     document.querySelectorAll('[data-lang]').forEach((btn) => {
       const opt = LANGUAGE_OPTIONS.find((l) => l.code === btn.dataset.lang);
-      btn.textContent = `${opt.flag} ${opt.label}`;
+      if (opt) btn.textContent = `${opt.flag} ${opt.label}`;
     });
   }
 
   function setDirection(isRtl) {
     document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
-  }
-
-  let authMode = 'login';
-
-  function showAuthScreen() {
-    $('authOverlay').hidden = false;
-    setAppAuthenticated(false);
-  }
-
-  function hideAuthScreen() {
-    $('authOverlay').hidden = true;
-  }
-
-  function setAppAuthenticated(authenticated) {
-    $('app').classList.toggle('app--guest', !authenticated);
-    $('appHeader').hidden = !authenticated;
-  }
-
-  function setAuthMode(mode) {
-    authMode = mode;
-    const isRegister = mode === 'register';
-    const isReset = mode === 'reset';
-    const needsEmail = isRegister || isReset;
-    const needsConfirm = isRegister || isReset;
-
-    $('authTabs').hidden = isReset;
-    $('authTabLogin').classList.toggle('auth-tabs__btn--active', mode === 'login');
-    $('authTabRegister').classList.toggle('auth-tabs__btn--active', isRegister);
-    $('authEmailWrap').hidden = !needsEmail;
-    $('authEmail').required = needsEmail;
-    $('authConfirmWrap').hidden = !needsConfirm;
-    $('authPasswordConfirm').required = needsConfirm;
-    $('authForgotWrap').hidden = mode !== 'login';
-    $('authBackLoginWrap').hidden = !isReset;
-    $('authResetHint').hidden = !isReset;
-    $('authPassword').autocomplete = needsConfirm ? 'new-password' : 'current-password';
-    clearAuthError();
-    clearAuthSuccess();
-  }
-
-  function resetAuth() {
-    authMode = 'login';
-    $('authForm').reset();
-    setAuthMode('login');
-  }
-
-  function updateAuthFormTexts(lang) {
-    const titleKey = authMode === 'register'
-      ? 'authRegisterTitle'
-      : authMode === 'reset'
-        ? 'authResetTitle'
-        : 'authLoginTitle';
-    const submitKey = authMode === 'register'
-      ? 'authSubmitRegister'
-      : authMode === 'reset'
-        ? 'authSubmitReset'
-        : 'authSubmitLogin';
-    const passwordLabelKey = authMode === 'reset' ? 'authNewPassword' : 'authPassword';
-
-    $('authTitle').textContent = t(lang, titleKey);
-    $('authSubmit').textContent = t(lang, submitKey);
-    $('authPasswordLabel').textContent = t(lang, passwordLabelKey);
-    $('authTabLogin').textContent = t(lang, 'authLogin');
-    $('authTabRegister').textContent = t(lang, 'authRegister');
-    document.querySelectorAll('#authOverlay [data-i18n]').forEach((el) => {
-      if (['authTitle', 'authSubmit', 'authPasswordLabel'].includes(el.id)) return;
-      el.textContent = t(lang, el.dataset.i18n);
-    });
-    if ($('authGuestBtn')) {
-      $('authGuestBtn').textContent = t(lang, 'authPlayAsGuest');
-    }
-  }
-
-  function showAuthError(message) {
-    const el = $('authError');
-    el.textContent = message;
-    el.hidden = !message;
-  }
-
-  function clearAuthError() {
-    $('authError').hidden = true;
-    $('authError').textContent = '';
-  }
-
-  function showAuthSuccess(message) {
-    const el = $('authSuccess');
-    el.textContent = message;
-    el.hidden = !message;
-  }
-
-  function clearAuthSuccess() {
-    $('authSuccess').hidden = true;
-    $('authSuccess').textContent = '';
-  }
-
-  function updateAccountChip(displayName, isGuest, lang) {
-    const name = displayName || '';
-    $('accountBtnName').textContent = name;
-    $('accountMenuName').textContent = name;
-    $('accountDeleteBtn').hidden = isGuest;
-    if (lang) {
-      $('accountLogoutBtn').textContent = t(lang, 'authLogout');
-      $('accountDeleteBtn').textContent = t(lang, 'authDeleteAccount');
-    }
-  }
-
-  function showDeleteAccountConfirm(lang, onConfirm, onCancel) {
-    const overlay = $('deleteAccountOverlay');
-    $('deleteAccountText').textContent = t(lang, 'authDeleteConfirm');
-    $('deleteAccountCancel').textContent = t(lang, 'authDeleteCancel');
-    $('deleteAccountConfirm').textContent = t(lang, 'authDeleteConfirmBtn');
-    overlay.hidden = false;
-
-    const confirm = () => {
-      overlay.hidden = true;
-      $('deleteAccountConfirm').removeEventListener('click', confirm);
-      $('deleteAccountCancel').removeEventListener('click', cancel);
-      onConfirm();
-    };
-    const cancel = () => {
-      overlay.hidden = true;
-      $('deleteAccountConfirm').removeEventListener('click', confirm);
-      $('deleteAccountCancel').removeEventListener('click', cancel);
-      if (onCancel) onCancel();
-    };
-
-    $('deleteAccountConfirm').addEventListener('click', confirm);
-    $('deleteAccountCancel').addEventListener('click', cancel);
-  }
-
-  function hideDeleteAccountConfirm() {
-    $('deleteAccountOverlay').hidden = true;
-  }
-
-  function initAccountMenu(onLogout, onDeleteRequest) {
-    bindMenuScroll($('accountMenu'));
-
-    $('accountBtn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMenu('accountMenu');
-    });
-
-    $('accountLogoutBtn').addEventListener('click', () => {
-      closeAllMenus();
-      onLogout();
-    });
-
-    $('accountDeleteBtn').addEventListener('click', () => {
-      closeAllMenus();
-      onDeleteRequest();
-    });
   }
 
   function showWelcomeScreen() {
@@ -1578,12 +1935,34 @@
     $('gameScreen').hidden = false;
   }
 
-  function updateScore(score, visible) {
+  function updateScore(score, visible, options = {}) {
+    const { totalScore = null, winStreak = 0, showTotal = false } = options;
     $('scoreRow').hidden = !visible;
     $('scoreValue').textContent = score;
+
+    const totalWrap = $('totalScoreWrap');
+    if (totalWrap) {
+      totalWrap.hidden = !showTotal || !visible;
+      if (showTotal && $('totalScoreValue')) {
+        $('totalScoreValue').textContent = totalScore != null ? totalScore : score;
+      }
+    }
+
+    const streakRow = $('streakRow');
+    const streakValue = $('streakValue');
+    if (streakRow && streakValue) {
+      const showStreak = visible && winStreak > 0;
+      streakRow.hidden = !showStreak;
+      if (showStreak) {
+        streakValue.textContent = winStreak;
+        streakValue.classList.remove('streak__value--new');
+        void streakValue.offsetWidth;
+        streakValue.classList.add('streak__value--new');
+      }
+    }
   }
 
-  const HINT_KEYS = { color: 'findColor', shape: 'findShape', symbol: 'findSymbol' };
+  const HINT_KEYS = { color: 'findColor', shape: 'findShape', symbol: 'findSymbol', size: 'findSize' };
 
   function updateGameHint(diffType, lang) {
     const key = HINT_KEYS[diffType];
@@ -1605,6 +1984,9 @@
       const shape = document.createElement('span');
       shape.className = `game-object__shape shape--${obj.shape}`;
       shape.style.backgroundColor = obj.color;
+      if (obj.scale && obj.scale !== 1) {
+        shape.style.transform = `scale(${obj.scale})`;
+      }
       if (revealIndex === index) shape.classList.add('game-object__shape--reveal');
 
       if (obj.showSymbol) {
@@ -1678,19 +2060,29 @@
 
   function updateLangButton(lang) {
     const opt = LANGUAGE_OPTIONS.find((l) => l.code === lang);
-    $('langBtnFlag').textContent = opt ? opt.flag : '🌐';
-    $('langBtnText').textContent = opt ? opt.label : '—';
-    $('langBtn').setAttribute('aria-label', opt ? opt.label : 'Language');
+    const flagEl = $('langBtnFlag');
+    const textEl = $('langBtnText');
+    const btn = $('langBtn');
+    if (flagEl) flagEl.textContent = opt ? opt.flag : '🌐';
+    if (textEl) textEl.textContent = opt ? opt.label : '—';
+    if (btn) btn.setAttribute('aria-label', opt ? opt.label : 'Language');
+    updateAuthLangButton(lang);
   }
 
-  function updateAgeButton(ageId, lang) {
-    const key = AGE_I18N_KEYS[ageId];
-    $('ageBtnText').textContent = key ? t(lang, key) : '—';
-    $('ageBtn').setAttribute('aria-label', t(lang, 'ageTitle'));
+  function updateAuthLangButton(lang) {
+    const btn = $('authLangBtn');
+    if (!btn) return;
+    const opt = LANGUAGE_OPTIONS.find((l) => l.code === lang);
+    const flagEl = $('authLangBtnFlag');
+    const textEl = $('authLangBtnText');
+    if (flagEl) flagEl.textContent = opt ? opt.flag : '🌐';
+    if (textEl) textEl.textContent = opt ? opt.label : '—';
+    btn.setAttribute('aria-label', opt ? opt.label : 'Language');
   }
 
-  function populateLangMenu(onSelect) {
-    const menu = $('langMenu');
+  function populateLanguageMenu(menuId, onSelect) {
+    const menu = $(menuId);
+    if (!menu) return;
     menu.innerHTML = LANGUAGE_OPTIONS.map(
       ({ code, flag, label }) =>
         `<button type="button" class="picker__item" data-lang="${code}">${flag} ${label}</button>`
@@ -1705,8 +2097,38 @@
     });
   }
 
-  function populateAgeMenu(lang, onSelect) {
+  function populateLangMenu(onSelect) {
+    populateLanguageMenu('langMenu', onSelect);
+  }
+
+  function populateAuthLangMenu(onSelect) {
+    populateLanguageMenu('authLangMenu', onSelect);
+  }
+
+  function initAuthLangPicker(lang, onSelect) {
+    populateAuthLangMenu(onSelect);
+    updateAuthLangButton(lang);
+
+    const btn = $('authLangBtn');
+    if (!btn || btn.dataset.langPickerBound === '1') return;
+    btn.dataset.langPickerBound = '1';
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu('authLangMenu');
+    });
+  }
+
+  function updateAgeButton(ageId, lang) {
+    const key = AGE_I18N_KEYS[ageId];
+    $('ageBtnText').textContent = key ? t(lang, key) : '—';
+    $('ageBtn').setAttribute('aria-label', t(lang, 'ageTitle'));
+  }
+
+  function updateAgeButton(ageId, lang) {
     const menu = $('ageMenu');
+    if (!menu) return;
     menu.innerHTML = AGE_GROUPS.map((id) => {
       const key = AGE_I18N_KEYS[id];
       return `<button type="button" class="picker__item" data-age-id="${id}">${t(lang, key)}</button>`;
@@ -1779,7 +2201,8 @@
   }
 
   function bindTutorialControls(onNext) {
-    $('tutorialNextBtn').addEventListener('click', onNext);
+    const btn = $('tutorialNextBtn');
+    if (btn) btn.addEventListener('click', onNext);
   }
 
   function refreshTutorialTexts(lang, stepIndex, score, playing) {
@@ -1795,16 +2218,22 @@
     populateLangMenu(onLangSelect);
     populateAgeMenu(lang, onAgeSelect);
 
-    $('langBtn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMenu('langMenu');
-    });
+    const langBtn = $('langBtn');
+    if (langBtn) {
+      langBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu('langMenu');
+      });
+    }
 
-    $('ageBtn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (agePickerLocked) return;
-      toggleMenu('ageMenu');
-    });
+    const ageBtn = $('ageBtn');
+    if (ageBtn) {
+      ageBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (agePickerLocked) return;
+        toggleMenu('ageMenu');
+      });
+    }
 
     document.addEventListener('click', closeAllMenus);
     window.addEventListener('resize', closeAllMenus);
@@ -1830,7 +2259,10 @@
     updateAgeButton,
     populateAgeMenu,
     initPickers,
+    initAuthLangPicker,
     closeAllMenus,
+    toggleMenu,
+    bindMenuScroll,
     showTutorialStep,
     hideTutorialOverlay,
     isTutorialOverlayOpen,
@@ -1840,21 +2272,6 @@
     bindTutorialControls,
     refreshTutorialTexts,
     setAgePickerLocked,
-    showAuthScreen,
-    hideAuthScreen,
-    setAppAuthenticated,
-    setAuthMode,
-    resetAuth,
-    updateAuthFormTexts,
-    showAuthError,
-    clearAuthError,
-    showAuthSuccess,
-    clearAuthSuccess,
-    updateAccountChip,
-    initAccountMenu,
-    showDeleteAccountConfirm,
-    hideDeleteAccountConfirm,
-    getAuthMode: () => authMode,
   };
 })(window);
 
@@ -1862,6 +2279,25 @@
  * Attention Trainer — main application controller
  */
 (function () {
+  if (typeof I18n === 'undefined' || typeof Game === 'undefined' || typeof UI === 'undefined') {
+    var box = document.getElementById('loadError');
+    var text = document.getElementById('loadErrorText');
+    if (box && text) {
+      text.textContent = 'Не загрузились скрипты. Загрузите на GitHub: i18n.js, login.js, game.js, ui.js, app.js';
+      box.hidden = false;
+    }
+    return;
+  }
+  if (typeof AuthUI === 'undefined' || typeof Auth === 'undefined' || typeof AuthController === 'undefined') {
+    var box = document.getElementById('loadError');
+    var text = document.getElementById('loadErrorText');
+    if (box && text) {
+      text.textContent = 'Файл login.js не найден. Загрузите login.js в корень сайта (рядом с index.html).';
+      box.hidden = false;
+    }
+    return;
+  }
+
   const { isRtl, normalizeLang, TUTORIAL_STEPS, t } = I18n;
   const { createGameState, generateRound, addScore, normalizeAge } = Game;
   const {
@@ -1883,6 +2319,7 @@
     updateAgeButton,
     populateAgeMenu,
     initPickers,
+    initAuthLangPicker,
     showTutorialStep,
     hideTutorialOverlay,
     isTutorialOverlayOpen,
@@ -1892,39 +2329,25 @@
     bindTutorialControls,
     refreshTutorialTexts,
     setAgePickerLocked,
+    closeAllMenus,
+    toggleMenu,
+    bindMenuScroll,
+  } = UI;
+
+  const {
     showAuthScreen,
     hideAuthScreen,
     setAppAuthenticated,
-    setAuthMode,
     resetAuth,
     updateAuthFormTexts,
-    showAuthError,
-    clearAuthError,
-    showAuthSuccess,
-    clearAuthSuccess,
     updateAccountChip,
-    initAccountMenu,
     showDeleteAccountConfirm,
     hideDeleteAccountConfirm,
-    getAuthMode,
-    closeAllMenus,
-  } = UI;
+    showEndGameAuthHint,
+  } = AuthUI;
 
   const TUTORIAL_LEVEL = '5-7';
   const TUTORIAL_SCORE_GOAL = 10;
-  const AUTH_ERROR_KEYS = {
-    empty: 'authErrorEmpty',
-    usernameShort: 'authErrorUsernameShort',
-    passwordShort: 'authErrorPasswordShort',
-    userExists: 'authErrorUserExists',
-    userNotFound: 'authErrorUserNotFound',
-    wrongPassword: 'authErrorWrongPassword',
-    passwordMismatch: 'authErrorPasswordMismatch',
-    invalidEmail: 'authErrorInvalidEmail',
-    emailExists: 'authErrorEmailExists',
-    emailMismatch: 'authErrorEmailMismatch',
-    noEmail: 'authErrorNoEmail',
-  };
 
   const prefs = {
     theme: 'light',
@@ -1937,9 +2360,60 @@
   let tutorialStep = 0;
   let appReady = false;
   let isGuest = false;
+  let totalScore = 0;
+  let winStreak = 0;
+
+  function loadProgress() {
+    if (isGuest) {
+      totalScore = parseInt(localStorage.getItem('guestTotalScore') || '0', 10);
+      winStreak = parseInt(localStorage.getItem('guestWinStreak') || '0', 10);
+      return;
+    }
+    const progress = Auth.getProgress();
+    totalScore = progress.totalScore;
+    winStreak = progress.winStreak;
+  }
+
+  function saveProgress() {
+    if (isGuest) {
+      localStorage.setItem('guestTotalScore', String(totalScore));
+      localStorage.setItem('guestWinStreak', String(winStreak));
+      return;
+    }
+    Auth.saveProgress(totalScore, winStreak);
+  }
+
+  function getDisplayScore() {
+    return state.score;
+  }
+
+  function syncScoreUI(visible = state.isPlaying || state.score > 0) {
+    const showHeader = visible || (!isGuest && appReady);
+    updateScore(state.score, showHeader, {
+      totalScore,
+      winStreak,
+      showTotal: !isGuest && appReady,
+    });
+  }
+
+  function recordWin() {
+    addScore(state);
+    totalScore += 1;
+    winStreak += 1;
+    saveProgress();
+    syncScoreUI(true);
+    addTutorialProgress();
+    syncTutorialBanner();
+  }
+
+  function recordLoss() {
+    winStreak = 0;
+    saveProgress();
+    syncScoreUI(true);
+  }
 
   function authLang() {
-    return appReady ? prefs.lang : 'en';
+    return prefs.lang;
   }
 
   function isGuestTutorialDone() {
@@ -1997,17 +2471,20 @@
   function loadUserPrefs(username) {
     if (isGuest) {
       loadGuestPrefs();
+      loadProgress();
       return;
     }
     const user = Auth.getUserData(username);
     if (!user) {
       tutorialActive = true;
+      loadProgress();
       return;
     }
     prefs.theme = user.theme || 'light';
     prefs.lang = normalizeLang(user.lang || 'en');
     prefs.age = normalizeAge(user.age || '5-7');
     tutorialActive = accountNeedsTutorial(user, username);
+    loadProgress();
   }
 
   function saveUserPrefs() {
@@ -2105,7 +2582,7 @@
     state.isPlaying = false;
     state.answered = false;
     state.round = null;
-    updateScore(0, false);
+    syncScoreUI(false);
   }
 
   function applyTheme(theme) {
@@ -2115,6 +2592,17 @@
     prefs.theme = theme;
     if (appReady) saveUserPrefs();
   }
+
+  function applyAuthLanguage(lang) {
+    lang = normalizeLang(lang);
+    prefs.lang = lang;
+    localStorage.setItem('guestLang', lang);
+    applyTranslations(lang);
+    setDirection(isRtl(lang));
+    updateLangButton(lang);
+    updateAuthFormTexts(lang);
+  }
+  window.__applyAuthLanguage = applyAuthLanguage;
 
   function applyLanguage(lang) {
     lang = normalizeLang(lang);
@@ -2211,12 +2699,10 @@
     );
 
     if (isCorrect) {
-      addScore(state);
-      updateScore(state.score, true);
-      addTutorialProgress();
-      syncTutorialBanner();
+      recordWin();
       showFeedback('correct', prefs.lang, () => startRound());
     } else {
+      recordLoss();
       showFeedback('wrong', prefs.lang, () => startRound());
     }
   }
@@ -2226,6 +2712,7 @@
 
     state.answered = true;
     state.isPlaying = false;
+    recordLoss();
     renderGameField(
       state.round.objects,
       state.round.cols,
@@ -2240,7 +2727,7 @@
     clearTimer();
     state.isPlaying = true;
     showPlayingScreen();
-    updateScore(state.score, true);
+    syncScoreUI(true);
     if (tutorialActive) {
       showTutorialBanner(prefs.lang, getTutorialScore());
     }
@@ -2254,9 +2741,16 @@
     state.score = 0;
     state.isPlaying = false;
     showWelcomeScreen();
-    updateScore(0, false);
+    syncScoreUI(false);
     if (tutorialActive) {
       hideTutorialBanner();
+    }
+    if (isGuest) {
+      saveProgress();
+      showEndGameAuthHint(true, authLang());
+      showAuthScreen();
+      setAppAuthenticated(false);
+      updateAuthFormTexts(authLang());
     }
   }
 
@@ -2266,22 +2760,32 @@
   }
 
   function enterApp(username, asGuest = false) {
-    isGuest = asGuest;
-    appReady = true;
-    hideAuthScreen();
-    setAppAuthenticated(true);
-    loadUserPrefs(username);
-    updateAccountChip(
-      asGuest ? t(prefs.lang, 'authGuestLabel') : getAccountLabel(username),
-      asGuest,
-      prefs.lang
-    );
-    applyTheme(prefs.theme);
-    applyLanguage(prefs.lang);
-    updateAgeButton(prefs.age, prefs.lang);
-    resetGameSession();
-    showWelcomeScreen();
-    initTutorial();
+    try {
+      isGuest = asGuest;
+      appReady = true;
+      setAppAuthenticated(true);
+      hideAuthScreen();
+      showEndGameAuthHint(false, prefs.lang);
+      loadUserPrefs(username);
+      updateAccountChip(
+        asGuest ? t(prefs.lang, 'authGuestLabel') : getAccountLabel(username),
+        asGuest,
+        prefs.lang
+      );
+      applyTheme(prefs.theme);
+      applyLanguage(prefs.lang);
+      updateAgeButton(prefs.age, prefs.lang);
+      resetGameSession();
+      syncScoreUI(!asGuest);
+      showWelcomeScreen();
+      initTutorial();
+    } catch (err) {
+      console.error('enterApp failed:', err);
+      appReady = false;
+      isGuest = false;
+      showAuthScreen();
+      setAppAuthenticated(false);
+    }
   }
 
   function enterAsGuest() {
@@ -2303,68 +2807,7 @@
     setAppAuthenticated(false);
     showAuthScreen();
     resetAuth();
-    applyTranslations('en');
-    setDirection(false);
-    updateAuthFormTexts('en');
-  }
-
-  function showAuthErrorKey(errorKey, extra = {}) {
-    const key = AUTH_ERROR_KEYS[errorKey] || 'authErrorEmpty';
-    let message = t(authLang(), key);
-    if (errorKey === 'userExists' && extra.suggestions?.length) {
-      message += ` ${t(authLang(), 'authErrorUserExistsTry')}: ${extra.suggestions.join(', ')}`;
-    }
-    showAuthError(message);
-  }
-
-  async function handleAuthSubmit(e) {
-    e.preventDefault();
-    clearAuthError();
-    clearAuthSuccess();
-
-    const username = $('authUsername').value;
-    const email = $('authEmail').value;
-    const password = $('authPassword').value;
-    const confirm = $('authPasswordConfirm').value;
-    const mode = getAuthMode();
-
-    if (mode === 'register') {
-      if (password !== confirm) {
-        showAuthErrorKey('passwordMismatch');
-        return;
-      }
-      const result = await Auth.register(username, password, email);
-      if (!result.ok) {
-        showAuthErrorKey(result.error, result);
-        return;
-      }
-      enterApp(result.username);
-      return;
-    }
-
-    if (mode === 'reset') {
-      if (password !== confirm) {
-        showAuthErrorKey('passwordMismatch');
-        return;
-      }
-      const result = await Auth.resetPassword(username, email, password);
-      if (!result.ok) {
-        showAuthErrorKey(result.error, result);
-        return;
-      }
-      $('authForm').reset();
-      setAuthMode('login');
-      updateAuthFormTexts(authLang());
-      showAuthSuccess(t(authLang(), 'authResetSuccess'));
-      return;
-    }
-
-    const result = await Auth.login(username, password);
-    if (!result.ok) {
-      showAuthErrorKey(result.error);
-      return;
-    }
-    enterApp(result.username);
+    applyAuthLanguage(normalizeLang(localStorage.getItem('guestLang') || prefs.lang || 'en'));
   }
 
   function requestDeleteAccount() {
@@ -2375,58 +2818,92 @@
     });
   }
 
-  function initAuth() {
-    resetAuth();
-    $('authTabLogin').addEventListener('click', () => {
-      setAuthMode('login');
-      updateAuthFormTexts(authLang());
-    });
-    $('authTabRegister').addEventListener('click', () => {
-      setAuthMode('register');
-      updateAuthFormTexts(authLang());
-    });
-    $('authForm').addEventListener('submit', handleAuthSubmit);
-    $('authForgotBtn').addEventListener('click', () => {
-      clearAuthError();
-      clearAuthSuccess();
-      setAuthMode('reset');
-      updateAuthFormTexts(authLang());
-    });
-    $('authBackLoginBtn').addEventListener('click', () => {
-      clearAuthError();
-      clearAuthSuccess();
-      $('authForm').reset();
-      setAuthMode('login');
-      updateAuthFormTexts(authLang());
-    });
-    $('authGuestBtn').addEventListener('click', enterAsGuest);
-    initAccountMenu(leaveApp, requestDeleteAccount);
+  function bindClick(id, handler) {
+    const el = $(id);
+    if (el) el.addEventListener('click', handler);
+  }
+
+  function bindGameControls() {
+    bindClick('startBtn', startGame);
+    bindClick('newGameBtn', newGame);
+    bindClick('themeLightBtn', () => applyTheme('light'));
+    bindClick('themeDarkBtn', () => applyTheme('dark'));
+  }
+
+  function fixStuckScreen() {
+    const overlay = $('authOverlay');
+    const app = $('app');
+    if (overlay && app && app.classList.contains('app--guest') && overlay.hidden) {
+      overlay.hidden = false;
+    }
+  }
+
+  function hideLoadError() {
+    const box = document.getElementById('loadError');
+    if (box) box.hidden = true;
   }
 
   function init() {
-    initPickers(prefs.lang, applyLanguage, applyAge);
-    bindTutorialControls(advanceTutorialStep);
-    initAuth();
+    hideLoadError();
+    fixStuckScreen();
 
-    const username = Auth.getCurrentUser();
-    if (username && Auth.getUserData(username)) {
-      enterApp(username, false);
-    } else if (Auth.isGuestSession()) {
-      enterAsGuest();
-    } else {
-      if (username) Auth.logout();
+    prefs.lang = normalizeLang(localStorage.getItem('guestLang') || 'en');
+
+    AuthController.configure({
+      getLang: authLang,
+      onEnterApp: (username) => enterApp(username, false),
+      onEnterGuest: enterAsGuest,
+      onLeaveApp: leaveApp,
+      onDeleteAccount: requestDeleteAccount,
+    });
+    AuthController.setMenuApi({ toggleMenu, closeAllMenus, bindMenuScroll });
+    AuthController.initAuth();
+    initAuthLangPicker(prefs.lang, applyAuthLanguage);
+    window.addEventListener('authLangChange', (e) => {
+      if (e.detail && e.detail.lang) applyAuthLanguage(e.detail.lang);
+    });
+
+    bindGameControls();
+
+    try {
+      bindTutorialControls(advanceTutorialStep);
+      initPickers(prefs.lang, applyLanguage, applyAge);
+
+      const username = Auth.getCurrentUser();
+      if (username && Auth.getUserData(username)) {
+        enterApp(username, false);
+      } else if (Auth.isGuestSession()) {
+        enterAsGuest();
+      } else {
+        if (username) Auth.logout();
+        showAuthScreen();
+        applyAuthLanguage(prefs.lang);
+      }
+    } catch (err) {
+      console.error('App init failed:', err);
       showAuthScreen();
-      applyTranslations('en');
-      setDirection(false);
-      updateAuthFormTexts('en');
+      setAppAuthenticated(false);
+      applyAuthLanguage('en');
     }
-
-    $('startBtn').addEventListener('click', startGame);
-    $('newGameBtn').addEventListener('click', newGame);
-    $('themeLightBtn').addEventListener('click', () => applyTheme('light'));
-    $('themeDarkBtn').addEventListener('click', () => applyTheme('dark'));
   }
 
-  init();
+  function boot() {
+    if (boot.done) return;
+    boot.done = true;
+    try {
+      init();
+    } catch (err) {
+      console.error('Boot failed:', err);
+      showAuthScreen();
+      setAppAuthenticated(false);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+  window.addEventListener('load', boot);
 })();
 
