@@ -280,6 +280,7 @@
   }
 
   let authMode = 'login';
+  let endGameHint = false;
 
   function showAuthScreen() {
     const overlay = $('authOverlay');
@@ -290,6 +291,9 @@
   function hideAuthScreen() {
     const overlay = $('authOverlay');
     if (overlay) overlay.hidden = true;
+    endGameHint = false;
+    const banner = $('authEndGameBanner');
+    if (banner) banner.hidden = true;
   }
 
   function setAppAuthenticated(authenticated) {
@@ -360,6 +364,16 @@
       if (['authTitle', 'authSubmit', 'authPasswordLabel'].includes(el.id)) return;
       el.textContent = t(lang, el.dataset.i18n);
     });
+    const saveHint = $('authSaveScoreHint');
+    if (saveHint) {
+      saveHint.hidden = authMode === 'reset';
+      if (!saveHint.hidden) saveHint.textContent = t(lang, 'authSaveScoreHint');
+    }
+    const endBanner = $('authEndGameBanner');
+    if (endBanner) {
+      endBanner.hidden = !endGameHint || authMode === 'reset';
+      if (!endBanner.hidden) endBanner.textContent = t(lang, 'authEndGameHint');
+    }
     if ($('authGuestBtn')) {
       $('authGuestBtn').textContent = t(lang, 'authPlayAsGuest');
     }
@@ -458,6 +472,11 @@
     });
   }
 
+  function showEndGameAuthHint(show, lang) {
+    endGameHint = show;
+    updateAuthFormTexts(lang || 'en');
+  }
+
   global.AuthUI = {
     $,
     showAuthScreen,
@@ -466,6 +485,7 @@
     setAuthMode,
     resetAuth,
     updateAuthFormTexts,
+    showEndGameAuthHint,
     showAuthError,
     clearAuthError,
     showAuthSuccess,

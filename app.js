@@ -65,6 +65,7 @@
     updateAccountChip,
     showDeleteAccountConfirm,
     hideDeleteAccountConfirm,
+    showEndGameAuthHint,
   } = AuthUI;
 
   const TUTORIAL_LEVEL = '5-7';
@@ -455,6 +456,13 @@
     if (tutorialActive) {
       hideTutorialBanner();
     }
+    if (isGuest) {
+      saveProgress();
+      showEndGameAuthHint(true, authLang());
+      showAuthScreen();
+      setAppAuthenticated(false);
+      updateAuthFormTexts(authLang());
+    }
   }
 
   function getAccountLabel(username) {
@@ -468,6 +476,7 @@
       appReady = true;
       setAppAuthenticated(true);
       hideAuthScreen();
+      showEndGameAuthHint(false, prefs.lang);
       loadUserPrefs(username);
       updateAccountChip(
         asGuest ? t(prefs.lang, 'authGuestLabel') : getAccountLabel(username),

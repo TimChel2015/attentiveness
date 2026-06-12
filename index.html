@@ -44,6 +44,10 @@
         <button class="auth-tabs__btn" id="authTabRegister" type="button" data-i18n="authRegister">Sign up</button>
       </div>
       <h1 class="auth-card__title" id="authTitle" data-i18n="authLoginTitle">Log in</h1>
+      <p class="auth-card__subtitle" id="authSaveScoreHint" data-i18n="authSaveScoreHint">
+        Sign in or create an account to keep your score and streak when you leave.
+      </p>
+      <p class="auth-form__hint auth-form__hint--warn" id="authEndGameBanner" hidden data-i18n="authEndGameHint"></p>
       <form class="auth-form" id="authForm" novalidate>
         <label class="auth-field">
           <span class="auth-field__label" data-i18n="authUsername">Username</span>
@@ -220,7 +224,7 @@
       }
       document.addEventListener('DOMContentLoaded', fixStuckScreen);
 
-      var loginPaths = ['login.js?v=12', 'auth/login.js?v=12', 'js/auth/login.js?v=12'];
+      var loginPaths = ['login.js?v=13', 'auth/login.js?v=13', 'js/auth/login.js?v=13'];
       var loginIndex = 0;
       function loadLogin() {
         if (loginIndex >= loginPaths.length) {
@@ -242,14 +246,14 @@
         document.head.appendChild(s);
       }
       function loadRest() {
-        ['game.js?v=12', 'ui.js?v=12', 'app.js?v=12'].forEach(function (src) {
+        ['game.js?v=13', 'ui.js?v=13', 'app.js?v=13'].forEach(function (src) {
           var s = document.createElement('script');
           s.src = src;
           document.body.appendChild(s);
         });
       }
       var i18n = document.createElement('script');
-      i18n.src = 'i18n.js?v=12';
+      i18n.src = 'i18n.js?v=13';
       i18n.onload = loadLogin;
       i18n.onerror = loadLogin;
       document.head.appendChild(i18n);
