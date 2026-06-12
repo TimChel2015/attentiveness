@@ -292,8 +292,6 @@
     const overlay = $('authOverlay');
     if (overlay) overlay.hidden = true;
     endGameHint = false;
-    const banner = $('authEndGameBanner');
-    if (banner) banner.hidden = true;
   }
 
   function setAppAuthenticated(authenticated) {
@@ -361,18 +359,16 @@
     if ($('authTabLogin')) $('authTabLogin').textContent = t(lang, 'authLogin');
     if ($('authTabRegister')) $('authTabRegister').textContent = t(lang, 'authRegister');
     document.querySelectorAll('#authOverlay [data-i18n]').forEach((el) => {
-      if (['authTitle', 'authSubmit', 'authPasswordLabel'].includes(el.id)) return;
+      if (['authTitle', 'authSubmit', 'authPasswordLabel', 'authSaveScoreHint'].includes(el.id)) return;
       el.textContent = t(lang, el.dataset.i18n);
     });
     const saveHint = $('authSaveScoreHint');
     if (saveHint) {
       saveHint.hidden = authMode === 'reset';
-      if (!saveHint.hidden) saveHint.textContent = t(lang, 'authSaveScoreHint');
-    }
-    const endBanner = $('authEndGameBanner');
-    if (endBanner) {
-      endBanner.hidden = !endGameHint || authMode === 'reset';
-      if (!endBanner.hidden) endBanner.textContent = t(lang, 'authEndGameHint');
+      if (!saveHint.hidden) {
+        const hintKey = endGameHint ? 'authEndGameHint' : 'authSaveScoreHint';
+        saveHint.textContent = t(lang, hintKey);
+      }
     }
     if ($('authGuestBtn')) {
       $('authGuestBtn').textContent = t(lang, 'authPlayAsGuest');
