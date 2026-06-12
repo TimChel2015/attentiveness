@@ -309,7 +309,7 @@
     $('ageBtn').setAttribute('aria-label', t(lang, 'ageTitle'));
   }
 
-  function updateAgeButton(ageId, lang) {
+  function populateAgeMenu(lang, onSelect) {
     const menu = $('ageMenu');
     if (!menu) return;
     menu.innerHTML = AGE_GROUPS.map((id) => {
@@ -426,6 +426,7 @@
   global.UI = {
     $,
     applyTranslations,
+    setPageTitle,
     setDirection,
     showWelcomeScreen,
     showPlayingScreen,

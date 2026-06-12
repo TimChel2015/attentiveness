@@ -26,6 +26,7 @@
   const {
     $,
     applyTranslations,
+    setPageTitle,
     setDirection,
     showWelcomeScreen,
     showPlayingScreen,
@@ -61,8 +62,11 @@
     showAuthScreen,
     hideAuthScreen,
     setAppAuthenticated,
+    setAuthMode,
     resetAuth,
     updateAuthFormTexts,
+    clearAuthError,
+    clearAuthSuccess,
     updateAccountChip,
     showDeleteAccountConfirm,
     hideDeleteAccountConfirm,
@@ -136,7 +140,7 @@
   }
 
   function authLang() {
-    return prefs.lang;
+    return normalizeLang(localStorage.getItem('guestLang') || prefs.lang || 'en');
   }
 
   function isGuestTutorialDone() {
@@ -321,6 +325,7 @@
     prefs.lang = lang;
     localStorage.setItem('guestLang', lang);
     applyTranslations(lang);
+    setPageTitle(lang);
     setDirection(isRtl(lang));
     updateLangButton(lang);
     updateAuthFormTexts(lang);
@@ -515,6 +520,7 @@
     Auth.setGuestSession();
     enterApp(null, true);
   }
+  window.enterAsGuest = enterAsGuest;
 
   function leaveApp() {
     appReady = false;
@@ -545,6 +551,76 @@
     const el = $(id);
     if (el) el.addEventListener('click', handler);
   }
+
+  function openPasswordReset() {
+    clearAuthError();
+    clearAuthSuccess();
+    setAuthMode('reset');
+    applyAuthLanguage(authLang());
+  }
+
+  function openLoginForm() {
+    clearAuthError();
+    clearAuthSuccess();
+    $('authForm')?.reset();
+    setAuthMode('login');
+    applyAuthLanguage(authLang());
+  }
+
+  function bindAuthScreenControls() {
+    function onOverlayClick(e) {
+      if (e.target.closest('#authGuestBtn')) {
+        e.preventDefault();
+        e.stopPropagation();
+        enterAsGuest();
+        return;
+      }
+      if (e.target.closest('#authForgotBtn')) {
+        e.preventDefault();
+        e.stopPropagation();
+        openPasswordReset();
+        return;
+      }
+      if (e.target.closest('#authBackLoginBtn')) {
+        e.preventDefault();
+        e.stopPropagation();
+        openLoginForm();
+        return;
+      }
+      if (e.target.closest('#authTabLogin')) {
+        e.preventDefault();
+        e.stopPropagation();
+        setAuthMode('login');
+        applyAuthLanguage(authLang());
+        return;
+      }
+      if (e.target.closest('#authTabRegister')) {
+        e.preventDefault();
+        e.stopPropagation();
+        setAuthMode('register');
+        applyAuthLanguage(authLang());
+      }
+    }
+
+    const overlay = $('authOverlay');
+    if (overlay && overlay.dataset.authOverlayClickBound !== '1') {
+      overlay.dataset.authOverlayClickBound = '1';
+      overlay.addEventListener('click', onOverlayClick, true);
+    }
+
+    const guestBtn = $('authGuestBtn');
+    if (guestBtn && guestBtn.dataset.guestBound !== '1') {
+      guestBtn.dataset.guestBound = '1';
+      guestBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        enterAsGuest();
+      }, true);
+    }
+  }
+
+  window.openPasswordReset = openPasswordReset;
+  window.openLoginForm = openLoginForm;
 
   function bindGameControls() {
     bindClick('startBtn', startGame);
@@ -580,6 +656,7 @@
       onDeleteAccount: requestDeleteAccount,
     });
     AuthController.setMenuApi({ toggleMenu, closeAllMenus, bindMenuScroll });
+    bindAuthScreenControls();
     AuthController.initAuth();
     initAuthLangPicker(prefs.lang, applyAuthLanguage);
     window.addEventListener('authLangChange', (e) => {

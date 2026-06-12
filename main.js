@@ -1499,36 +1499,61 @@
   let menuApi = null;
   let formBound = false;
   let menuBound = false;
+  let authInitialized = false;
+
+  function bindAuthClick(id, handler) {
+    const el = AuthUI.$(id);
+    if (!el || el.dataset.authBound === '1') return;
+    el.dataset.authBound = '1';
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      handler(e);
+    });
+  }
 
   function bindAuthForm() {
     if (formBound) return;
     formBound = true;
 
-    const lang = () => hooks.getLang();
+    function getAuthLang() {
+      try {
+        const stored = localStorage.getItem('guestLang');
+        if (stored) return stored;
+      } catch {}
+      return hooks.getLang();
+    }
 
-    bindClick('authTabLogin', () => {
+    function refreshAuthTexts() {
+      AuthUI.updateAuthFormTexts(getAuthLang());
+    }
+
+    bindAuthClick('authTabLogin', () => {
       AuthUI.setAuthMode('login');
-      AuthUI.updateAuthFormTexts(lang());
+      refreshAuthTexts();
     });
-    bindClick('authTabRegister', () => {
+    bindAuthClick('authTabRegister', () => {
       AuthUI.setAuthMode('register');
-      AuthUI.updateAuthFormTexts(lang());
+      refreshAuthTexts();
     });
     bindSubmit('authForm', handleAuthSubmit);
-    bindClick('authForgotBtn', () => {
+    bindAuthClick('authForgotBtn', () => {
       AuthUI.clearAuthError();
       AuthUI.clearAuthSuccess();
       AuthUI.setAuthMode('reset');
-      AuthUI.updateAuthFormTexts(lang());
+      refreshAuthTexts();
     });
-    bindClick('authBackLoginBtn', () => {
+    bindAuthClick('authBackLoginBtn', () => {
       AuthUI.clearAuthError();
       AuthUI.clearAuthSuccess();
       AuthUI.$('authForm')?.reset();
       AuthUI.setAuthMode('login');
-      AuthUI.updateAuthFormTexts(lang());
+      refreshAuthTexts();
     });
-    bindClick('authGuestBtn', () => hooks.onEnterGuest());
+    bindAuthClick('authGuestBtn', () => {
+      if (typeof window.enterAsGuest === 'function') window.enterAsGuest();
+      else hooks.onEnterGuest();
+    });
   }
 
   function bindAccountMenu() {
@@ -1540,7 +1565,8 @@
   function initAuth() {
     bindAuthForm();
     bindAccountMenu();
-    if (!formBound) return;
+    if (!formBound || authInitialized) return;
+    authInitialized = true;
     try {
       AuthUI.resetAuth();
     } catch (err) {
@@ -1631,12 +1657,6 @@
     setMenuApi,
     initAuth,
   };
-
-  try {
-    initAuth();
-  } catch (err) {
-    console.error('Early auth bind failed:', err);
-  }
 })(window);
 
 /** Game logic — round generation, scoring, difficulty by age */
@@ -2126,7 +2146,7 @@
     $('ageBtn').setAttribute('aria-label', t(lang, 'ageTitle'));
   }
 
-  function updateAgeButton(ageId, lang) {
+  function populateAgeMenu(lang, onSelect) {
     const menu = $('ageMenu');
     if (!menu) return;
     menu.innerHTML = AGE_GROUPS.map((id) => {
@@ -2243,6 +2263,7 @@
   global.UI = {
     $,
     applyTranslations,
+    setPageTitle,
     setDirection,
     showWelcomeScreen,
     showPlayingScreen,
@@ -2303,6 +2324,7 @@
   const {
     $,
     applyTranslations,
+    setPageTitle,
     setDirection,
     showWelcomeScreen,
     showPlayingScreen,
@@ -2338,8 +2360,11 @@
     showAuthScreen,
     hideAuthScreen,
     setAppAuthenticated,
+    setAuthMode,
     resetAuth,
     updateAuthFormTexts,
+    clearAuthError,
+    clearAuthSuccess,
     updateAccountChip,
     showDeleteAccountConfirm,
     hideDeleteAccountConfirm,
@@ -2413,7 +2438,7 @@
   }
 
   function authLang() {
-    return prefs.lang;
+    return normalizeLang(localStorage.getItem('guestLang') || prefs.lang || 'en');
   }
 
   function isGuestTutorialDone() {
@@ -2598,6 +2623,7 @@
     prefs.lang = lang;
     localStorage.setItem('guestLang', lang);
     applyTranslations(lang);
+    setPageTitle(lang);
     setDirection(isRtl(lang));
     updateLangButton(lang);
     updateAuthFormTexts(lang);
@@ -2792,6 +2818,7 @@
     Auth.setGuestSession();
     enterApp(null, true);
   }
+  window.enterAsGuest = enterAsGuest;
 
   function leaveApp() {
     appReady = false;
@@ -2822,6 +2849,76 @@
     const el = $(id);
     if (el) el.addEventListener('click', handler);
   }
+
+  function openPasswordReset() {
+    clearAuthError();
+    clearAuthSuccess();
+    setAuthMode('reset');
+    applyAuthLanguage(authLang());
+  }
+
+  function openLoginForm() {
+    clearAuthError();
+    clearAuthSuccess();
+    $('authForm')?.reset();
+    setAuthMode('login');
+    applyAuthLanguage(authLang());
+  }
+
+  function bindAuthScreenControls() {
+    function onOverlayClick(e) {
+      if (e.target.closest('#authGuestBtn')) {
+        e.preventDefault();
+        e.stopPropagation();
+        enterAsGuest();
+        return;
+      }
+      if (e.target.closest('#authForgotBtn')) {
+        e.preventDefault();
+        e.stopPropagation();
+        openPasswordReset();
+        return;
+      }
+      if (e.target.closest('#authBackLoginBtn')) {
+        e.preventDefault();
+        e.stopPropagation();
+        openLoginForm();
+        return;
+      }
+      if (e.target.closest('#authTabLogin')) {
+        e.preventDefault();
+        e.stopPropagation();
+        setAuthMode('login');
+        applyAuthLanguage(authLang());
+        return;
+      }
+      if (e.target.closest('#authTabRegister')) {
+        e.preventDefault();
+        e.stopPropagation();
+        setAuthMode('register');
+        applyAuthLanguage(authLang());
+      }
+    }
+
+    const overlay = $('authOverlay');
+    if (overlay && overlay.dataset.authOverlayClickBound !== '1') {
+      overlay.dataset.authOverlayClickBound = '1';
+      overlay.addEventListener('click', onOverlayClick, true);
+    }
+
+    const guestBtn = $('authGuestBtn');
+    if (guestBtn && guestBtn.dataset.guestBound !== '1') {
+      guestBtn.dataset.guestBound = '1';
+      guestBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        enterAsGuest();
+      }, true);
+    }
+  }
+
+  window.openPasswordReset = openPasswordReset;
+  window.openLoginForm = openLoginForm;
 
   function bindGameControls() {
     bindClick('startBtn', startGame);
@@ -2857,6 +2954,7 @@
       onDeleteAccount: requestDeleteAccount,
     });
     AuthController.setMenuApi({ toggleMenu, closeAllMenus, bindMenuScroll });
+    bindAuthScreenControls();
     AuthController.initAuth();
     initAuthLangPicker(prefs.lang, applyAuthLanguage);
     window.addEventListener('authLangChange', (e) => {

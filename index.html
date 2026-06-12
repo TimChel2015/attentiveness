@@ -79,14 +79,14 @@
         <p class="auth-form__error" id="authError" hidden></p>
         <p class="auth-form__success" id="authSuccess" hidden></p>
         <button class="btn btn--primary btn--large auth-form__submit" id="authSubmit" type="submit" data-i18n="authSubmitLogin">Log in</button>
-        <p class="auth-form__link-wrap" id="authForgotWrap">
-          <button class="auth-form__link" id="authForgotBtn" type="button" data-i18n="authForgotPassword">Forgot password?</button>
-        </p>
-        <p class="auth-form__link-wrap" id="authBackLoginWrap" hidden>
-          <button class="auth-form__link" id="authBackLoginBtn" type="button" data-i18n="authBackToLogin">Back to log in</button>
-        </p>
       </form>
-      <button class="btn btn--secondary auth-form__guest" id="authGuestBtn" type="button" data-i18n="authPlayAsGuest">
+      <p class="auth-form__link-wrap" id="authForgotWrap">
+        <button class="auth-form__link" id="authForgotBtn" type="button" data-i18n="authForgotPassword" onclick="window.openPasswordReset&&window.openPasswordReset();return false;">Forgot password?</button>
+      </p>
+      <p class="auth-form__link-wrap" id="authBackLoginWrap" hidden>
+        <button class="auth-form__link" id="authBackLoginBtn" type="button" data-i18n="authBackToLogin">Back to log in</button>
+      </p>
+      <button class="btn btn--secondary auth-form__guest" id="authGuestBtn" type="button" data-i18n="authPlayAsGuest" onclick="window.enterAsGuest&&window.enterAsGuest();return false;">
         No account? Play anyway
       </button>
       </div>
@@ -314,6 +314,38 @@
         applyAuthLangNow(stored);
       }
 
+      function initAuthActionsEarly() {
+        window.openPasswordReset = window.openPasswordReset || function () {
+          if (!window.AuthUI) return;
+          window.AuthUI.clearAuthError();
+          window.AuthUI.clearAuthSuccess();
+          window.AuthUI.setAuthMode('reset');
+          var lang = localStorage.getItem('guestLang') || 'en';
+          if (typeof window.__applyAuthLanguage === 'function') window.__applyAuthLanguage(lang);
+          else window.AuthUI.updateAuthFormTexts(lang);
+        };
+        window.openLoginForm = window.openLoginForm || function () {
+          if (!window.AuthUI) return;
+          window.AuthUI.clearAuthError();
+          window.AuthUI.clearAuthSuccess();
+          var form = document.getElementById('authForm');
+          if (form) form.reset();
+          window.AuthUI.setAuthMode('login');
+          var lang = localStorage.getItem('guestLang') || 'en';
+          if (typeof window.__applyAuthLanguage === 'function') window.__applyAuthLanguage(lang);
+          else window.AuthUI.updateAuthFormTexts(lang);
+        };
+        window.enterAsGuest = window.enterAsGuest || function () {
+          if (window.Auth && window.Auth.setGuestSession) window.Auth.setGuestSession();
+          var overlay = document.getElementById('authOverlay');
+          var app = document.getElementById('app');
+          var start = document.getElementById('startOverlay');
+          if (overlay) overlay.hidden = true;
+          if (app) app.classList.remove('app--guest');
+          if (start) start.hidden = false;
+        };
+      }
+
       function fixStuckScreen() {
         var overlay = document.getElementById('authOverlay');
         var app = document.getElementById('app');
@@ -325,6 +357,7 @@
       document.addEventListener('DOMContentLoaded', function () {
         fixStuckScreen();
         initAuthLangEarly();
+        initAuthActionsEarly();
       });
       window.addEventListener('load', function () {
         var lang = localStorage.getItem('guestLang') || 'en';
@@ -334,6 +367,6 @@
       });
     })();
   </script>
-  <script src="main.js?v=33"></script>
+  <script src="main.js?v=38"></script>
 </body>
 </html>

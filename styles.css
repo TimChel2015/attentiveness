@@ -509,6 +509,10 @@ select {
 .auth-form__guest {
   width: 100%;
   font-size: 0.88rem;
+  pointer-events: auto;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
 }
 
 .auth-shell__back {
@@ -764,10 +768,13 @@ select {
 .auth-form__link-wrap {
   margin: 0;
   text-align: center;
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
 }
 
 .auth-form__link {
-  padding: 0;
+  padding: 0.35rem 0.5rem;
   font: inherit;
   font-size: 0.82rem;
   font-weight: 700;
@@ -777,6 +784,9 @@ select {
   cursor: pointer;
   text-decoration: underline;
   text-underline-offset: 2px;
+  pointer-events: auto;
+  position: relative;
+  z-index: 2;
 }
 
 .auth-form__link:hover {

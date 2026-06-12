@@ -524,36 +524,61 @@
   let menuApi = null;
   let formBound = false;
   let menuBound = false;
+  let authInitialized = false;
+
+  function bindAuthClick(id, handler) {
+    const el = AuthUI.$(id);
+    if (!el || el.dataset.authBound === '1') return;
+    el.dataset.authBound = '1';
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      handler(e);
+    });
+  }
 
   function bindAuthForm() {
     if (formBound) return;
     formBound = true;
 
-    const lang = () => hooks.getLang();
+    function getAuthLang() {
+      try {
+        const stored = localStorage.getItem('guestLang');
+        if (stored) return stored;
+      } catch {}
+      return hooks.getLang();
+    }
 
-    bindClick('authTabLogin', () => {
+    function refreshAuthTexts() {
+      AuthUI.updateAuthFormTexts(getAuthLang());
+    }
+
+    bindAuthClick('authTabLogin', () => {
       AuthUI.setAuthMode('login');
-      AuthUI.updateAuthFormTexts(lang());
+      refreshAuthTexts();
     });
-    bindClick('authTabRegister', () => {
+    bindAuthClick('authTabRegister', () => {
       AuthUI.setAuthMode('register');
-      AuthUI.updateAuthFormTexts(lang());
+      refreshAuthTexts();
     });
     bindSubmit('authForm', handleAuthSubmit);
-    bindClick('authForgotBtn', () => {
+    bindAuthClick('authForgotBtn', () => {
       AuthUI.clearAuthError();
       AuthUI.clearAuthSuccess();
       AuthUI.setAuthMode('reset');
-      AuthUI.updateAuthFormTexts(lang());
+      refreshAuthTexts();
     });
-    bindClick('authBackLoginBtn', () => {
+    bindAuthClick('authBackLoginBtn', () => {
       AuthUI.clearAuthError();
       AuthUI.clearAuthSuccess();
       AuthUI.$('authForm')?.reset();
       AuthUI.setAuthMode('login');
-      AuthUI.updateAuthFormTexts(lang());
+      refreshAuthTexts();
     });
-    bindClick('authGuestBtn', () => hooks.onEnterGuest());
+    bindAuthClick('authGuestBtn', () => {
+      if (typeof window.enterAsGuest === 'function') window.enterAsGuest();
+      else hooks.onEnterGuest();
+    });
   }
 
   function bindAccountMenu() {
@@ -565,7 +590,8 @@
   function initAuth() {
     bindAuthForm();
     bindAccountMenu();
-    if (!formBound) return;
+    if (!formBound || authInitialized) return;
+    authInitialized = true;
     try {
       AuthUI.resetAuth();
     } catch (err) {
@@ -656,10 +682,4 @@
     setMenuApi,
     initAuth,
   };
-
-  try {
-    initAuth();
-  } catch (err) {
-    console.error('Early auth bind failed:', err);
-  }
 })(window);
