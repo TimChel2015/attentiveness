@@ -30,6 +30,15 @@
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
   }
 
+  function readGuestLangForAccount() {
+    try {
+      const stored = localStorage.getItem('guestLang');
+      if (stored && global.I18n) return global.I18n.normalizeLang(stored);
+      if (stored) return stored;
+    } catch {}
+    return 'en';
+  }
+
   async function hashPassword(password) {
     const data = new TextEncoder().encode(password);
     if (global.crypto?.subtle) {
@@ -157,6 +166,7 @@
     const displayName = getDisplayName(username);
     users[name] = {
       ...DEFAULT_USER_DATA,
+      lang: readGuestLangForAccount(),
       displayName,
       email: mail,
       passwordHash: await hashPassword(password),
@@ -281,6 +291,77 @@
 
   let authMode = 'login';
   let endGameHint = false;
+  let passwordTogglesReady = false;
+  let currentAuthLang = 'en';
+
+  const PASSWORD_TOGGLE_PAIRS = [
+    ['authPassword', 'authPasswordToggle'],
+    ['authPasswordConfirm', 'authPasswordConfirmToggle'],
+  ];
+
+  function resolveAuthLang() {
+    try {
+      const stored = localStorage.getItem('guestLang');
+      if (stored && global.I18n) return global.I18n.normalizeLang(stored);
+      if (stored) return stored;
+    } catch {}
+    return currentAuthLang || 'en';
+  }
+
+  function bindPasswordToggle(inputId, toggleId) {
+    const input = $(inputId);
+    const toggle = $(toggleId);
+    if (!input || !toggle || toggle.dataset.bound === '1') return;
+    toggle.dataset.bound = '1';
+
+    function setVisible(visible, lang) {
+      input.type = visible ? 'text' : 'password';
+      toggle.setAttribute('aria-pressed', visible ? 'true' : 'false');
+      const labelKey = visible ? 'authHidePassword' : 'authShowPassword';
+      toggle.setAttribute('aria-label', t(lang || 'en', labelKey));
+      const showIcon = toggle.querySelector('.auth-field__toggle-icon--show');
+      const hideIcon = toggle.querySelector('.auth-field__toggle-icon--hide');
+      if (showIcon) showIcon.hidden = visible;
+      if (hideIcon) hideIcon.hidden = !visible;
+    }
+
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setVisible(input.type === 'password', currentAuthLang);
+    });
+  }
+
+  function initPasswordToggles() {
+    if (passwordTogglesReady) return;
+    passwordTogglesReady = true;
+    PASSWORD_TOGGLE_PAIRS.forEach(([inputId, toggleId]) => bindPasswordToggle(inputId, toggleId));
+  }
+
+  function resetPasswordVisibility(lang) {
+    PASSWORD_TOGGLE_PAIRS.forEach(([inputId, toggleId]) => {
+      const input = $(inputId);
+      const toggle = $(toggleId);
+      if (!input || !toggle) return;
+      input.type = 'password';
+      toggle.setAttribute('aria-pressed', 'false');
+      toggle.setAttribute('aria-label', t(lang, 'authShowPassword'));
+      const showIcon = toggle.querySelector('.auth-field__toggle-icon--show');
+      const hideIcon = toggle.querySelector('.auth-field__toggle-icon--hide');
+      if (showIcon) showIcon.hidden = false;
+      if (hideIcon) hideIcon.hidden = true;
+    });
+  }
+
+  function updatePasswordToggleLabels(lang) {
+    PASSWORD_TOGGLE_PAIRS.forEach(([inputId, toggleId]) => {
+      const input = $(inputId);
+      const toggle = $(toggleId);
+      if (!input || !toggle) return;
+      const visible = input.type === 'text';
+      toggle.setAttribute('aria-label', t(lang, visible ? 'authHidePassword' : 'authShowPassword'));
+    });
+  }
 
   function showAuthScreen() {
     const overlay = $('authOverlay');
@@ -326,8 +407,11 @@
     if ($('authPassword')) {
       $('authPassword').autocomplete = needsConfirm ? 'new-password' : 'current-password';
     }
+    const lang = resolveAuthLang();
+    resetPasswordVisibility(lang);
     clearAuthError();
     clearAuthSuccess();
+    updateAuthFormTexts(lang);
   }
 
   function resetAuth() {
@@ -338,6 +422,8 @@
   }
 
   function updateAuthFormTexts(lang) {
+    lang = global.I18n ? global.I18n.normalizeLang(lang) : lang;
+    currentAuthLang = lang;
     const titleKey = authMode === 'register'
       ? 'authRegisterTitle'
       : authMode === 'reset'
@@ -373,6 +459,8 @@
     if ($('authGuestBtn')) {
       $('authGuestBtn').textContent = t(lang, 'authPlayAsGuest');
     }
+    initPasswordToggles();
+    updatePasswordToggleLabels(lang);
   }
 
   function showAuthError(message) {
@@ -521,6 +609,25 @@
     onDeleteAccount: () => {},
   };
 
+  function getAuthLang() {
+    try {
+      const stored = localStorage.getItem('guestLang');
+      if (stored) {
+        return global.I18n ? global.I18n.normalizeLang(stored) : stored;
+      }
+    } catch {}
+    return hooks.getLang();
+  }
+
+  function syncAuthLanguage() {
+    const lang = getAuthLang();
+    if (typeof window.__applyAuthLanguage === 'function') {
+      window.__applyAuthLanguage(lang);
+    } else {
+      AuthUI.updateAuthFormTexts(lang);
+    }
+  }
+
   let menuApi = null;
   let formBound = false;
   let menuBound = false;
@@ -541,25 +648,17 @@
     if (formBound) return;
     formBound = true;
 
-    function getAuthLang() {
-      try {
-        const stored = localStorage.getItem('guestLang');
-        if (stored) return stored;
-      } catch {}
-      return hooks.getLang();
-    }
-
     function refreshAuthTexts() {
-      AuthUI.updateAuthFormTexts(getAuthLang());
+      syncAuthLanguage();
     }
 
     bindAuthClick('authTabLogin', () => {
       AuthUI.setAuthMode('login');
-      refreshAuthTexts();
+      syncAuthLanguage();
     });
     bindAuthClick('authTabRegister', () => {
       AuthUI.setAuthMode('register');
-      refreshAuthTexts();
+      syncAuthLanguage();
     });
     bindSubmit('authForm', handleAuthSubmit);
     bindAuthClick('authForgotBtn', () => {
@@ -654,8 +753,8 @@
       }
       AuthUI.$('authForm')?.reset();
       AuthUI.setAuthMode('login');
-      AuthUI.updateAuthFormTexts(hooks.getLang());
-      AuthUI.showAuthSuccess(t(hooks.getLang(), 'authResetSuccess'));
+      syncAuthLanguage();
+      AuthUI.showAuthSuccess(t(getAuthLang(), 'authResetSuccess'));
       return;
     }
 

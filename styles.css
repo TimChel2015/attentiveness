@@ -671,6 +671,61 @@ select {
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
+.auth-field__password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-field__input--password {
+  padding-inline-end: 2.75rem;
+}
+
+.auth-field__toggle {
+  position: absolute;
+  inset-inline-end: 0.45rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  font-size: 1.05rem;
+  line-height: 1;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  border-radius: 0.35rem;
+  touch-action: manipulation;
+}
+
+.auth-field__toggle:hover {
+  color: var(--primary);
+}
+
+.auth-field__toggle:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.auth-field__toggle-icon svg {
+  display: block;
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.auth-field__toggle-icon--hide[hidden] {
+  display: none !important;
+}
+
 .auth-field__input:focus {
   outline: none;
   border-color: var(--primary);
